@@ -38,11 +38,11 @@
     "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.3"
   },
-  "author": "Markus Englund <markus.s.englund@gmail.com>",
-  "homepage": "https://github.com/yogaboll/react-npm-component-starter",
+  "author": "Akshay Ram Vignesh A",
+  "homepage": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:yogaboll/react-npm-component-starter.git"
+    "url": ""
   },
   "dependencies": {
     "eslint": "^4.19.1",

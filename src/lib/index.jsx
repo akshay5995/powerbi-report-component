@@ -6,9 +6,9 @@ import Embed from './Embed';
 class Report extends PureComponent {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   currentReport: {},
-    // };
+    this.state = {
+      currentReport: {}, //eslint-disable-line
+    };
     this.performOnEmbed = this.performOnEmbed.bind(this);
     this.createConfig = this.createConfig.bind(this);
   }
@@ -22,7 +22,7 @@ class Report extends PureComponent {
         embedUrl,
         embedId,
         permissions,
-        settings,
+        extraSettings,
       } = this.props;
       return {
         type: embedType,
@@ -30,8 +30,12 @@ class Report extends PureComponent {
         accessToken,
         embedUrl,
         id: embedId,
-        permissions: models.permissions[permissions],
-        settings,
+        permissions: models.Permissions[permissions],
+        setting: {
+          filterPaneEnabled: true,
+          navContentPaneEnabled: true,
+          ...extraSettings,
+        },
       };
     }
     return null;
@@ -42,11 +46,11 @@ class Report extends PureComponent {
       onSelectData,
       onPageChange,
     } = this.props;
-    // report.on('loaded', () => {
-    //   this.setState({
-    //     currentReport: reports,
-    //   });
-    // });
+    report.on('loaded', () => {
+      this.setState({
+        currentReport: report, //eslint-disable-line
+      });
+    });
     report.on('dataSelected', (event) => {
       if (onSelectData) { onSelectData(event.detail); }
     });
@@ -75,11 +79,11 @@ Report.propTypes = {
   accessToken: PropTypes.string.isRequired,
   embedUrl: PropTypes.string.isRequired,
   embedId: PropTypes.string.isRequired,
+  extraSettings: PropTypes.object, //eslint-disable-line
   permissions: PropTypes.string.isRequired,
-  settings: PropTypes.object.isRequired, //eslint-disable-line
-  onSelectData: PropTypes.func.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  style: PropTypes.object.isRequired, //eslint-disable-line
+  onSelectData: PropTypes.func,//eslint-disable-line
+  onPageChange: PropTypes.func, //eslint-disable-line
+  style: PropTypes.object, //eslint-disable-line
 };
 
 export default Report;

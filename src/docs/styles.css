@@ -1,4 +1,75 @@
-body {
-  background: #eee;
+html, body {
+  height: 100% !important; 
+  width: 100% !important;
+  margin: 0 !important;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+#app {
+  height: 100% !important; 
+  width: 100% !important;
+}
+.root {
+  display: flex;
+  flex-flow: column;
+  height: 100% !important; 
+  width: 100% !important;
+}
+
+.header {
+    background: #00b4d2;
+    text-align: center;
+    height: 21px !important;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.config {
+  display: grid;
+  padding: 30px 0 10px 0;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: 70px 70px auto;
+}
+
+.config > button {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  width: 50%;
+  height: 30px;
+  justify-self: right;
+  margin-right: 20px;
+  font-size: 15px;
+}
+
+.config > button :hover {
+  border: 1px solid #00b4d2;
+}
+
+.config > span {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  padding-left: 10px;
+}
+
+.config > * > input {
+  width: 90%;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  font-size: 15px;
+  padding: 5px 10px;
+}
+
+.report {
+  flex-grow: 1;
+}
+
+.report > iframe{
+  border: 0 !important;
+}
+
+input :required {
+  border: 1px solid red;
 }

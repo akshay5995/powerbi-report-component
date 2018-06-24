@@ -37,13 +37,14 @@ class Embed extends PureComponent {
     const errors = validateConfig(this.state);
     if (!errors) {
       return this.embed(this.state);
-    } else if (!this.component) {
+    } else if (this.component !== null) {
       this.reset();
     }
+    return null;
   }
 
   embed(config) {
-    this.component = powerbi.embed(this.reportRef, config); //eslint-disable-line
+    this.component = powerbi.embed(this.reportRef.current, config); //eslint-disable-line
     if (this.props.performOnEmbed) {
       this.props.performOnEmbed(this.component);
     }
