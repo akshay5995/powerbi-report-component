@@ -31,7 +31,7 @@ class Report extends PureComponent {
         embedUrl,
         id: embedId,
         permissions: models.Permissions[permissions],
-        setting: {
+        settings: {
           filterPaneEnabled: true,
           navContentPaneEnabled: true,
           ...extraSettings,
@@ -43,19 +43,23 @@ class Report extends PureComponent {
 
   performOnEmbed(report) {
     const {
+      onLoad,
       onSelectData,
       onPageChange,
     } = this.props;
     report.on('loaded', () => {
-      this.setState({
+      if (onLoad) onLoad();
+      if (!this.state.currentReport) {
+        this.setState({
         currentReport: report, //eslint-disable-line
-      });
+        });
+      }
     });
     report.on('dataSelected', (event) => {
       if (onSelectData) { onSelectData(event.detail); }
     });
     report.on('pageChanged', (event) => {
-      if (onPageChange) { onPageChange(event.detail.newPage); }
+      if (onPageChange) { onPageChange(event.detail); }
     });
   }
 
@@ -81,6 +85,7 @@ Report.propTypes = {
   embedId: PropTypes.string.isRequired,
   extraSettings: PropTypes.object, //eslint-disable-line
   permissions: PropTypes.string.isRequired,
+  onLoad: PropTypes.func,//eslint-disable-line
   onSelectData: PropTypes.func,//eslint-disable-line
   onPageChange: PropTypes.func, //eslint-disable-line
   style: PropTypes.object, //eslint-disable-line
