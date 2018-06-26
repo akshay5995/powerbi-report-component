@@ -60,7 +60,7 @@ class MyComponent extends Component {
 
 
 
-#Features
+## Features
 
 - Custom styling by passing style to your embedded report component.
 - Component also allows you pass callbacks to trigger on events like:
