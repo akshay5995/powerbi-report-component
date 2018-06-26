@@ -3,11 +3,11 @@
 It's a minimalistic react component to embed a powerbi report or dashboard into your react application.
 Makes embedding a microsoft powerbi report/ dashboard  into your react application a breeze.
 
-#Installation
+## Installation
 
 ```npm i powerbi-report-component```
 
-#Usuage
+## Usuage
 
 ``` 
 import React, {Component} from 'react';
