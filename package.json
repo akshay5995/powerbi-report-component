@@ -22,8 +22,7 @@
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "powerbi-client": "^2.5.2"
+    "react-dom": "^16.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-beta.46",
@@ -53,14 +52,15 @@
     "name": "Akshay Ram Vignesh A",
     "email": "akshay5995@gmail.com"
   },
-  "homepage" : "http://akshay5995.github.io/powerbi-report-component",
+  "homepage": "http://akshay5995.github.io/powerbi-report-component",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
     "eslint": "^4.19.1",
     "prop-types": "^15.6.2",
-    "react-copy-to-clipboard": "^5.0.1"
+    "react-copy-to-clipboard": "^5.0.1",
+    "powerbi-client": "^2.5.2"
   }
 }
