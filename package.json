@@ -10,7 +10,14 @@
     "docs": "webpack-dev-server --mode development",
     "docs:prod": "webpack --mode production"
   },
-  "keywords": ["powerbi", "react-powerbi", "react", "bi", "embed", "report"],
+  "keywords": [
+    "powerbi",
+    "react-powerbi",
+    "react",
+    "bi",
+    "embed",
+    "report"
+  ],
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.2.0",
@@ -28,15 +35,16 @@
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.9.1",
+    "eslint-plugin-react": "^7.10.0",
+    "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "powerbi-client": "^2.5.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "style-loader": "^0.21.0",
-    "powerbi-client": "^2.5.2",
-    "webpack": "^4.6.0",
+    "webpack": "^4.12.1",
     "webpack-cli": "^2.0.15",
     "webpack-dev-server": "^3.1.3"
   },
