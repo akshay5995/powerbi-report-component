@@ -1,7 +1,7 @@
 {
   "name": "powerbi-report-component",
   "version": "0.1.0",
-  "description": "A minimalistic react component to embed a powerbi report in your appication",
+  "description": "A minimalistic react component to embed a powerbi report in your application",
   "main": "lib/index.js",
   "scripts": {
     "dev": "concurrently \"npm run lib:watch\" \"npm run docs\"",
