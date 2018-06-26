@@ -20,7 +20,7 @@ class MyComponent extends Component {
   }
 
   handleReportLoad = () => {
-    // your logic when report loads
+    // will be called when report loads
   }
 
   handlePageChange = (data) => {
@@ -63,7 +63,7 @@ class MyComponent extends Component {
 ## Features
 
 - Custom styling by passing style to your embedded report component.
-- Component also allows you pass callbacks to trigger on events like:
+- Component also lets you pass callbacks to trigger on events like:
     - Page Change   
     - Load
     - Data Element Clicked
