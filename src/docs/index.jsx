@@ -33,16 +33,16 @@ class Demo extends Component {
     } = this.state;
     const viewAccessToken = accessToken && `${accessToken.slice(0, 10)}...`;
     const viewEmbedUrl = embedUrl && `${embedUrl.slice(0, 10)}...`;
-    return `<Report embedType='${embedType}'
-    tokenType='${tokenType}'
-    accessToken='${view ? viewAccessToken : accessToken}'
-    embedUrl='${view ? viewEmbedUrl : embedUrl}
-    embedId='${embedId}'
+    return `<Report embedType="${embedType}"
+    tokenType="${tokenType}"
+    accessToken="${view ? viewAccessToken : accessToken}"
+    embedUrl="${view ? viewEmbedUrl : embedUrl}"
+    embedId="${embedId}"
     extraSettings={{
       filterPaneEnabled: ${this.state.filterPaneEnabled === 'filter-true'},
       navContentPaneEnabled: ${this.state.navContentPaneEnabled === 'nav-true'},
     }}
-    permissions='${permissions}'
+    permissions="${permissions}"
     style={{
       height: '100%',
       border: '0',
