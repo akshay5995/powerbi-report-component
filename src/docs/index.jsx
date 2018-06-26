@@ -51,10 +51,10 @@ class Demo extends Component {
     }}
     onLoad={() => { console.log('Report Loaded!'); }}
     onSelectData={(data) => { 
-      window.alert('You clicked chart: + data.visual.title); 
+      window.alert('You clicked chart:' + data.visual.title); 
     }}
     onPageChange={(data) => { 
-      window.alert('You changed page to + data.newPage.displayName); 
+      window.alert('You changed page to' + data.newPage.displayName); 
     }}
   />`;
   }
