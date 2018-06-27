@@ -1,6 +1,6 @@
 # Powerbi Report Component
 
-It's a minimalistic react component to embed a powerbi report or dashboard into your react application.
+It's a minimalistic react component to embed a Microsoft PowerBI report or dashboard into your react application.
 Makes embedding a microsoft powerbi report/ dashboard  into your react application a breeze.
 
 ## Installation
@@ -72,3 +72,7 @@ class MyComponent extends Component {
 
 For demo visit: 
 > http://akshay5995.github.io/powerbi-report-component
+
+For Sample embed token , embed url and embed Id visit:(More docs)
+
+https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#
