@@ -1,6 +1,6 @@
 {
   "name": "powerbi-report-component",
-  "version": "0.1.1",
+  "version": "1.0.0-beta",
   "description": "A minimalistic react component to embed a powerbi report or dashboard in your react application",
   "main": "lib/index.js",
   "scripts": {
@@ -34,13 +34,14 @@
     "babel-loader": "^8.0.0-beta.0",
     "concurrently": "^3.5.1",
     "css-loader": "^0.28.11",
+    "react-copy-to-clipboard": "^5.0.1",
+    "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.10.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "powerbi-client": "^2.5.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "style-loader": "^0.21.0",
@@ -58,9 +59,7 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "eslint": "^4.19.1",
-    "prop-types": "^15.6.2",
-    "react-copy-to-clipboard": "^5.0.1",
-    "powerbi-client": "^2.5.2"
+    "powerbi-client": "^2.5.2",
+    "prop-types": "^15.6.2"
   }
 }

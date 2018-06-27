@@ -7,7 +7,7 @@ class Report extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      currentReport: {}, //eslint-disable-line
+      currentReport: null,
     };
     this.performOnEmbed = this.performOnEmbed.bind(this);
     this.createConfig = this.createConfig.bind(this);
@@ -51,7 +51,7 @@ class Report extends PureComponent {
       if (onLoad) onLoad();
       if (!this.state.currentReport) {
         this.setState({
-        currentReport: report, //eslint-disable-line
+        currentReport: report,
         });
       }
     });
@@ -83,12 +83,12 @@ Report.propTypes = {
   accessToken: PropTypes.string.isRequired,
   embedUrl: PropTypes.string.isRequired,
   embedId: PropTypes.string.isRequired,
-  extraSettings: PropTypes.object, //eslint-disable-line
+  extraSettings: PropTypes.object,
   permissions: PropTypes.string.isRequired,
-  onLoad: PropTypes.func,//eslint-disable-line
-  onSelectData: PropTypes.func,//eslint-disable-line
-  onPageChange: PropTypes.func, //eslint-disable-line
-  style: PropTypes.object, //eslint-disable-line
+  onLoad: PropTypes.func,
+  onSelectData: PropTypes.func,
+  onPageChange: PropTypes.func,
+  style: PropTypes.object,
 };
 
 export default Report;

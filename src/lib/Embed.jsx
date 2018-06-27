@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import pbi from 'powerbi-client';
@@ -33,7 +34,7 @@ class Embed extends PureComponent {
     this.updateState(nextProps.config);
   }
 
-  componentDidUpdate() { //eslint-disable-line
+  componentDidUpdate() {
     const errors = validateConfig(this.state);
     if (!errors) {
       return this.embed(this.state);
@@ -44,7 +45,7 @@ class Embed extends PureComponent {
   }
 
   embed(config) {
-    this.component = powerbi.embed(this.reportRef.current, config); //eslint-disable-line
+    this.component = powerbi.embed(this.reportRef.current, config);
     if (this.props.performOnEmbed) {
       this.props.performOnEmbed(this.component);
     }
@@ -68,9 +69,9 @@ class Embed extends PureComponent {
 }
 
 Embed.propTypes = {
-  config: PropTypes.object.isRequired, //eslint-disable-line
+  config: PropTypes.object.isRequired,
   performOnEmbed: PropTypes.func.isRequired,
-  style: PropTypes.object, //eslint-disable-line
+  style: PropTypes.object,
 };
 
 export default Embed;
