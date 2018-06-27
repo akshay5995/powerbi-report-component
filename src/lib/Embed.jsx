@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import pbi from 'powerbi-client';

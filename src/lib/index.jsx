@@ -1,3 +1,5 @@
+/* eslint-disable*/
+
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { models } from 'powerbi-client';
@@ -51,7 +53,7 @@ class Report extends PureComponent {
       if (onLoad) onLoad();
       if (!this.state.currentReport) {
         this.setState({
-        currentReport: report,
+          currentReport: report,
         });
       }
     });

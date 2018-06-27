@@ -54,7 +54,7 @@ class Demo extends Component {
       window.alert('You clicked chart:' + data.visual.title); 
     }}
     onPageChange={(data) => { 
-      window.alert('You changed page to' + data.newPage.displayName); 
+      console.log('You changed page to:' + data.newPage.displayName); 
     }}
   />`;
   }
