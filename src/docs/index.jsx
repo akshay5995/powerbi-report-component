@@ -7,6 +7,7 @@ import './styles.css';
 class Demo extends Component {
   constructor(props) {
     super(props);
+    this.report = null;
     this.state = {
       embedType: 'report',
       tokenType: 'Embed',
@@ -49,7 +50,10 @@ class Demo extends Component {
       padding: '20px',
       background: '#eee'
     }}
-    onLoad={() => { console.log('Report Loaded!'); }}
+    onLoad={(report) => { 
+      console.log('Report Loaded!');
+      //this.report = report (Read docs to know how to use report object that is returned)
+    }}
     onSelectData={(data) => { 
       window.alert('You clicked chart:' + data.visual.title); 
     }}
@@ -104,13 +108,36 @@ class Demo extends Component {
               <span><input checked={this.state.filterPaneEnabled === 'filter-true'} type="radio" value="filter-true" name="filterPaneEnabled" onChange={this.handleChange} />True</span>
               <span><input checked={this.state.filterPaneEnabled === 'filter-false'} type="radio" value="filter-false" name="filterPaneEnabled" onChange={this.handleChange} />False</span>
             </span>
-            <button onClick={() => {
+            <span className="interactions">
+            General Operations:
+              <button
+                className="interactionBtn"
+                onClick={() => {
+                  if (this.report) {
+                    this.report.fullscreen();
+                  }
+                }}
+              >
+                  Fullscreen
+              </button>
+              <button
+                className="interactionBtn"
+                onClick={() => {
+                  if (this.report) {
+                    this.report.print();
+                  }
+                }}
+              >
+                Print
+              </button>
+            </span>
+            <button
+              className="runBtn"
+              onClick={() => {
               if (!this.state.flag) {
                 this.setState({
                 flag: true,
                 });
-              } else {
-                this.forceUpdate();
               }
             }}
             >Run
@@ -127,9 +154,7 @@ class Demo extends Component {
             </span>
             <pre>
               <code className="language-css">
-                {
-                  this.getCode()
-                }
+                {this.getCode()}
               </code>
             </pre>
           </div>
@@ -143,7 +168,10 @@ class Demo extends Component {
           extraSettings={extraSettings}
           permissions={permissions}
           style={style.report}
-          onLoad={() => { console.log('Report Loaded!'); }} //eslint-disable-line
+          onLoad={(report) => {
+            console.log("You'll get back a report object with this callback");
+            this.report = report;
+          }} //eslint-disable-line
           onSelectData={(data) => { window.alert(`You clicked chart: ${data.visual.title}`); }} //eslint-disable-line
           onPageChange={(data) => { console.log(`You changed page to: ${data.newPage.displayName}`); }} //eslint-disable-line
         />}

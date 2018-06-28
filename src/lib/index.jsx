@@ -9,14 +9,23 @@ class Report extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      currentReport: null,
+      currentConfig: null,
     };
     this.performOnEmbed = this.performOnEmbed.bind(this);
     this.createConfig = this.createConfig.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
-  createConfig() {
-    if (this.props) {
+  componentDidMount() {
+    this.updateState(this.props);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateState(nextProps);
+  }
+
+  createConfig(props) {
+    if (props) {
       const {
         embedType,
         tokenType,
@@ -25,7 +34,7 @@ class Report extends PureComponent {
         embedId,
         permissions,
         extraSettings,
-      } = this.props;
+      } = props;
       return {
         type: embedType,
         tokenType: models.TokenType[tokenType],
@@ -50,12 +59,7 @@ class Report extends PureComponent {
       onPageChange,
     } = this.props;
     report.on('loaded', () => {
-      if (onLoad) onLoad();
-      if (!this.state.currentReport) {
-        this.setState({
-          currentReport: report,
-        });
-      }
+      if (onLoad) onLoad(report);
     });
     report.on('dataSelected', (event) => {
       if (onSelectData) { onSelectData(event.detail); }
@@ -65,12 +69,17 @@ class Report extends PureComponent {
     });
   }
 
+  updateState(props) {
+    this.setState({ 
+      currentConfig: this.createConfig(props),
+    });
+  }
+
   render() {
-    const config = this.createConfig();
-    if (!config) { return <div> Error </div>; }
+    if (!this.state.currentConfig) { return <div> Error </div>; }
     return (
       <Embed
-        config={config}
+        config={this.state.currentConfig}
         performOnEmbed={this.performOnEmbed}
         style={this.props.style}
       />

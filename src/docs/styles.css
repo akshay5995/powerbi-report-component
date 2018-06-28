@@ -34,7 +34,26 @@ html, body {
   border: 1px solid #000;
 }
 
-.config > button {
+.interactions {
+    display: flex;
+    flex-flow: column;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 6;
+}
+
+.interactionBtn {
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  width: 50%;
+  height: 30px;
+  justify-self: right;
+  font-size: 15px;
+  margin: 2.5px;
+}
+
+.runBtn {
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 5;
