@@ -132,6 +132,10 @@ Inside your compoent where you're using { Report } component.
 For demo visit: 
 > http://akshay5995.github.io/powerbi-report-component
 
-For Sample embed token , embed url and embed Id visit:(More docs)
+Use Token, URL, Report ID from:
 
-https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#
+> https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#
+
+Follow the instructions below in image:
+
+![instructions not available](https://raw.githubusercontent.com/akshay5995/powerbi-report-component/master/images/Embed-Instructions.png)

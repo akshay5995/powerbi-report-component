@@ -95,7 +95,7 @@ input :required {
 
 .container {
   display: flex;
-  min-height: 50% !important;
+  min-height: 60% !important;
 }
 
 .code {

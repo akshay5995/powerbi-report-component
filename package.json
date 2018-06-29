@@ -59,7 +59,7 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.5.2",
+    "powerbi-client": "^2.6.0",
     "prop-types": "^15.6.2"
   }
 }

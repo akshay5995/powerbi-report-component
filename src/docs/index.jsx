@@ -80,7 +80,7 @@ class Demo extends Component {
     } = this.state;
     const style = {
       report: {
-        height: '100%', border: '0', padding: '20px', background: '#eee',
+        height: '50%', border: '0', padding: '20px', background: '#eee',
       },
     };
     const extraSettings = {
