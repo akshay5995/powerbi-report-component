@@ -17,10 +17,12 @@ class Demo extends Component {
       permissions: 'All',
       filterPaneEnabled: 'filter-false',
       navContentPaneEnabled: 'nav-false',
+      visualHeaderFlag: true,
       flag: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
+    this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(this);
   }
 
   getCode(view = true) {
@@ -50,7 +52,12 @@ class Demo extends Component {
       padding: '20px',
       background: '#eee'
     }}
-    onLoad={(report) => { 
+    onLoad={(report) => {
+      /*
+      you can set filters onLoad using:
+      this.report.setFilters([filter]).catch((errors) => {
+        console.log(errors);
+      });*/
       console.log('Report Loaded!');
       //this.report = report (Read docs to know how to use report object that is returned)
     }}
@@ -66,6 +73,33 @@ class Demo extends Component {
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
+    });
+  }
+
+
+  toggleAllVisualHeaders() {
+    const newSettings = {
+      visualSettings: {
+        visualHeaders: [
+          {
+            settings: {
+              visible: !this.state.visualHeaderFlag,
+            },
+          },
+        ],
+      },
+    };
+    if (this.report) {
+      this.report.updateSettings(newSettings)
+        .then(() => {
+          console.log('Visual header was successfully hidden for all the visuals in the report.');
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    this.setState({
+      visualHeaderFlag: false,
     });
   }
 
@@ -86,6 +120,15 @@ class Demo extends Component {
     const extraSettings = {
       filterPaneEnabled: this.state.filterPaneEnabled === 'filter-true',
       navContentPaneEnabled: this.state.navContentPaneEnabled === 'nav-true',
+    };
+    const filter = {
+      $schema: 'http://powerbi.com/product/schema#basic',
+      target: {
+        table: 'Store',
+        column: 'Chain',
+      },
+      operator: 'In',
+      values: ['Lindseys'],
     };
     return (
       <div className="root">
@@ -119,6 +162,57 @@ class Demo extends Component {
                 }}
               >
                   Fullscreen
+              </button>
+              <button
+                className="interactionBtn"
+                onClick={() => {
+                  if (this.report) {
+                    this.report.switchMode('edit');
+                  }
+                }}
+              >
+                Edit Mode
+              </button>
+              <button
+                className="interactionBtn"
+                onClick={() => {
+                  if (this.report) {
+                    this.report.switchMode('view');
+                  }
+                }}
+              >
+                View Mode
+              </button>
+              <button
+                className="interactionBtn"
+                onClick={() => {
+                  if (this.report) {
+                    this.report.setFilters([filter]).catch((errors) => {
+                      console.log(errors);
+                    });
+                  }
+                }}
+              >
+                Set Filter
+              </button>
+              <button
+                className="interactionBtn"
+                onClick={() => {
+                  if (this.report) {
+                    this.report.removeFilters()
+                      .catch((errors) => {
+                        console.log(errors);
+                    });
+                  }
+                }}
+              >
+                Remove Filter
+              </button>
+              <button
+                className="interactionBtn"
+                onClick={() => this.toggleAllVisualHeaders()}
+              >
+                Toggle Visual Header
               </button>
               <button
                 className="interactionBtn"

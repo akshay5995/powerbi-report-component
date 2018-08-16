@@ -116,16 +116,180 @@ Inside your compoent where you're using { Report } component.
 
 ```
 
+For Report Level Filters:
+
+```
+
+  /*
+    Example filter object used in microsoft's demo page:
+
+    const filter = {
+        $schema: "http://powerbi.com/product/schema#basic",
+        target: {
+          table: "Store",
+          column: "Chain"
+        },
+        operator: "In",
+        values: ["Lindseys"]
+      };
+  */
+  
+
+  ...
+
+  setFilter = (filter) => this.report.setFilters([filter]).catch(function (errors) {
+        console.log(errors);
+    });
+  
+  getFilter = () => this.report.getFilters().then(function (filters) {
+          console.log(filters);
+      }).catch(function (errors) {
+          console.log(errors);
+      });
+
+  removeFilters = () => this.report.removeFilters()
+      .catch(function (errors) {
+          console.log(errors);
+      });
+
+  ...
+
+```
+
 
 ## Features
 
-- Custom styling by passing style to your embedded report component.
-- Component also lets you pass callbacks to trigger on events like:
-    - Page Change   
-    - Load
-    - Data Element Clicked
-    - Fullscreen
-    - Print Report
+Currently supported features:
+
+1. Custom styling by passing style to your embedded report component.
+2. The component also lets you pass callbacks to trigger on events like:
+
+  Page Change
+  ```
+    onPageChange={(data) => 
+    console.log(`Page name :{data.newPage.displayName}`) 
+    }
+  ```
+  Load
+  ```
+    onLoad={(report) => { 
+      console.log('Report Loaded!');
+      this.report = report;
+      }
+    }
+  ```
+  Data Element Clicked
+  ```
+    onSelectData={(data) => 
+      console.log(`You clicked on chart: {data.visual.title}`)
+    }
+  ```
+3. Use ‘report’ object returned to parent component for:
+
+  #Change Report Mode to View or Edit:
+
+  ```
+    //mode can be "view" or "edit"
+
+    changeMode = (mode) => this.report.switchMode(mode);
+  ```
+
+  #Fullscreen
+
+  ```
+    setFullscreen = () => this.report.fullscreen();
+  ```
+
+  #Print Report
+
+  ```
+    printReport = () => this.report.print();
+  ```
+
+  #Set Filters
+
+  ```
+      //example filter from microsoft's demo page
+
+      const filter = {
+        $schema: "http://powerbi.com/product/schema#basic",
+        target: {
+          table: "Store",
+          column: "Chain"
+        },
+        operator: "In",
+        values: ["Lindseys"]
+      };
+
+      // using event handlers
+
+      setFilter = (filter) => this.report.setFilters([filter]).catch(function (errors) {
+        console.log(errors);
+      });
+
+      // during onload
+
+      onLoad = (report) => { 
+        report.setFilters([filter]).catch(function (errors) {
+          console.log(errors);
+        });
+        this.report = report;
+      }
+    }
+
+  ```
+
+  #Show / Hide all visual headers:
+
+  ```
+
+  toggleAllVisualHeaders = (bool) => 
+  {
+    const newSettings = {
+      visualSettings: {
+        visualHeaders: [
+          {
+            settings: {
+              visible: bool
+            }
+          }
+        ]
+      }
+    }
+    this.report.updateSettings(newSettings)
+      .then(function () {
+        console.log("Visual header was successfully hidden for all the visuals in the report.");
+      })
+      .catch(function (errors) {
+        console.log(errors);
+      });
+  }
+
+  ```
+
+  #Get Filters
+
+  ```
+    getFilter = () => this.report.getFilters().then(function (filters) {
+          console.log(filters);
+      }).catch(function (errors) {
+          console.log(errors);
+      });
+
+  ```
+
+  #Remove Filters
+
+  ```
+
+    removeFilters = () => this.report.removeFilters()
+      .catch(function (errors) {
+          console.log(errors);
+      });
+
+  ```
+
+More features coming soon! ⚡️
 
 ## More features coming soon!! :zap:
 
@@ -139,3 +303,7 @@ Use Token, URL, Report ID from:
 Follow the instructions below in image:
 
 ![instructions not available](https://raw.githubusercontent.com/akshay5995/powerbi-report-component/master/images/Embed-Instructions.png)
+
+Follow me on:
+  Medium: https://medium.com/@akshay5995
+
