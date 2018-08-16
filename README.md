@@ -239,34 +239,6 @@ Currently supported features:
 
   ```
 
-  #Show / Hide all visual headers:
-
-  ```
-
-  toggleAllVisualHeaders = (bool) => 
-  {
-    const newSettings = {
-      visualSettings: {
-        visualHeaders: [
-          {
-            settings: {
-              visible: bool
-            }
-          }
-        ]
-      }
-    }
-    this.report.updateSettings(newSettings)
-      .then(function () {
-        console.log("Visual header was successfully hidden for all the visuals in the report.");
-      })
-      .catch(function (errors) {
-        console.log(errors);
-      });
-  }
-
-  ```
-
   #Get Filters
 
   ```
@@ -286,6 +258,35 @@ Currently supported features:
       .catch(function (errors) {
           console.log(errors);
       });
+
+  ```
+
+  
+  #Show / Hide all visual headers:
+
+  ```
+
+  toggleAllVisualHeaders = (bool) => 
+  {
+    const newSettings = {
+      visualSettings: {
+        visualHeaders: [
+          {
+            settings: {
+              visible: bool,  // boolean variable
+            }
+          }
+        ]
+      }
+    }
+    this.report.updateSettings(newSettings)
+      .then(function () {
+        console.log("Visual header toggle successful.");
+      })
+      .catch(function (errors) {
+        console.log(errors);
+      });
+  }
 
   ```
 

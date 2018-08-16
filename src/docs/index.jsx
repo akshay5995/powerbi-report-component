@@ -99,7 +99,7 @@ class Demo extends Component {
         });
     }
     this.setState({
-      visualHeaderFlag: false,
+      visualHeaderFlag: !this.state.visualHeaderFlag,
     });
   }
 
