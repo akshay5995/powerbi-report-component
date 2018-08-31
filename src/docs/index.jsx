@@ -76,7 +76,6 @@ class Demo extends Component {
     });
   }
 
-
   toggleAllVisualHeaders() {
     const newSettings = {
       visualSettings: {
@@ -124,11 +123,11 @@ class Demo extends Component {
     const filter = {
       $schema: 'http://powerbi.com/product/schema#basic',
       target: {
-        table: 'Store',
-        column: 'Chain',
+        table: 'Geo',
+        column: 'Region',
       },
       operator: 'In',
-      values: ['Lindseys'],
+      values: ['West'],
     };
     return (
       <div className="root">

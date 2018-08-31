@@ -25,29 +25,29 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0-beta.46",
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/plugin-proposal-class-properties": "^7.0.0-beta.46",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0-beta.46",
-    "@babel/preset-env": "^7.0.0-beta.46",
-    "@babel/preset-react": "^7.0.0-beta.46",
-    "babel-loader": "^8.0.0-beta.0",
-    "concurrently": "^3.5.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.0",
+    "concurrently": "^3.6.1",
     "css-loader": "^0.28.11",
-    "react-copy-to-clipboard": "^5.0.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
+    "react": "^16.4.2",
+    "react-copy-to-clipboard": "^5.0.1",
+    "react-dom": "^16.4.2",
     "style-loader": "^0.21.0",
-    "webpack": "^4.12.1",
+    "webpack": "^4.17.1",
     "webpack-cli": "^2.0.15",
-    "webpack-dev-server": "^3.1.3"
+    "webpack-dev-server": "^3.1.7"
   },
   "author": {
     "name": "Akshay Ram Vignesh A",
@@ -59,7 +59,7 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.6.0",
+    "powerbi-client": "^2.6.1",
     "prop-types": "^15.6.2"
   }
 }

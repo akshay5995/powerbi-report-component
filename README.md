@@ -289,9 +289,6 @@ Currently supported features:
   }
 
   ```
-
-More features coming soon! ⚡️
-
 ## More features coming soon!! :zap:
 
 For demo visit: 
