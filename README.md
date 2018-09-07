@@ -33,6 +33,13 @@ class MyComponent extends Component {
     // will be called when pages in your report changes
   }
 
+  handleTileClicked = (dashboard, data) => { // only used when embedType is "dashboard"
+    // will be called when report loads
+
+    this.report = dashboard; // get the object from callback and store it.(optional)
+    console.log('Data from tile', data);
+  }
+
   render() {
     const reportStyle = {
         // style object for report component
@@ -56,6 +63,7 @@ class MyComponent extends Component {
             onLoad={this.handleReportLoad}
             onSelectData={this.handleDataSelected}
             onPageChange={this.handlePageChange}
+            onTileClicked={this.handleTileClicked}
         />
     </div>
     );
@@ -156,8 +164,21 @@ For Report Level Filters:
 
 ```
 
+## Dashboard events: (When embedType === "dashboard")
 
-## Features
+```
+
+handleTileClicked = (dashboard, data) => { // only used when embedType is "dashboard"
+    // will be called when report loads
+
+    this.report = dashboard; // get the object from callback and store it.(optional)
+    console.log('Data from tile', data);
+  }
+
+```
+
+
+### Features
 
 Currently supported features:
 

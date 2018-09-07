@@ -54,19 +54,27 @@ class Report extends PureComponent {
 
   performOnEmbed(report) {
     const {
+      embedType,
       onLoad,
       onSelectData,
       onPageChange,
+      onTileClicked,
     } = this.props;
-    report.on('loaded', () => {
-      if (onLoad) onLoad(report);
-    });
-    report.on('dataSelected', (event) => {
-      if (onSelectData) { onSelectData(event.detail); }
-    });
-    report.on('pageChanged', (event) => {
-      if (onPageChange) { onPageChange(event.detail); }
-    });
+    if(embedType === 'report') {
+      report.on('loaded', () => {
+        if (onLoad) onLoad(report);
+      });
+      report.on('dataSelected', (event) => {
+        if (onSelectData) { onSelectData(event.detail); }
+      });
+      report.on('pageChanged', (event) => {
+        if (onPageChange) { onPageChange(event.detail); }
+      });
+    } else if(embedType === 'dashboard'){
+      report.on('tileClicked', (event) => {
+        if (onTileClicked) { onTileClicked(report, event.detail); }
+      });
+    }
   }
 
   updateState(props) {
@@ -99,6 +107,7 @@ Report.propTypes = {
   onLoad: PropTypes.func,
   onSelectData: PropTypes.func,
   onPageChange: PropTypes.func,
+  onTileClicked: PropTypes.func,
   style: PropTypes.object,
 };
 

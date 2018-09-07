@@ -17,7 +17,8 @@
     "react",
     "bi",
     "embed",
-    "report"
+    "report",
+    "dashboard"
   ],
   "license": "MIT",
   "peerDependencies": {

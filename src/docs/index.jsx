@@ -67,6 +67,10 @@ class Demo extends Component {
     onPageChange={(data) => { 
       console.log('You changed page to:' + data.newPage.displayName); 
     }}
+    onTileClicked={(dashboard, data) => { //only used for dashboard
+      // this.report = dashboard; use for object for triggering fullscreen
+      console.log('You clicked tile:', data);
+    }}
   />`;
   }
 
@@ -129,29 +133,36 @@ class Demo extends Component {
       operator: 'In',
       values: ['West'],
     };
+    const reportFlag = embedType === 'report';
     return (
       <div className="root">
         <div className="header">Power BI Report Component Demo</div>
         <div className="container">
           <div className="config">
-            <span>Embed Type: <input name="embedToken" onChange={this.handleChange} value={embedType} required /></span>
+            <span>Embed Type: <input name="embedType" onChange={this.handleChange} value={embedType} required /></span>
             <span>Token Type: <input name="tokenType" onChange={this.handleChange} value={tokenType} required /></span>
             <span>Token: <input name="accessToken" onChange={this.handleChange} value={accessToken} required /></span>
             <span>Embed Url: <input name="embedUrl" onChange={this.handleChange} value={embedUrl} required /></span>
             <span>Embed Id: <input name="embedId" onChange={this.handleChange} value={embedId} required /></span>
-            <span>Permissions: <input name="permissions" onChange={this.handleChange} value={permissions} required /></span>
-            <span>
-            Display Nav Pane:
-              <span><input checked={this.state.navContentPaneEnabled === 'nav-true'} type="radio" value="nav-true" name="navContentPaneEnabled" onChange={this.handleChange} />True</span>
-              <span><input checked={this.state.navContentPaneEnabled === 'nav-false'} type="radio" value="nav-false" name="navContentPaneEnabled" onChange={this.handleChange} />False</span>
-            </span>
-            <span>
-            Display Filter Pane:
-              <span><input checked={this.state.filterPaneEnabled === 'filter-true'} type="radio" value="filter-true" name="filterPaneEnabled" onChange={this.handleChange} />True</span>
-              <span><input checked={this.state.filterPaneEnabled === 'filter-false'} type="radio" value="filter-false" name="filterPaneEnabled" onChange={this.handleChange} />False</span>
-            </span>
+            {reportFlag && <span>Permissions: <input name="permissions" onChange={this.handleChange} value={permissions} required /></span>}
+            {
+              reportFlag &&
+              <span>
+                Display Nav Pane:
+                <span><input checked={this.state.navContentPaneEnabled === 'nav-true'} type="radio" value="nav-true" name="navContentPaneEnabled" onChange={this.handleChange} />True</span>
+                <span><input checked={this.state.navContentPaneEnabled === 'nav-false'} type="radio" value="nav-false" name="navContentPaneEnabled" onChange={this.handleChange} />False</span>
+              </span>
+          }
+            {
+                reportFlag &&
+                <span>
+                Display Filter Pane:
+                  <span><input checked={this.state.filterPaneEnabled === 'filter-true'} type="radio" value="filter-true" name="filterPaneEnabled" onChange={this.handleChange} />True</span>
+                  <span><input checked={this.state.filterPaneEnabled === 'filter-false'} type="radio" value="filter-false" name="filterPaneEnabled" onChange={this.handleChange} />False</span>
+                </span>
+          }
             <span className="interactions">
-            General Operations:
+              General Operations:
               <button
                 className="interactionBtn"
                 onClick={() => {
@@ -164,6 +175,7 @@ class Demo extends Component {
               </button>
               <button
                 className="interactionBtn"
+                disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
                     this.report.switchMode('edit');
@@ -174,6 +186,7 @@ class Demo extends Component {
               </button>
               <button
                 className="interactionBtn"
+                disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
                     this.report.switchMode('view');
@@ -184,6 +197,7 @@ class Demo extends Component {
               </button>
               <button
                 className="interactionBtn"
+                disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
                     this.report.setFilters([filter]).catch((errors) => {
@@ -196,6 +210,7 @@ class Demo extends Component {
               </button>
               <button
                 className="interactionBtn"
+                disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
                     this.report.removeFilters()
@@ -209,12 +224,14 @@ class Demo extends Component {
               </button>
               <button
                 className="interactionBtn"
+                disabled={!reportFlag}
                 onClick={() => this.toggleAllVisualHeaders()}
               >
                 Toggle Visual Header
               </button>
               <button
                 className="interactionBtn"
+                disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
                     this.report.print();
@@ -267,6 +284,10 @@ class Demo extends Component {
           }} //eslint-disable-line
           onSelectData={(data) => { window.alert(`You clicked chart: ${data.visual.title}`); }} //eslint-disable-line
           onPageChange={(data) => { console.log(`You changed page to: ${data.newPage.displayName}`); }} //eslint-disable-line
+          onTileClicked={(dashboard, data) => {
+            this.report = dashboard;
+            console.log('You clicked tile:', data);
+          }}
         />}
       </div>
     );
