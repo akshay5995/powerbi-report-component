@@ -99,7 +99,7 @@ input :required {
 }
 
 .code {
-  font-size: 12px;
+  font-size: 10px;
   flex-grow: 1;
   border: 2px solid #000;
   padding: 5px 0 0 5px;

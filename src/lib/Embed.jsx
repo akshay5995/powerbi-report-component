@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import pbi from 'powerbi-client';
+import {polyfill} from 'react-lifecycles-compat';
 
 // powerbi object is global
 
@@ -31,8 +32,8 @@ class Embed extends PureComponent {
     this.updateState(this.props.config);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.updateState(nextProps.config);
+  static getDerivedStateFromProps(props, state) {
+    return({...state, ...props.config})
   }
 
   componentDidUpdate() {
@@ -74,5 +75,7 @@ Embed.propTypes = {
   performOnEmbed: PropTypes.func.isRequired,
   style: PropTypes.object,
 };
+
+polyfill(Embed);
 
 export default Embed;

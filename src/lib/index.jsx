@@ -4,6 +4,35 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { models } from 'powerbi-client';
 import Embed from './Embed';
+import {polyfill} from 'react-lifecycles-compat';
+
+const createConfig = (props) => {
+  if (props) {
+    const {
+      embedType,
+      tokenType,
+      accessToken,
+      embedUrl,
+      embedId,
+      permissions,
+      extraSettings,
+    } = props;
+    return {
+      type: embedType,
+      tokenType: models.TokenType[tokenType],
+      accessToken,
+      embedUrl,
+      id: embedId,
+      permissions: models.Permissions[permissions],
+      settings: {
+        filterPaneEnabled: true,
+        navContentPaneEnabled: true,
+        ...extraSettings,
+      },
+    };
+  }
+  return null;
+}
 
 class Report extends PureComponent {
   constructor(props) {
@@ -12,7 +41,6 @@ class Report extends PureComponent {
       currentConfig: null,
     };
     this.performOnEmbed = this.performOnEmbed.bind(this);
-    this.createConfig = this.createConfig.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
@@ -20,36 +48,8 @@ class Report extends PureComponent {
     this.updateState(this.props);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.updateState(nextProps);
-  }
-
-  createConfig(props) {
-    if (props) {
-      const {
-        embedType,
-        tokenType,
-        accessToken,
-        embedUrl,
-        embedId,
-        permissions,
-        extraSettings,
-      } = props;
-      return {
-        type: embedType,
-        tokenType: models.TokenType[tokenType],
-        accessToken,
-        embedUrl,
-        id: embedId,
-        permissions: models.Permissions[permissions],
-        settings: {
-          filterPaneEnabled: true,
-          navContentPaneEnabled: true,
-          ...extraSettings,
-        },
-      };
-    }
-    return null;
+  static getDerivedStateFromProps(props) {
+    return({ currentConfig: createConfig(props)});
   }
 
   performOnEmbed(report) {
@@ -79,7 +79,7 @@ class Report extends PureComponent {
 
   updateState(props) {
     this.setState({ 
-      currentConfig: this.createConfig(props),
+      currentConfig: createConfig(props),
     });
   }
 
@@ -110,5 +110,7 @@ Report.propTypes = {
   onTileClicked: PropTypes.func,
   style: PropTypes.object,
 };
+
+polyfill(Report);
 
 export default Report;

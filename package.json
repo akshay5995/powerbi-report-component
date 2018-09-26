@@ -26,13 +26,13 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.0.0",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.0",
+    "babel-loader": "^8.0.2",
     "concurrently": "^3.6.1",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
@@ -42,13 +42,13 @@
     "eslint-plugin-react": "^7.11.1",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "react": "^16.4.2",
+    "react": "^16.5.2",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.4.2",
+    "react-dom": "^16.5.2",
     "style-loader": "^0.21.0",
-    "webpack": "^4.17.1",
+    "webpack": "^4.19.0",
     "webpack-cli": "^2.0.15",
-    "webpack-dev-server": "^3.1.7"
+    "webpack-dev-server": "^3.1.9"
   },
   "author": {
     "name": "Akshay Ram Vignesh A",
@@ -60,7 +60,8 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.6.1",
-    "prop-types": "^15.6.2"
+    "powerbi-client": "^2.6.4",
+    "prop-types": "^15.6.2",
+    "react-lifecycles-compat": "^3.0.4"
   }
 }

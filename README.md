@@ -207,7 +207,7 @@ Currently supported features:
   ```
 3. Use ‘report’ object returned to parent component for:
 
-  #Change Report Mode to View or Edit:
+# Change Report Mode to View or Edit:
 
   ```
     //mode can be "view" or "edit"
@@ -215,19 +215,19 @@ Currently supported features:
     changeMode = (mode) => this.report.switchMode(mode);
   ```
 
-  #Fullscreen
+  # Fullscreen
 
   ```
     setFullscreen = () => this.report.fullscreen();
   ```
 
-  #Print Report
+  # Print Report
 
   ```
     printReport = () => this.report.print();
   ```
 
-  #Set Filters
+  # Set Filters
 
   ```
       //example filter from microsoft's demo page
@@ -260,7 +260,7 @@ Currently supported features:
 
   ```
 
-  #Get Filters
+  # Get Filters
 
   ```
     getFilter = () => this.report.getFilters().then(function (filters) {
@@ -271,7 +271,7 @@ Currently supported features:
 
   ```
 
-  #Remove Filters
+  # Remove Filters
 
   ```
 
@@ -283,7 +283,7 @@ Currently supported features:
   ```
 
   
-  #Show / Hide all visual headers:
+  # Show / Hide all visual headers:
 
   ```
 
