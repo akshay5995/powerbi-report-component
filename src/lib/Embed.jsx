@@ -22,7 +22,7 @@ const validateConfig = (config) => {
 class Embed extends PureComponent {
   constructor(props) {
     super(props);
-    this.state = null;
+    this.state = {};
     this.component = null;
     this.reportRef = React.createRef();
     this.updateState = this.updateState.bind(this);
@@ -33,7 +33,7 @@ class Embed extends PureComponent {
   }
 
   static getDerivedStateFromProps(props, state) {
-    return({...state, ...props.config})
+    return({...props.config})
   }
 
   componentDidUpdate() {
