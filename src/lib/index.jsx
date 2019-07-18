@@ -56,6 +56,7 @@ class Report extends PureComponent {
     const {
       embedType,
       onLoad,
+      onRender,
       onSelectData,
       onPageChange,
       onTileClicked,
@@ -63,6 +64,9 @@ class Report extends PureComponent {
     if(embedType === 'report') {
       report.on('loaded', () => {
         if (onLoad) onLoad(report);
+      });
+      report.on('rendered', () => {
+        if (onRender) onRender(report);
       });
       report.on('dataSelected', (event) => {
         if (onSelectData) { onSelectData(event.detail); }

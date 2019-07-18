@@ -24,7 +24,17 @@ class MyComponent extends Component {
   }
 
   handleReportLoad = (report) => {
-    // will be called when report loads
+    // will be called when report loads:
+    // - scripts and data received from server, visuals are rendered on the browser
+    // - flickering Power BI logo stops appearing but report is not fully ready to be consumed
+
+    this.report = report; // get the object from callback and store it.(optional)
+  }
+
+  handleReportRender = (report) => {
+    // will be called when report renders: 
+    // - visuals finish rendering
+    // - report is fully visible and ready for consumption
 
     this.report = report; // get the object from callback and store it.(optional)
   }
@@ -61,6 +71,7 @@ class MyComponent extends Component {
             permissions="All" // View
             style={reportStyle}
             onLoad={this.handleReportLoad}
+            onRender={this.handleReportRender}
             onSelectData={this.handleDataSelected}
             onPageChange={this.handlePageChange}
             onTileClicked={this.handleTileClicked}
@@ -74,7 +85,7 @@ class MyComponent extends Component {
 
 > this.report can be used to perform operations like 'Fullscreen' or 'Print the report'
 
-### To use the report object returned by OnLoad
+### To use the report object returned by onLoad/onRender
 
 Inside your compoent where you're using { Report } component.
 
@@ -89,7 +100,7 @@ Inside your compoent where you're using { Report } component.
 
 ```
 
-*Callback passed to be passed to onLoad prop*
+*Callback passed to the onLoad or onRender prop*
 
 ```
 
@@ -97,7 +108,11 @@ Inside your compoent where you're using { Report } component.
     this.report = report; // get the report object from callback and store it.
   }
 
-  ....
+  handleReportRender = (report) => {
+    this.report = report; // get the report object from callback and store it.
+  }
+
+  ...
 ```
 
 *using the* this.report *to perform operations*
@@ -195,6 +210,14 @@ Currently supported features:
   ```
     onLoad={(report) => { 
       console.log('Report Loaded!');
+      this.report = report;
+      }
+    }
+  ```
+  Render
+  ```
+    onRender={(report) => { 
+      console.log('Report Rendered!');
       this.report = report;
       }
     }
