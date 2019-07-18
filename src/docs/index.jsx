@@ -1,26 +1,26 @@
 /*  eslint-disable import/no-extraneous-dependencies */
 
-import React, { Component } from 'react';
-import { render } from 'react-dom';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Report from '../lib';
-import './styles.css';
+import React, { Component } from "react";
+import { render } from "react-dom";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import Report from "../lib";
+import "./styles.css";
 
 class Demo extends Component {
   constructor(props) {
     super(props);
     this.report = null;
     this.state = {
-      embedType: 'report',
-      tokenType: 'Embed',
-      accessToken: '',
-      embedUrl: '',
-      embedId: '',
-      permissions: 'All',
-      filterPaneEnabled: 'filter-false',
-      navContentPaneEnabled: 'nav-false',
+      embedType: "report",
+      tokenType: "Embed",
+      accessToken: "",
+      embedUrl: "",
+      embedId: "",
+      permissions: "All",
+      filterPaneEnabled: "filter-false",
+      navContentPaneEnabled: "nav-false",
       visualHeaderFlag: true,
-      flag: false,
+      flag: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
@@ -34,7 +34,7 @@ class Demo extends Component {
       accessToken,
       embedUrl,
       embedId,
-      permissions,
+      permissions
     } = this.state;
     const viewAccessToken = accessToken && `${accessToken.slice(0, 10)}...`;
     const viewEmbedUrl = embedUrl && `${embedUrl.slice(0, 10)}...`;
@@ -44,8 +44,8 @@ class Demo extends Component {
     embedUrl="${view ? viewEmbedUrl : embedUrl}"
     embedId="${embedId}"
     extraSettings={{
-      filterPaneEnabled: ${this.state.filterPaneEnabled === 'filter-true'},
-      navContentPaneEnabled: ${this.state.navContentPaneEnabled === 'nav-true'},
+      filterPaneEnabled: ${this.state.filterPaneEnabled === "filter-true"},
+      navContentPaneEnabled: ${this.state.navContentPaneEnabled === "nav-true"},
     }}
     permissions="${permissions}"
     style={{
@@ -78,7 +78,7 @@ class Demo extends Component {
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value
     });
   }
 
@@ -88,23 +88,26 @@ class Demo extends Component {
         visualHeaders: [
           {
             settings: {
-              visible: !this.state.visualHeaderFlag,
-            },
-          },
-        ],
-      },
+              visible: !this.state.visualHeaderFlag
+            }
+          }
+        ]
+      }
     };
     if (this.report) {
-      this.report.updateSettings(newSettings)
+      this.report
+        .updateSettings(newSettings)
         .then(() => {
-          console.log('Visual header was successfully hidden for all the visuals in the report.');
+          console.log(
+            "Visual header was successfully hidden for all the visuals in the report."
+          );
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     }
     this.setState({
-      visualHeaderFlag: !this.state.visualHeaderFlag,
+      visualHeaderFlag: !this.state.visualHeaderFlag
     });
   }
 
@@ -115,54 +118,170 @@ class Demo extends Component {
       accessToken,
       embedUrl,
       embedId,
-      permissions,
+      permissions
     } = this.state;
     const style = {
       report: {
-        height: '50%', border: '0', padding: '20px', background: '#eee',
-      },
+        height: "50%",
+        border: "0",
+        padding: "20px",
+        background: "#eee"
+      }
     };
     const extraSettings = {
-      filterPaneEnabled: this.state.filterPaneEnabled === 'filter-true',
-      navContentPaneEnabled: this.state.navContentPaneEnabled === 'nav-true',
+      filterPaneEnabled: this.state.filterPaneEnabled === "filter-true",
+      navContentPaneEnabled: this.state.navContentPaneEnabled === "nav-true"
     };
     const filter = {
-      $schema: 'http://powerbi.com/product/schema#basic',
+      $schema: "http://powerbi.com/product/schema#basic",
       target: {
-        table: 'Geo',
-        column: 'Region',
+        table: "Geo",
+        column: "Region"
       },
-      operator: 'In',
-      values: ['West'],
+      operator: "In",
+      values: ["West"]
     };
-    const reportFlag = embedType === 'report';
+    const reportFlag = embedType === "report";
     return (
       <div className="root">
         <div className="header">Power BI Report Component Demo</div>
+        {this.state.flag ? (
+          <Report
+            embedType={embedType}
+            tokenType={tokenType}
+            accessToken={accessToken}
+            embedUrl={embedUrl}
+            embedId={embedId}
+            extraSettings={extraSettings}
+            permissions={permissions}
+            style={style.report}
+            onLoad={report => {
+              console.log("You'll get back a report object with this callback");
+              this.report = report;
+            }} //eslint-disable-line
+            onSelectData={data => {
+              window.alert(`You clicked chart: ${data.visual.title}`);
+            }} //eslint-disable-line
+            onPageChange={data => {
+              console.log(`You changed page to: ${data.newPage.displayName}`);
+            }} //eslint-disable-line
+            onTileClicked={(dashboard, data) => {
+              this.report = dashboard;
+              console.log("You clicked tile:", data);
+            }}
+          />
+        ) : (
+          <div className="placeholder">Report will appear here</div>
+        )}
         <div className="container">
           <div className="config">
-            <span>Embed Type: <input name="embedType" onChange={this.handleChange} value={embedType} required /></span>
-            <span>Token Type: <input name="tokenType" onChange={this.handleChange} value={tokenType} required /></span>
-            <span>Token: <input name="accessToken" onChange={this.handleChange} value={accessToken} required /></span>
-            <span>Embed Url: <input name="embedUrl" onChange={this.handleChange} value={embedUrl} required /></span>
-            <span>Embed Id: <input name="embedId" onChange={this.handleChange} value={embedId} required /></span>
-            {reportFlag && <span>Permissions: <input name="permissions" onChange={this.handleChange} value={permissions} required /></span>}
-            {
-              reportFlag &&
+            <span>
+              Embed Type:{" "}
+              <input
+                name="embedType"
+                onChange={this.handleChange}
+                value={embedType}
+                required
+              />
+            </span>
+            <span>
+              Token Type:{" "}
+              <input
+                name="tokenType"
+                onChange={this.handleChange}
+                value={tokenType}
+                required
+              />
+            </span>
+            <span>
+              Token:{" "}
+              <input
+                name="accessToken"
+                onChange={this.handleChange}
+                value={accessToken}
+                autoFocus={true}
+                required
+              />
+            </span>
+            <span>
+              Embed Url:{" "}
+              <input
+                name="embedUrl"
+                onChange={this.handleChange}
+                value={embedUrl}
+                required
+              />
+            </span>
+            <span>
+              Embed Id:{" "}
+              <input
+                name="embedId"
+                onChange={this.handleChange}
+                value={embedId}
+                required
+              />
+            </span>
+            {reportFlag && (
+              <span>
+                Permissions:{" "}
+                <input
+                  name="permissions"
+                  onChange={this.handleChange}
+                  value={permissions}
+                  required
+                />
+              </span>
+            )}
+            {reportFlag && (
               <span>
                 Display Nav Pane:
-                <span><input checked={this.state.navContentPaneEnabled === 'nav-true'} type="radio" value="nav-true" name="navContentPaneEnabled" onChange={this.handleChange} />True</span>
-                <span><input checked={this.state.navContentPaneEnabled === 'nav-false'} type="radio" value="nav-false" name="navContentPaneEnabled" onChange={this.handleChange} />False</span>
-              </span>
-          }
-            {
-                reportFlag &&
                 <span>
-                Display Filter Pane:
-                  <span><input checked={this.state.filterPaneEnabled === 'filter-true'} type="radio" value="filter-true" name="filterPaneEnabled" onChange={this.handleChange} />True</span>
-                  <span><input checked={this.state.filterPaneEnabled === 'filter-false'} type="radio" value="filter-false" name="filterPaneEnabled" onChange={this.handleChange} />False</span>
+                  <input
+                    checked={this.state.navContentPaneEnabled === "nav-true"}
+                    type="radio"
+                    value="nav-true"
+                    name="navContentPaneEnabled"
+                    onChange={this.handleChange}
+                  />
+                  True
                 </span>
-          }
+                <span>
+                  <input
+                    checked={this.state.navContentPaneEnabled === "nav-false"}
+                    type="radio"
+                    value="nav-false"
+                    name="navContentPaneEnabled"
+                    onChange={this.handleChange}
+                  />
+                  False
+                </span>
+              </span>
+            )}
+            {reportFlag && (
+              <span>
+                Display Filter Pane:
+                <span>
+                  <input
+                    checked={this.state.filterPaneEnabled === "filter-true"}
+                    type="radio"
+                    value="filter-true"
+                    name="filterPaneEnabled"
+                    onChange={this.handleChange}
+                  />
+                  True
+                </span>
+                <span>
+                  <input
+                    checked={this.state.filterPaneEnabled === "filter-false"}
+                    type="radio"
+                    value="filter-false"
+                    name="filterPaneEnabled"
+                    onChange={this.handleChange}
+                  />
+                  False
+                </span>
+              </span>
+            )}
             <span className="interactions">
               General Operations:
               <button
@@ -173,14 +292,14 @@ class Demo extends Component {
                   }
                 }}
               >
-                  Fullscreen
+                Fullscreen
               </button>
               <button
                 className="interactionBtn"
                 disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
-                    this.report.switchMode('edit');
+                    this.report.switchMode("edit");
                   }
                 }}
               >
@@ -191,7 +310,7 @@ class Demo extends Component {
                 disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
-                    this.report.switchMode('view');
+                    this.report.switchMode("view");
                   }
                 }}
               >
@@ -202,7 +321,7 @@ class Demo extends Component {
                 disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
-                    this.report.setFilters([filter]).catch((errors) => {
+                    this.report.setFilters([filter]).catch(errors => {
                       console.log(errors);
                     });
                   }
@@ -215,9 +334,8 @@ class Demo extends Component {
                 disabled={!reportFlag}
                 onClick={() => {
                   if (this.report) {
-                    this.report.removeFilters()
-                      .catch((errors) => {
-                        console.log(errors);
+                    this.report.removeFilters().catch(errors => {
+                      console.log(errors);
                     });
                   }
                 }}
@@ -246,54 +364,31 @@ class Demo extends Component {
             <button
               className="runBtn"
               onClick={() => {
-              if (!this.state.flag) {
-                this.setState({
-                flag: true,
-                });
-              }
-            }}
-            >Run
+                if (!this.state.flag) {
+                  this.setState({
+                    flag: true
+                  });
+                }
+              }}
+            >
+              Run
             </button>
           </div>
           <div className="code">
             <span className="codeHeader">
               <h2>Code:</h2>
-              <CopyToClipboard
-                text={this.getCode(false)}
-              >
-                <button className="copyBtn">Copy</button>
+              <CopyToClipboard text={this.getCode(false)}>
+                <button className="copyBtn">Copy code!</button>
               </CopyToClipboard>
             </span>
             <pre>
-              <code className="language-css">
-                {this.getCode()}
-              </code>
+              <code className="language-css">{this.getCode()}</code>
             </pre>
           </div>
         </div>
-        {this.state.flag && <Report
-          embedType={embedType}
-          tokenType={tokenType}
-          accessToken={accessToken}
-          embedUrl={embedUrl}
-          embedId={embedId}
-          extraSettings={extraSettings}
-          permissions={permissions}
-          style={style.report}
-          onLoad={(report) => {
-            console.log("You'll get back a report object with this callback");
-            this.report = report;
-          }} //eslint-disable-line
-          onSelectData={(data) => { window.alert(`You clicked chart: ${data.visual.title}`); }} //eslint-disable-line
-          onPageChange={(data) => { console.log(`You changed page to: ${data.newPage.displayName}`); }} //eslint-disable-line
-          onTileClicked={(dashboard, data) => {
-            this.report = dashboard;
-            console.log('You clicked tile:', data);
-          }}
-        />}
       </div>
     );
   }
 }
 
-render(<Demo />, document.getElementById('app'));
+render(<Demo />, document.getElementById("app"));
