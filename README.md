@@ -333,7 +333,7 @@ Currently supported features:
   }
 
   ```
-## More features coming soon!! :zap:
+
 
 For demo visit: 
 > http://akshay5995.github.io/powerbi-report-component
@@ -346,6 +346,4 @@ Follow the instructions below in image:
 
 ![instructions not available](https://raw.githubusercontent.com/akshay5995/powerbi-report-component/master/images/Embed-Instructions.png)
 
-Follow me on:
-  Medium: https://medium.com/@akshay5995
 
