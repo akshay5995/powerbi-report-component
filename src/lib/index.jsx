@@ -15,6 +15,7 @@ const createConfig = props => {
       embedUrl,
       embedId,
       permissions,
+      pageName,
       extraSettings
     } = props;
     return {
@@ -23,6 +24,7 @@ const createConfig = props => {
       accessToken,
       embedUrl,
       id: embedId,
+      pageName: pageName,
       permissions: models.Permissions[permissions],
       settings: {
         filterPaneEnabled: true,
@@ -113,6 +115,7 @@ Report.propTypes = {
   accessToken: PropTypes.string.isRequired,
   embedUrl: PropTypes.string.isRequired,
   embedId: PropTypes.string.isRequired,
+  pageName: PropTypes.string,
   extraSettings: PropTypes.object,
   permissions: PropTypes.string.isRequired,
   onLoad: PropTypes.func,
