@@ -1,8 +1,10 @@
 /*  eslint-disable import/no-extraneous-dependencies */
 
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { render } from "react-dom";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 import Report from "../lib";
 import "./styles.css";
 
@@ -16,6 +18,7 @@ class Demo extends Component {
       accessToken: "",
       embedUrl: "",
       embedId: "",
+      pageName: "",
       permissions: "All",
       filterPaneEnabled: "filter-false",
       navContentPaneEnabled: "nav-false",
@@ -25,6 +28,7 @@ class Demo extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
     this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(this);
+    this._onSelect = this._onSelect.bind(this);
   }
 
   getCode(view = true) {
@@ -82,6 +86,11 @@ class Demo extends Component {
     });
   }
 
+  _onSelect = state => option => {
+    const { value } = option;
+    this.setState({ [state]: value });
+  };
+
   toggleAllVisualHeaders() {
     const newSettings = {
       visualSettings: {
@@ -118,7 +127,8 @@ class Demo extends Component {
       accessToken,
       embedUrl,
       embedId,
-      permissions
+      permissions,
+      pageName
     } = this.state;
     const style = {
       report: {
@@ -128,6 +138,7 @@ class Demo extends Component {
         background: "#eee"
       }
     };
+    const embedTypeOptions = ["report", "dashboard"];
     const extraSettings = {
       filterPaneEnabled: this.state.filterPaneEnabled === "filter-true",
       navContentPaneEnabled: this.state.navContentPaneEnabled === "nav-true"
@@ -154,13 +165,14 @@ class Demo extends Component {
             embedId={embedId}
             extraSettings={extraSettings}
             permissions={permissions}
+            pageName={pageName}
             style={style.report}
             onLoad={report => {
               console.log("You'll get back a report object with this callback");
               this.report = report;
             }} //eslint-disable-line
             onSelectData={data => {
-              window.alert(`You clicked chart: ${data.visual.title}`);
+              window.alert(`You clicked chart: ${data.visual.name}`);
             }} //eslint-disable-line
             onPageChange={data => {
               console.log(`You changed page to: ${data.newPage.displayName}`);
@@ -176,16 +188,15 @@ class Demo extends Component {
         <div className="container">
           <div className="config">
             <span>
-              Embed Type:{" "}
-              <input
-                name="embedType"
-                onChange={this.handleChange}
+              Embed Type:
+              <Dropdown
+                options={embedTypeOptions}
+                onChange={this._onSelect("embedType")}
                 value={embedType}
-                required
               />
             </span>
             <span>
-              Token Type:{" "}
+              Token Type:
               <input
                 name="tokenType"
                 onChange={this.handleChange}
@@ -194,7 +205,7 @@ class Demo extends Component {
               />
             </span>
             <span>
-              Token:{" "}
+              Token:
               <input
                 name="accessToken"
                 onChange={this.handleChange}
@@ -204,7 +215,7 @@ class Demo extends Component {
               />
             </span>
             <span>
-              Embed Url:{" "}
+              Embed Url:
               <input
                 name="embedUrl"
                 onChange={this.handleChange}
@@ -213,7 +224,7 @@ class Demo extends Component {
               />
             </span>
             <span>
-              Embed Id:{" "}
+              Embed Id:
               <input
                 name="embedId"
                 onChange={this.handleChange}
@@ -222,65 +233,73 @@ class Demo extends Component {
               />
             </span>
             {reportFlag && (
-              <span>
-                Permissions:{" "}
-                <input
-                  name="permissions"
-                  onChange={this.handleChange}
-                  value={permissions}
-                  required
-                />
-              </span>
-            )}
-            {reportFlag && (
-              <span>
-                Display Nav Pane:
+              <Fragment>
                 <span>
+                  Page Name (optional)
                   <input
-                    checked={this.state.navContentPaneEnabled === "nav-true"}
-                    type="radio"
-                    value="nav-true"
-                    name="navContentPaneEnabled"
+                    name="pageName"
                     onChange={this.handleChange}
+                    value={pageName}
+                    required
                   />
-                  True
                 </span>
                 <span>
+                  Permissions:
                   <input
-                    checked={this.state.navContentPaneEnabled === "nav-false"}
-                    type="radio"
-                    value="nav-false"
-                    name="navContentPaneEnabled"
+                    name="permissions"
                     onChange={this.handleChange}
+                    value={permissions}
+                    required
                   />
-                  False
-                </span>
-              </span>
-            )}
-            {reportFlag && (
-              <span>
-                Display Filter Pane:
-                <span>
-                  <input
-                    checked={this.state.filterPaneEnabled === "filter-true"}
-                    type="radio"
-                    value="filter-true"
-                    name="filterPaneEnabled"
-                    onChange={this.handleChange}
-                  />
-                  True
                 </span>
                 <span>
-                  <input
-                    checked={this.state.filterPaneEnabled === "filter-false"}
-                    type="radio"
-                    value="filter-false"
-                    name="filterPaneEnabled"
-                    onChange={this.handleChange}
-                  />
-                  False
+                  Display Nav Pane:
+                  <span>
+                    <input
+                      checked={this.state.navContentPaneEnabled === "nav-true"}
+                      type="radio"
+                      value="nav-true"
+                      name="navContentPaneEnabled"
+                      onChange={this.handleChange}
+                    />
+                    True
+                  </span>
+                  <span>
+                    <input
+                      checked={this.state.navContentPaneEnabled === "nav-false"}
+                      type="radio"
+                      value="nav-false"
+                      name="navContentPaneEnabled"
+                      onChange={this.handleChange}
+                    />
+                    False
+                  </span>
                 </span>
-              </span>
+
+                <span>
+                  Display Filter Pane:
+                  <span>
+                    <input
+                      checked={this.state.filterPaneEnabled === "filter-true"}
+                      type="radio"
+                      value="filter-true"
+                      name="filterPaneEnabled"
+                      onChange={this.handleChange}
+                    />
+                    True
+                  </span>
+                  <span>
+                    <input
+                      checked={this.state.filterPaneEnabled === "filter-false"}
+                      type="radio"
+                      value="filter-false"
+                      name="filterPaneEnabled"
+                      onChange={this.handleChange}
+                    />
+                    False
+                  </span>
+                </span>
+              </Fragment>
             )}
             <span className="interactions">
               General Operations:
@@ -378,7 +397,7 @@ class Demo extends Component {
             <span className="codeHeader">
               <h2>Code:</h2>
               <CopyToClipboard text={this.getCode(false)}>
-                <button className="copyBtn">Copy code!</button>
+                <button className="copyBtn">Click to copy</button>
               </CopyToClipboard>
             </span>
             <pre>
