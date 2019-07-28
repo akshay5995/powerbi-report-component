@@ -67,6 +67,7 @@ class MyComponent extends Component {
             accessToken="" // accessToken goes here
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
+            pageName="" // set as current page of the report
             extraSettings={extraSettings}
             permissions="All" // View
             style={reportStyle}
