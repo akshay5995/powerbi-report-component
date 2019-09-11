@@ -8,27 +8,31 @@ import "react-dropdown/style.css";
 import Report from "../lib";
 import "./styles.css";
 
+const initialState = {
+  embedType: "report",
+  tokenType: "Embed",
+  accessToken: "",
+  embedUrl: "",
+  embedId: "",
+  pageName: "",
+  dashboardId: "",
+  permissions: "All",
+  filterPaneEnabled: "filter-false",
+  navContentPaneEnabled: "nav-false",
+  visualHeaderFlag: true,
+  flag: false
+};
+
 class Demo extends Component {
   constructor(props) {
     super(props);
     this.report = null;
-    this.state = {
-      embedType: "report",
-      tokenType: "Embed",
-      accessToken: "",
-      embedUrl: "",
-      embedId: "",
-      pageName: "",
-      permissions: "All",
-      filterPaneEnabled: "filter-false",
-      navContentPaneEnabled: "nav-false",
-      visualHeaderFlag: true,
-      flag: false
-    };
+    this.state = initialState;
     this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
     this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(this);
-    this._onSelect = this._onSelect.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
   getCode(view = true) {
@@ -41,7 +45,9 @@ class Demo extends Component {
       permissions
     } = this.state;
     const viewAccessToken = accessToken && `${accessToken.slice(0, 10)}...`;
+
     const viewEmbedUrl = embedUrl && `${embedUrl.slice(0, 10)}...`;
+
     return `<Report embedType="${embedType}"
     tokenType="${tokenType}"
     accessToken="${view ? viewAccessToken : accessToken}"
@@ -73,8 +79,7 @@ class Demo extends Component {
     onPageChange={(data) => { 
       console.log('You changed page to:' + data.newPage.displayName); 
     }}
-    onTileClicked={(dashboard, data) => { //only used for dashboard
-      // this.report = dashboard; use for object for triggering fullscreen
+    onTileClicked={(data) => {
       console.log('You clicked tile:', data);
     }}
   />`;
@@ -86,9 +91,9 @@ class Demo extends Component {
     });
   }
 
-  _onSelect = state => option => {
+  onSelect = state => option => {
     const { value } = option;
-    this.setState({ [state]: value });
+    this.resetState(() => this.setState({ [state]: value }));
   };
 
   toggleAllVisualHeaders() {
@@ -120,6 +125,10 @@ class Demo extends Component {
     });
   }
 
+  resetState(callback) {
+    this.setState(initialState, callback);
+  }
+
   render() {
     const {
       embedType,
@@ -128,7 +137,8 @@ class Demo extends Component {
       embedUrl,
       embedId,
       permissions,
-      pageName
+      pageName,
+      dashboardId
     } = this.state;
     const style = {
       report: {
@@ -138,7 +148,7 @@ class Demo extends Component {
         background: "#eee"
       }
     };
-    const embedTypeOptions = ["report", "dashboard"];
+    const embedTypeOptions = ["report", "dashboard", "tile"];
     const extraSettings = {
       filterPaneEnabled: this.state.filterPaneEnabled === "filter-true",
       navContentPaneEnabled: this.state.navContentPaneEnabled === "nav-true"
@@ -153,6 +163,8 @@ class Demo extends Component {
       values: ["West"]
     };
     const reportFlag = embedType === "report";
+    const tileFlag = embedType === "tile";
+
     return (
       <div className="root">
         <div className="header">Power BI Report Component Demo</div>
@@ -163,6 +175,7 @@ class Demo extends Component {
             accessToken={accessToken}
             embedUrl={embedUrl}
             embedId={embedId}
+            dashboardId={dashboardId}
             extraSettings={extraSettings}
             permissions={permissions}
             pageName={pageName}
@@ -177,8 +190,7 @@ class Demo extends Component {
             onPageChange={data => {
               console.log(`You changed page to: ${data.newPage.displayName}`);
             }} //eslint-disable-line
-            onTileClicked={(dashboard, data) => {
-              this.report = dashboard;
+            onTileClicked={data => {
               console.log("You clicked tile:", data);
             }}
           />
@@ -191,7 +203,7 @@ class Demo extends Component {
               Embed Type:
               <Dropdown
                 options={embedTypeOptions}
-                onChange={this._onSelect("embedType")}
+                onChange={this.onSelect("embedType")}
                 value={embedType}
               />
             </span>
@@ -223,8 +235,19 @@ class Demo extends Component {
                 required
               />
             </span>
+            {tileFlag && (
+              <span>
+                Dashboard Id:
+                <input
+                  name="dashboardId"
+                  onChange={this.handleChange}
+                  value={dashboardId}
+                  required
+                />
+              </span>
+            )}
             <span>
-              Embed Id:
+             {`${tileFlag ? "Tile" : "Embed"}  Id:`}
               <input
                 name="embedId"
                 onChange={this.handleChange}

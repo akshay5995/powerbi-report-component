@@ -4,6 +4,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { models } from "powerbi-client";
 import Embed from "./Embed";
+import { clean } from "./utils";
 import { polyfill } from "react-lifecycles-compat";
 
 const createConfig = props => {
@@ -16,22 +17,25 @@ const createConfig = props => {
       embedId,
       permissions,
       pageName,
-      extraSettings
+      extraSettings,
+      dashboardId
     } = props;
-    return {
+
+    return clean({
       type: embedType,
       tokenType: models.TokenType[tokenType],
       accessToken,
       embedUrl,
       id: embedId,
       pageName: pageName,
+      dashboardId: dashboardId,
       permissions: models.Permissions[permissions],
       settings: {
         filterPaneEnabled: true,
         navContentPaneEnabled: true,
         ...extraSettings
       }
-    };
+    });
   }
   return null;
 };
@@ -54,7 +58,7 @@ class Report extends PureComponent {
     return { currentConfig: createConfig(props) };
   }
 
-  performOnEmbed(report) {
+  performOnEmbed(report, reportRef) {
     const {
       embedType,
       onLoad,
@@ -63,10 +67,10 @@ class Report extends PureComponent {
       onPageChange,
       onTileClicked
     } = this.props;
+
+    if(onLoad) onLoad(powerbi.get(reportRef));
+
     if (embedType === "report") {
-      report.on("loaded", () => {
-        if (onLoad) onLoad(report);
-      });
       report.on("rendered", () => {
         if (onRender) onRender(report);
       });
@@ -83,7 +87,7 @@ class Report extends PureComponent {
     } else if (embedType === "dashboard") {
       report.on("tileClicked", event => {
         if (onTileClicked) {
-          onTileClicked(report, event.detail);
+          onTileClicked(event.detail);
         }
       });
     }

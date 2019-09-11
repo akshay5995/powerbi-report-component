@@ -48,7 +48,7 @@ class Embed extends PureComponent {
   embed(config) {
     this.component = powerbi.embed(this.reportRef.current, config);
     if (this.props.performOnEmbed) {
-      this.props.performOnEmbed(this.component);
+      this.props.performOnEmbed(this.component, this.reportRef.current);
     }
     return this.component;
   }
