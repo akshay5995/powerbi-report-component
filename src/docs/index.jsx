@@ -1,34 +1,42 @@
 /*  eslint-disable import/no-extraneous-dependencies */
 
-import React, { Component, Fragment } from "react";
-import { render } from "react-dom";
-import { CopyToClipboard } from "react-copy-to-clipboard";
-import Dropdown from "react-dropdown";
-import "react-dropdown/style.css";
-import Report from "../lib";
-import "./styles.css";
+import React, { Component, Fragment } from 'react';
+import { render } from 'react-dom';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import SplitterLayout from 'react-splitter-layout';
+import 'react-splitter-layout/lib/index.css';
+import './styles.css';
+import Report from '../lib';
+
+const initialState = {
+  embedType: 'report',
+  tokenType: 'Embed',
+  accessToken: '',
+  embedUrl: '',
+  embedId: '',
+  pageName: '',
+  dashboardId: '',
+  permissions: 'All',
+  filterPaneEnabled: 'filter-false',
+  navContentPaneEnabled: 'nav-false',
+  visualHeaderFlag: true,
+  flag: false,
+};
 
 class Demo extends Component {
   constructor(props) {
     super(props);
     this.report = null;
-    this.state = {
-      embedType: "report",
-      tokenType: "Embed",
-      accessToken: "",
-      embedUrl: "",
-      embedId: "",
-      pageName: "",
-      permissions: "All",
-      filterPaneEnabled: "filter-false",
-      navContentPaneEnabled: "nav-false",
-      visualHeaderFlag: true,
-      flag: false
-    };
+    this.state = initialState;
     this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
-    this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(this);
-    this._onSelect = this._onSelect.bind(this);
+    this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(
+      this
+    );
+    this.onSelect = this.onSelect.bind(this);
+    this.resetState = this.resetState.bind(this);
   }
 
   getCode(view = true) {
@@ -38,18 +46,28 @@ class Demo extends Component {
       accessToken,
       embedUrl,
       embedId,
-      permissions
+      permissions,
+      dashboardId,
+      pageName,
     } = this.state;
-    const viewAccessToken = accessToken && `${accessToken.slice(0, 10)}...`;
+    const viewAccessToken =
+      accessToken && `${accessToken.slice(0, 10)}...`;
+
     const viewEmbedUrl = embedUrl && `${embedUrl.slice(0, 10)}...`;
+
     return `<Report embedType="${embedType}"
     tokenType="${tokenType}"
     accessToken="${view ? viewAccessToken : accessToken}"
+    accessToken={accessToken}
     embedUrl="${view ? viewEmbedUrl : embedUrl}"
     embedId="${embedId}"
+    dashboardId="${dashboardId}"
+    pageName="${pageName}"
     extraSettings={{
-      filterPaneEnabled: ${this.state.filterPaneEnabled === "filter-true"},
-      navContentPaneEnabled: ${this.state.navContentPaneEnabled === "nav-true"},
+      filterPaneEnabled: ${this.state.filterPaneEnabled ===
+        'filter-true'},
+      navContentPaneEnabled: ${this.state.navContentPaneEnabled ===
+        'nav-true'},
     }}
     permissions="${permissions}"
     style={{
@@ -73,22 +91,21 @@ class Demo extends Component {
     onPageChange={(data) => { 
       console.log('You changed page to:' + data.newPage.displayName); 
     }}
-    onTileClicked={(dashboard, data) => { //only used for dashboard
-      // this.report = dashboard; use for object for triggering fullscreen
-      console.log('You clicked tile:', data);
+    onTileClicked={data => {
+      console.log('Data from tile', data);
     }}
   />`;
   }
 
   handleChange(event) {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   }
 
-  _onSelect = state => option => {
+  onSelect = state => option => {
     const { value } = option;
-    this.setState({ [state]: value });
+    this.resetState(() => this.setState({ [state]: value }));
   };
 
   toggleAllVisualHeaders() {
@@ -97,18 +114,18 @@ class Demo extends Component {
         visualHeaders: [
           {
             settings: {
-              visible: !this.state.visualHeaderFlag
-            }
-          }
-        ]
-      }
+              visible: !this.state.visualHeaderFlag,
+            },
+          },
+        ],
+      },
     };
     if (this.report) {
       this.report
         .updateSettings(newSettings)
         .then(() => {
           console.log(
-            "Visual header was successfully hidden for all the visuals in the report."
+            'Visual header was successfully hidden for all the visuals in the report.'
           );
         })
         .catch(error => {
@@ -116,8 +133,12 @@ class Demo extends Component {
         });
     }
     this.setState({
-      visualHeaderFlag: !this.state.visualHeaderFlag
+      visualHeaderFlag: !this.state.visualHeaderFlag,
     });
+  }
+
+  resetState(callback) {
+    this.setState(initialState, callback);
   }
 
   render() {
@@ -128,286 +149,320 @@ class Demo extends Component {
       embedUrl,
       embedId,
       permissions,
-      pageName
+      pageName,
+      dashboardId,
+      flag,
     } = this.state;
     const style = {
       report: {
-        height: "50%",
-        border: "0",
-        padding: "20px",
-        background: "#eee"
-      }
-    };
-    const embedTypeOptions = ["report", "dashboard"];
-    const extraSettings = {
-      filterPaneEnabled: this.state.filterPaneEnabled === "filter-true",
-      navContentPaneEnabled: this.state.navContentPaneEnabled === "nav-true"
-    };
-    const filter = {
-      $schema: "http://powerbi.com/product/schema#basic",
-      target: {
-        table: "Geo",
-        column: "Region"
+        height: '100%',
+        border: '0',
       },
-      operator: "In",
-      values: ["West"]
     };
-    const reportFlag = embedType === "report";
+
+    const embedTypeOptions = ['report', 'dashboard'];
+
+    const extraSettings = {
+      filterPaneEnabled: this.state.filterPaneEnabled === 'filter-true',
+      navContentPaneEnabled:
+        this.state.navContentPaneEnabled === 'nav-true',
+    };
+
+    const filter = {
+      $schema: 'http://powerbi.com/product/schema#basic',
+      target: {
+        table: 'Geo',
+        column: 'Region',
+      },
+      operator: 'In',
+      values: ['West'],
+    };
+
+    const reportFlag = embedType === 'report';
+
     return (
       <div className="root">
-        <div className="header">Power BI Report Component Demo</div>
-        {this.state.flag ? (
-          <Report
-            embedType={embedType}
-            tokenType={tokenType}
-            accessToken={accessToken}
-            embedUrl={embedUrl}
-            embedId={embedId}
-            extraSettings={extraSettings}
-            permissions={permissions}
-            pageName={pageName}
-            style={style.report}
-            onLoad={report => {
-              console.log("You'll get back a report object with this callback");
-              this.report = report;
-            }} //eslint-disable-line
-            onSelectData={data => {
-              window.alert(`You clicked chart: ${data.visual.name}`);
-            }} //eslint-disable-line
-            onPageChange={data => {
-              console.log(`You changed page to: ${data.newPage.displayName}`);
-            }} //eslint-disable-line
-            onTileClicked={(dashboard, data) => {
-              this.report = dashboard;
-              console.log("You clicked tile:", data);
-            }}
-          />
-        ) : (
-          <div className="placeholder">Report will appear here</div>
-        )}
-        <div className="container">
-          <div className="config">
-            <span>
-              Embed Type:
-              <Dropdown
-                options={embedTypeOptions}
-                onChange={this._onSelect("embedType")}
-                value={embedType}
-              />
-            </span>
-            <span>
-              Token Type:
-              <input
-                name="tokenType"
-                onChange={this.handleChange}
-                value={tokenType}
-                required
-              />
-            </span>
-            <span>
-              Token:
-              <input
-                name="accessToken"
-                onChange={this.handleChange}
-                value={accessToken}
-                autoFocus={true}
-                required
-              />
-            </span>
-            <span>
-              Embed Url:
-              <input
-                name="embedUrl"
-                onChange={this.handleChange}
-                value={embedUrl}
-                required
-              />
-            </span>
-            <span>
-              Embed Id:
-              <input
-                name="embedId"
-                onChange={this.handleChange}
-                value={embedId}
-                required
-              />
-            </span>
-            {reportFlag && (
-              <Fragment>
-                <span>
-                  Page Name (optional)
-                  <input
-                    name="pageName"
-                    onChange={this.handleChange}
-                    value={pageName}
-                    required
-                  />
-                </span>
-                <span>
-                  Permissions:
-                  <input
-                    name="permissions"
-                    onChange={this.handleChange}
-                    value={permissions}
-                    required
-                  />
-                </span>
-                <span>
-                  Display Nav Pane:
-                  <span>
-                    <input
-                      checked={this.state.navContentPaneEnabled === "nav-true"}
-                      type="radio"
-                      value="nav-true"
-                      name="navContentPaneEnabled"
-                      onChange={this.handleChange}
-                    />
-                    True
-                  </span>
-                  <span>
-                    <input
-                      checked={this.state.navContentPaneEnabled === "nav-false"}
-                      type="radio"
-                      value="nav-false"
-                      name="navContentPaneEnabled"
-                      onChange={this.handleChange}
-                    />
-                    False
-                  </span>
-                </span>
-
-                <span>
-                  Display Filter Pane:
-                  <span>
-                    <input
-                      checked={this.state.filterPaneEnabled === "filter-true"}
-                      type="radio"
-                      value="filter-true"
-                      name="filterPaneEnabled"
-                      onChange={this.handleChange}
-                    />
-                    True
-                  </span>
-                  <span>
-                    <input
-                      checked={this.state.filterPaneEnabled === "filter-false"}
-                      type="radio"
-                      value="filter-false"
-                      name="filterPaneEnabled"
-                      onChange={this.handleChange}
-                    />
-                    False
-                  </span>
-                </span>
-              </Fragment>
-            )}
-            <span className="interactions">
-              General Operations:
-              <button
-                className="interactionBtn"
-                onClick={() => {
-                  if (this.report) {
-                    this.report.fullscreen();
-                  }
-                }}
-              >
-                Fullscreen
-              </button>
-              <button
-                className="interactionBtn"
-                disabled={!reportFlag}
-                onClick={() => {
-                  if (this.report) {
-                    this.report.switchMode("edit");
-                  }
-                }}
-              >
-                Edit Mode
-              </button>
-              <button
-                className="interactionBtn"
-                disabled={!reportFlag}
-                onClick={() => {
-                  if (this.report) {
-                    this.report.switchMode("view");
-                  }
-                }}
-              >
-                View Mode
-              </button>
-              <button
-                className="interactionBtn"
-                disabled={!reportFlag}
-                onClick={() => {
-                  if (this.report) {
-                    this.report.setFilters([filter]).catch(errors => {
-                      console.log(errors);
-                    });
-                  }
-                }}
-              >
-                Set Filter
-              </button>
-              <button
-                className="interactionBtn"
-                disabled={!reportFlag}
-                onClick={() => {
-                  if (this.report) {
-                    this.report.removeFilters().catch(errors => {
-                      console.log(errors);
-                    });
-                  }
-                }}
-              >
-                Remove Filter
-              </button>
-              <button
-                className="interactionBtn"
-                disabled={!reportFlag}
-                onClick={() => this.toggleAllVisualHeaders()}
-              >
-                Toggle Visual Header
-              </button>
-              <button
-                className="interactionBtn"
-                disabled={!reportFlag}
-                onClick={() => {
-                  if (this.report) {
-                    this.report.print();
-                  }
-                }}
-              >
-                Print
-              </button>
-            </span>
-            <button
-              className="runBtn"
-              onClick={() => {
-                if (!this.state.flag) {
-                  this.setState({
-                    flag: true
-                  });
-                }
+        <SplitterLayout percentage secondaryInitialSize={70}>
+          {this.state.flag ? (
+            <Report
+              embedType={embedType}
+              tokenType={tokenType}
+              accessToken={accessToken}
+              embedUrl={embedUrl}
+              embedId={embedId}
+              dashboardId={dashboardId}
+              extraSettings={extraSettings}
+              permissions={permissions}
+              pageName={pageName}
+              style={style.report}
+              onLoad={report => {
+                console.log('Report Loaded!');
+                this.report = report;
               }}
-            >
-              Run
-            </button>
-          </div>
-          <div className="code">
-            <span className="codeHeader">
-              <h2>Code:</h2>
+              onSelectData={data => {
+                window.alert(`You clicked chart: ${data.visual.name}`);
+              }}
+              onPageChange={data => {
+                console.log(
+                  `You changed page to: ${data.newPage.displayName}`
+                );
+              }}
+              onTileClicked={data => {
+                console.log('Data from tile', data);
+              }}
+            />
+          ) : (
+            <div className="placeholder">
+              <h1>Report will be displayed in this section</h1>
+              <div>
+                <h3>Instructions</h3>
+                <ol>
+                  <li>Fill in the details on the right</li>
+                  <li>Click on Run</li>
+                  <li>
+                    Drag the bar on the right to resize the sections
+                  </li>
+                </ol>
+              </div>
+            </div>
+          )}
+          <div className="container">
+            <div className="config">
+              <span className="header">PowerBi Report Component</span>
+              <span>
+                <b className="fieldName">Embed Type</b>
+                <Dropdown
+                  options={embedTypeOptions}
+                  onChange={this.onSelect('embedType')}
+                  value={embedType}
+                />
+              </span>
+              <span>
+                <b className="fieldName">Token Type</b>
+                <input
+                  name="tokenType"
+                  onChange={this.handleChange}
+                  value={tokenType}
+                  required
+                />
+              </span>
+              <span>
+                <b className="fieldName">Token</b>
+                <input
+                  name="accessToken"
+                  onChange={this.handleChange}
+                  value={accessToken}
+                  required
+                />
+              </span>
+              <span>
+                <b className="fieldName">Embed Url</b>
+                <input
+                  name="embedUrl"
+                  onChange={this.handleChange}
+                  value={embedUrl}
+                  required
+                />
+              </span>
+              <span>
+                <b className="fieldName">Embed Id</b>
+                <input
+                  name="embedId"
+                  onChange={this.handleChange}
+                  value={embedId}
+                  required
+                />
+              </span>
+              {reportFlag && (
+                <Fragment>
+                  <span>
+                    <b className="fieldName">Page Name (optional)</b>
+                    <input
+                      name="pageName"
+                      onChange={this.handleChange}
+                      value={pageName}
+                      required
+                    />
+                  </span>
+                  <span>
+                    <b className="fieldName">Permissions</b>
+                    <input
+                      name="permissions"
+                      onChange={this.handleChange}
+                      value={permissions}
+                      required
+                    />
+                  </span>
+                  <span>
+                    <b className="fieldName">Display Nav Pane</b>
+                    <span>
+                      <input
+                        checked={
+                          this.state.navContentPaneEnabled ===
+                          'nav-true'
+                        }
+                        type="radio"
+                        value="nav-true"
+                        name="navContentPaneEnabled"
+                        onChange={this.handleChange}
+                      />
+                      True
+                    </span>
+                    <span>
+                      <input
+                        checked={
+                          this.state.navContentPaneEnabled ===
+                          'nav-false'
+                        }
+                        type="radio"
+                        value="nav-false"
+                        name="navContentPaneEnabled"
+                        onChange={this.handleChange}
+                      />
+                      False
+                    </span>
+                  </span>
+                  <span>
+                    <b className="fieldName">Display Filter Pane</b>
+                    <span>
+                      <input
+                        checked={
+                          this.state.filterPaneEnabled === 'filter-true'
+                        }
+                        type="radio"
+                        value="filter-true"
+                        name="filterPaneEnabled"
+                        onChange={this.handleChange}
+                      />
+                      True
+                    </span>
+                    <span>
+                      <input
+                        checked={
+                          this.state.filterPaneEnabled ===
+                          'filter-false'
+                        }
+                        type="radio"
+                        value="filter-false"
+                        name="filterPaneEnabled"
+                        onChange={this.handleChange}
+                      />
+                      False
+                    </span>
+                  </span>
+                </Fragment>
+              )}
+              <span className="interactions">
+                <button
+                  className="interactionBtn"
+                  disabled={!flag}
+                  onClick={() => {
+                    if (this.report) {
+                      this.report.fullscreen();
+                    }
+                  }}
+                >
+                  Fullscreen
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={() => {
+                    if (this.report) {
+                      this.report.switchMode('edit');
+                    }
+                  }}
+                >
+                  Edit Mode
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={() => {
+                    if (this.report) {
+                      this.report.switchMode('view');
+                    }
+                  }}
+                >
+                  View Mode
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={() => {
+                    if (this.report) {
+                      this.report.setFilters([filter]).catch(errors => {
+                        console.log(errors);
+                      });
+                    }
+                  }}
+                >
+                  Set Filter
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={() => {
+                    if (this.report) {
+                      this.report.removeFilters().catch(errors => {
+                        console.log(errors);
+                      });
+                    }
+                  }}
+                >
+                  Remove Filter
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={() => this.toggleAllVisualHeaders()}
+                >
+                  Toggle Visual Header
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={() => {
+                    if (this.report) {
+                      this.report.print();
+                    }
+                  }}
+                >
+                  Print
+                </button>
+              </span>
+              <span className="runBtnHolder">
+                <button
+                  className="runBtn"
+                  onClick={() => {
+                    if (!flag) {
+                      this.setState({
+                        flag: true,
+                      });
+                    }
+                  }}
+                >
+                  Run
+                </button>
+              </span>
+            </div>
+            <div className="code">
               <CopyToClipboard text={this.getCode(false)}>
-                <button className="copyBtn">Click to copy</button>
+                <button className="copyBtn">Copy</button>
               </CopyToClipboard>
-            </span>
-            <pre>
-              <code className="language-css">{this.getCode()}</code>
-            </pre>
+              <pre>
+                <code className="language-css">{this.getCode()}</code>
+              </pre>
+            </div>
+            <footer>
+              {'Made with ❤️ by '}
+              <a href="https://github.com/akshay5995">@akshay5995</a>
+            </footer>
           </div>
-        </div>
+        </SplitterLayout>
       </div>
     );
   }
 }
 
-render(<Demo />, document.getElementById("app"));
+render(<Demo />, document.getElementById('app'));

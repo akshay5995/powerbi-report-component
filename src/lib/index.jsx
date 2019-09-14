@@ -1,10 +1,10 @@
 /* eslint-disable*/
 
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import { models } from "powerbi-client";
-import Embed from "./Embed";
-import { polyfill } from "react-lifecycles-compat";
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { models } from 'powerbi-client';
+import Embed from './Embed';
+import { clean } from './utils';
 
 const createConfig = props => {
   if (props) {
@@ -16,22 +16,25 @@ const createConfig = props => {
       embedId,
       permissions,
       pageName,
-      extraSettings
+      extraSettings,
+      dashboardId,
     } = props;
-    return {
+
+    return clean({
       type: embedType,
       tokenType: models.TokenType[tokenType],
       accessToken,
       embedUrl,
       id: embedId,
       pageName: pageName,
+      dashboardId: dashboardId,
       permissions: models.Permissions[permissions],
       settings: {
         filterPaneEnabled: true,
         navContentPaneEnabled: true,
-        ...extraSettings
-      }
-    };
+        ...extraSettings,
+      },
+    });
   }
   return null;
 };
@@ -40,7 +43,7 @@ class Report extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      currentConfig: null
+      currentConfig: null,
     };
     this.performOnEmbed = this.performOnEmbed.bind(this);
     this.updateState = this.updateState.bind(this);
@@ -54,36 +57,36 @@ class Report extends PureComponent {
     return { currentConfig: createConfig(props) };
   }
 
-  performOnEmbed(report) {
+  performOnEmbed(report, reportRef) {
     const {
       embedType,
       onLoad,
       onRender,
       onSelectData,
       onPageChange,
-      onTileClicked
+      onTileClicked,
     } = this.props;
-    if (embedType === "report") {
-      report.on("loaded", () => {
-        if (onLoad) onLoad(report);
-      });
-      report.on("rendered", () => {
+
+    if (onLoad) onLoad(powerbi.get(reportRef));
+
+    if (embedType === 'report') {
+      report.on('rendered', () => {
         if (onRender) onRender(report);
       });
-      report.on("dataSelected", event => {
+      report.on('dataSelected', event => {
         if (onSelectData) {
           onSelectData(event.detail);
         }
       });
-      report.on("pageChanged", event => {
+      report.on('pageChanged', event => {
         if (onPageChange) {
           onPageChange(event.detail);
         }
       });
-    } else if (embedType === "dashboard") {
-      report.on("tileClicked", event => {
+    } else if (embedType === 'dashboard') {
+      report.on('tileClicked', event => {
         if (onTileClicked) {
-          onTileClicked(report, event.detail);
+          onTileClicked(event.detail);
         }
       });
     }
@@ -91,7 +94,7 @@ class Report extends PureComponent {
 
   updateState(props) {
     this.setState({
-      currentConfig: createConfig(props)
+      currentConfig: createConfig(props),
     });
   }
 
@@ -99,6 +102,7 @@ class Report extends PureComponent {
     if (!this.state.currentConfig) {
       return <div> Error </div>;
     }
+
     return (
       <Embed
         config={this.state.currentConfig}
@@ -122,9 +126,7 @@ Report.propTypes = {
   onSelectData: PropTypes.func,
   onPageChange: PropTypes.func,
   onTileClicked: PropTypes.func,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
-
-polyfill(Report);
 
 export default Report;

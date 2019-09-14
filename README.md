@@ -5,15 +5,15 @@
 ![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/akshay5995/powerbi-report-component?style=for-the-badge)
 
 It's a minimalistic react component to embed a Microsoft PowerBI report or dashboard into your react application.
-Makes embedding a microsoft powerbi report/ dashboard  into your react application a breeze.
+Makes embedding a microsoft powerbi report/ dashboard into your react application a breeze.
 
 ## Installation
 
-```npm i powerbi-report-component```
+`npm i powerbi-report-component`
 
 ## Usuage
 
-``` 
+```
 import React, {Component} from 'react';
 import Report from 'powerbi-report-component';
 
@@ -36,7 +36,7 @@ class MyComponent extends Component {
   }
 
   handleReportRender = (report) => {
-    // will be called when report renders: 
+    // will be called when report renders:
     // - visuals finish rendering
     // - report is fully visible and ready for consumption
 
@@ -47,10 +47,7 @@ class MyComponent extends Component {
     // will be called when pages in your report changes
   }
 
-  handleTileClicked = (dashboard, data) => { // only used when embedType is "dashboard"
-    // will be called when report loads
-
-    this.report = dashboard; // get the object from callback and store it.(optional)
+  handleTileClicked = (data) => {
     console.log('Data from tile', data);
   }
 
@@ -65,7 +62,7 @@ class MyComponent extends Component {
     };
     return (
     <div className="root">
-        <Report 
+        <Report
             embedType="report" // "dashboard"
             tokenType="Embed" // "Aad"
             accessToken="" // accessToken goes here
@@ -86,7 +83,7 @@ class MyComponent extends Component {
   }
 }
 
-  ```
+```
 
 > this.report can be used to perform operations like 'Fullscreen' or 'Print the report'
 
@@ -94,7 +91,8 @@ class MyComponent extends Component {
 
 Inside your compoent where you're using { Report } component.
 
-*Constructor:*
+_Constructor:_
+
 ```
   ...
   constructor(props) {
@@ -105,7 +103,7 @@ Inside your compoent where you're using { Report } component.
 
 ```
 
-*Callback passed to the onLoad or onRender prop*
+_Callback passed to the onLoad or onRender prop_
 
 ```
 
@@ -120,7 +118,7 @@ Inside your compoent where you're using { Report } component.
   ...
 ```
 
-*using the* this.report *to perform operations*
+_using the_ this.report _to perform operations_
 
 ```
   ...
@@ -161,14 +159,14 @@ For Report Level Filters:
         values: ["Lindseys"]
       };
   */
-  
+
 
   ...
 
   setFilter = (filter) => this.report.setFilters([filter]).catch(function (errors) {
         console.log(errors);
     });
-  
+
   getFilter = () => this.report.getFilters().then(function (filters) {
           console.log(filters);
       }).catch(function (errors) {
@@ -188,15 +186,11 @@ For Report Level Filters:
 
 ```
 
-handleTileClicked = (dashboard, data) => { // only used when embedType is "dashboard"
-    // will be called when report loads
-
-    this.report = dashboard; // get the object from callback and store it.(optional)
+handleTileClicked = (data) => {
     console.log('Data from tile', data);
-  }
+}
 
 ```
-
 
 ### Features
 
@@ -205,142 +199,149 @@ Currently supported features:
 1. Custom styling by passing style to your embedded report component.
 2. The component also lets you pass callbacks to trigger on events like:
 
-  Page Change
-  ```
-    onPageChange={(data) => 
-    console.log(`Page name :{data.newPage.displayName}`) 
+Page Change
+
+```
+  onPageChange={(data) =>
+  console.log(`Page name :{data.newPage.displayName}`)
+  }
+```
+
+Load
+
+```
+  onLoad={(report) => {
+    console.log('Report Loaded!');
+    this.report = report;
     }
-  ```
-  Load
-  ```
-    onLoad={(report) => { 
-      console.log('Report Loaded!');
-      this.report = report;
-      }
+  }
+```
+
+Render
+
+```
+  onRender={(report) => {
+    console.log('Report Rendered!');
+    this.report = report;
     }
-  ```
-  Render
-  ```
-    onRender={(report) => { 
-      console.log('Report Rendered!');
-      this.report = report;
-      }
-    }
-  ```
-  Data Element Clicked
-  ```
-    onSelectData={(data) => 
-      console.log(`You clicked on chart: {data.visual.title}`)
-    }
-  ```
+  }
+```
+
+Data Element Clicked
+
+```
+  onSelectData={(data) =>
+    console.log(`You clicked on chart: {data.visual.title}`)
+  }
+```
+
 3. Use ‘report’ object returned to parent component for:
 
 # Change Report Mode to View or Edit:
 
-  ```
-    //mode can be "view" or "edit"
+```
+  //mode can be "view" or "edit"
 
-    changeMode = (mode) => this.report.switchMode(mode);
-  ```
+  changeMode = (mode) => this.report.switchMode(mode);
+```
 
-  # Fullscreen
+# Fullscreen
 
-  ```
-    setFullscreen = () => this.report.fullscreen();
-  ```
+```
+  setFullscreen = () => this.report.fullscreen();
+```
 
-  # Print Report
+# Print Report
 
-  ```
-    printReport = () => this.report.print();
-  ```
+```
+  printReport = () => this.report.print();
+```
 
-  # Set Filters
+# Set Filters
 
-  ```
-      //example filter from microsoft's demo page
+```
+    //example filter from microsoft's demo page
 
-      const filter = {
-        $schema: "http://powerbi.com/product/schema#basic",
-        target: {
-          table: "Store",
-          column: "Chain"
-        },
-        operator: "In",
-        values: ["Lindseys"]
-      };
+    const filter = {
+      $schema: "http://powerbi.com/product/schema#basic",
+      target: {
+        table: "Store",
+        column: "Chain"
+      },
+      operator: "In",
+      values: ["Lindseys"]
+    };
 
-      // using event handlers
+    // using event handlers
 
-      setFilter = (filter) => this.report.setFilters([filter]).catch(function (errors) {
+    setFilter = (filter) => this.report.setFilters([filter]).catch(function (errors) {
+      console.log(errors);
+    });
+
+    // during onload
+
+    onLoad = (report) => {
+      report.setFilters([filter]).catch(function (errors) {
         console.log(errors);
       });
-
-      // during onload
-
-      onLoad = (report) => { 
-        report.setFilters([filter]).catch(function (errors) {
-          console.log(errors);
-        });
-        this.report = report;
-      }
+      this.report = report;
     }
-
-  ```
-
-  # Get Filters
-
-  ```
-    getFilter = () => this.report.getFilters().then(function (filters) {
-          console.log(filters);
-      }).catch(function (errors) {
-          console.log(errors);
-      });
-
-  ```
-
-  # Remove Filters
-
-  ```
-
-    removeFilters = () => this.report.removeFilters()
-      .catch(function (errors) {
-          console.log(errors);
-      });
-
-  ```
-
-  
-  # Show / Hide all visual headers:
-
-  ```
-
-  toggleAllVisualHeaders = (bool) => 
-  {
-    const newSettings = {
-      visualSettings: {
-        visualHeaders: [
-          {
-            settings: {
-              visible: bool,  // boolean variable
-            }
-          }
-        ]
-      }
-    }
-    this.report.updateSettings(newSettings)
-      .then(function () {
-        console.log("Visual header toggle successful.");
-      })
-      .catch(function (errors) {
-        console.log(errors);
-      });
   }
 
-  ```
+```
 
+# Get Filters
 
-For demo visit: 
+```
+  getFilter = () => this.report.getFilters().then(function (filters) {
+        console.log(filters);
+    }).catch(function (errors) {
+        console.log(errors);
+    });
+
+```
+
+# Remove Filters
+
+```
+
+  removeFilters = () => this.report.removeFilters()
+    .catch(function (errors) {
+        console.log(errors);
+    });
+
+```
+
+# Show / Hide all visual headers:
+
+```
+
+toggleAllVisualHeaders = (bool) =>
+{
+  const newSettings = {
+    visualSettings: {
+      visualHeaders: [
+        {
+          settings: {
+            visible: bool,  // boolean variable
+          }
+        }
+      ]
+    }
+  }
+  this.report.updateSettings(newSettings)
+    .then(function () {
+      console.log("Visual header toggle successful.");
+    })
+    .catch(function (errors) {
+      console.log(errors);
+    });
+}
+
+```
+
+For demo visit:
+
 > http://akshay5995.github.io/powerbi-report-component
 
 Use Token, URL, Report ID from:
@@ -350,5 +351,3 @@ Use Token, URL, Report ID from:
 Follow the instructions below in image:
 
 ![instructions not available](https://raw.githubusercontent.com/akshay5995/powerbi-report-component/master/images/Embed-Instructions.png)
-
-
