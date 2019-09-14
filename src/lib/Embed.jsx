@@ -1,20 +1,19 @@
 /* eslint-disable */
 
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import pbi from "powerbi-client";
-import { polyfill } from "react-lifecycles-compat";
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import pbi from 'powerbi-client';
 
 // powerbi object is global
 
 const validateConfig = config => {
   switch (config.type) {
-    case "report":
+    case 'report':
       return pbi.models.validateReportLoad(config);
-    case "dashboard":
+    case 'dashboard':
       return pbi.models.validateDashboardLoad(config);
     default:
-      return "Unknown config type";
+      return 'Unknown config type';
   }
 };
 
@@ -48,7 +47,7 @@ class Embed extends PureComponent {
   embed(config) {
     this.component = powerbi.embed(this.reportRef.current, config);
     if (this.props.performOnEmbed) {
-      this.props.performOnEmbed(this.component);
+      this.props.performOnEmbed(this.component, this.reportRef.current);
     }
     return this.component;
   }
@@ -60,7 +59,11 @@ class Embed extends PureComponent {
 
   render() {
     return (
-      <div className="report" style={this.props.style} ref={this.reportRef} />
+      <div
+        className="report"
+        style={this.props.style}
+        ref={this.reportRef}
+      />
     );
   }
 }
@@ -68,9 +71,7 @@ class Embed extends PureComponent {
 Embed.propTypes = {
   config: PropTypes.object.isRequired,
   performOnEmbed: PropTypes.func.isRequired,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
-
-polyfill(Embed);
 
 export default Embed;

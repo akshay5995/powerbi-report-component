@@ -3,13 +3,16 @@ body {
   height: 100% !important;
   width: 100% !important;
   margin: 0 !important;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+    sans-serif;
+  overflow-y: hidden;
 }
 
 #app {
   height: 100% !important;
   width: 100% !important;
 }
+
 .root {
   display: flex;
   flex-flow: column;
@@ -18,60 +21,80 @@ body {
 }
 
 .header {
-  background: #00b4d2;
+  background: #000;
   text-align: center;
-  height: 21px !important;
-  padding: 10px;
   font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-family: 'Courier New', Courier, monospace;
+  border-radius: 4px;
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+
+.repoLink {
+  z-index: 99;
+}
+
+.repoLink > img {
+  float: right;
 }
 
 .config {
-  min-width: 50%;
-  max-width: 50%;
   display: grid;
   padding: 16px;
-  grid-template-columns: auto auto auto;
-  grid-template-rows: 70px 70px auto auto;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 70px auto auto auto;
+  grid-column-gap: 15px;
+  grid-row-gap: 15px;
+  grid-auto-flow: column;
 }
 
 .interactions {
-  display: flex;
-  flex-flow: column;
+  grid-column: 2;
+  grid-row-end: 8;
+}
+
+.runBtnHolder {
   grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 6;
+  grid-row-start: 7;
+  margin: auto 0;
 }
 
 .interactionBtn {
-  border: 1px solid #bbb;
   border-radius: 6px;
-  width: 50%;
-  height: 30px;
-  justify-self: right;
-  font-size: 15px;
-  margin: 2.5px;
+  cursor: pointer;
+  min-width: 141px;
+  height: 35px;
+  margin: 5px;
+  font-weight: bold;
+  border: 1px solid;
+  background: transparent;
+}
+
+.interactionBtn:disabled {
+  color: #bbb;
+  border: 1px solid #bbb;
+  cursor: default;
 }
 
 .runBtn {
-  grid-column-start: 3;
-  grid-column-end: 4;
-  grid-row-start: 5;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-  width: 50%;
-  height: 30px;
-  justify-self: right;
-  margin-right: 20px;
-  font-size: 15px;
+  border: 2px solid green;
   cursor: pointer;
+  font-weight: bold;
+  color: green;
+  background: #fff;
+  border-radius: 4px;
+  font-size: 14px;
+  padding: 15px;
+  width: 100%;
 }
 
-.config > span {
-  display: flex;
-  flex-flow: column;
-  flex-grow: 1;
-  padding-left: 10px;
+.runBtn:hover {
+  background: green;
+  color: white;
 }
 
 .config > * > input {
@@ -95,40 +118,75 @@ input :required {
 }
 
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
 }
 
-.code {
-  font-size: 10px;
-  flex-grow: 1;
-  padding: 5px 0 0 5px;
-}
-
-.code > h2 {
-  margin-bottom: 5px !important;
+.code > pre {
+  background: lightgrey;
+  padding: 15px;
+  font-size: 14px;
+  margin: 0;
 }
 
 .codeHeader {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-auto-rows: 60px 1fr;
 }
 
 .copyBtn {
-  font-size: 12px;
-  padding: 0px 30px;
-  height: 25px;
-  margin-right: 5px;
-  background: #fff;
-  outline: none;
-  border-radius: 8px;
-  color: #008000;
+  border: 2px solid black;
+  border-radius: 6px;
   cursor: pointer;
+  font-weight: bold;
+  height: 30px;
+  color: black;
+  background: #fff;
+  padding: 5px 15px;
+  float: right;
+  margin-right: 2%;
 }
 
 .placeholder {
-  flex-grow: 1;
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  background: #bbb;
+  padding: 15px;
+}
+
+.layout-splitter {
+  width: 12px !important;
+  background: #000 !important;
+  border: 25px solid #bbb;
+  opacity: 0.5;
+}
+
+.layout-splitter:hover {
+  opacity: 1;
+}
+
+.layout-splitter:active {
+  opacity: 1;
+}
+
+.fieldName {
+  display: block;
+  width: 100%;
+}
+
+footer {
+  margin: 10px;
+  text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+  .code {
+    display: none;
+  }
+
+  .config {
+    padding: 10px;
+  }
+
+  .layout-splitter {
+    width: 12px !important;
+    border: 10px solid #bbb;
+  }
 }
