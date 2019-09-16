@@ -4,8 +4,7 @@
 ![license](https://img.shields.io/github/license/akshay5995/powerbi-report-component?color=blue&style=for-the-badge)
 ![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/akshay5995/powerbi-report-component?style=for-the-badge)
 
-It's a minimalistic react component to embed a Microsoft PowerBI report or dashboard into your react application.
-Makes embedding a microsoft powerbi report/ dashboard into your react application a breeze.
+It's a minimalistic React component for embedding a Microsoft PowerBI report or dashboard into your React application a breeze.
 
 ## Installation
 
@@ -340,11 +339,15 @@ toggleAllVisualHeaders = (bool) =>
 
 ```
 
-For demo visit:
+For playgroud visit:
 
 > http://akshay5995.github.io/powerbi-report-component
 
-Use Token, URL, Report ID from:
+You can find how to generate token for your report using Powershell from [this video](https://www.youtube.com/watch?v=4KuyPNtVijo).
+
+_Don't have a Report?_
+
+You can get the Token, URL and Report ID from Microsoft JS playground:
 
 > https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#
 
