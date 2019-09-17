@@ -343,7 +343,7 @@ For playgroud visit:
 
 > http://akshay5995.github.io/powerbi-report-component
 
-You can find how to generate token for your report using Powershell from [this video](https://www.youtube.com/watch?v=4KuyPNtVijo).
+You can find out how to generate token for your report using Powershell from [this video](https://www.youtube.com/watch?v=4KuyPNtVijo).
 
 _Don't have a Report?_
 
