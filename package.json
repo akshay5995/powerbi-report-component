@@ -20,6 +20,9 @@
     "report",
     "dashboard"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@akshay5995"
+  },
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.2.0",
@@ -44,8 +47,8 @@
     "react-splitter-layout": "^4.0.0",
     "style-loader": "^0.21.0",
     "webpack": "^4.40.2",
-    "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
   },
   "author": {
     "name": "Akshay Ram Vignesh A",
