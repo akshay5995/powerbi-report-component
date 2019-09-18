@@ -20,6 +20,9 @@
     "report",
     "dashboard"
   ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@akshay5995"
+  },
   "license": "MIT",
   "peerDependencies": {
     "react": "^16.2.0",
