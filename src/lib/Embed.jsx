@@ -30,6 +30,12 @@ class Embed extends PureComponent {
     this.updateState(this.props.config);
   }
 
+  componentWillUnmount() {
+    if (this.reportRef.current !== null) {
+      powerbi.reset(this.reportRef.current);
+    }
+  }
+
   static getDerivedStateFromProps(props, state) {
     return { ...props.config };
   }
