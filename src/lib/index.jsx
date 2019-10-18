@@ -70,9 +70,10 @@ class Report extends PureComponent {
       onCommandTriggered,
     } = this.props;
 
-    if (onLoad) onLoad(powerbi.get(reportRef));
-
     if (embedType === 'report') {
+      report.on('loaded', () => {
+        if (onLoad) onLoad(report);
+      });
       report.on('rendered', () => {
         if (onRender) onRender(report);
       });
@@ -102,6 +103,8 @@ class Report extends PureComponent {
         }
       });
     } else if (embedType === 'dashboard') {
+      if (onLoad) onLoad(report, powerbi.get(reportRef));
+
       report.on('tileClicked', event => {
         if (onTileClicked) {
           onTileClicked(event.detail);

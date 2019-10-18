@@ -238,7 +238,7 @@ Button Clicked
 Filters Applied (In documentation, but not yet supported)
 
 ```
-  onFiltersApplied={(report) => {
+  onFiltersApplied={(filters) => {
     console.log('Filters Applied!');
     }
   }
@@ -247,8 +247,8 @@ Filters Applied (In documentation, but not yet supported)
 Command Triggered
 
 ```
-  onCommandTriggered={(report) => {
-    console.log('Command Triggered!');
+  onCommandTriggered={(extensionCommand) => {
+    console.log('Extension Command Triggered!');
     }
   }
 ```
