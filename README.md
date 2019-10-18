@@ -226,6 +226,33 @@ Render
   }
 ```
 
+Button Clicked
+
+```
+  onButtonClicked={(data) => {
+    console.log(`Button ${data.title} of type ${data.type} Clicked!`);
+    }
+  }
+```
+
+Filters Applied (In documentation, but not yet supported)
+
+```
+  onFiltersApplied={(report) => {
+    console.log('Filters Applied!');
+    }
+  }
+```
+
+Command Triggered
+
+```
+  onCommandTriggered={(report) => {
+    console.log('Command Triggered!');
+    }
+  }
+```
+
 Data Element Clicked
 
 ```
