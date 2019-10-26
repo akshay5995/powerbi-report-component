@@ -65,11 +65,15 @@ class Report extends PureComponent {
       onSelectData,
       onPageChange,
       onTileClicked,
+      onButtonClicked,
+      onFiltersApplied,
+      onCommandTriggered,
     } = this.props;
 
-    if (onLoad) onLoad(powerbi.get(reportRef));
-
     if (embedType === 'report') {
+      report.on('loaded', () => {
+        if (onLoad) onLoad(report);
+      });
       report.on('rendered', () => {
         if (onRender) onRender(report);
       });
@@ -83,7 +87,24 @@ class Report extends PureComponent {
           onPageChange(event.detail);
         }
       });
+      report.on('buttonClicked', event => {
+        if (onButtonClicked) {
+          onButtonClicked(event.detail);
+        }
+      });
+      report.on('filtersApplied', event => {
+        if (onFiltersApplied) {
+          onFiltersApplied(event.detail);
+        }
+      });
+      report.on('commandTriggered', event => {
+        if (onCommandTriggered) {
+          onCommandTriggered(event.detail);
+        }
+      });
     } else if (embedType === 'dashboard') {
+      if (onLoad) onLoad(report, powerbi.get(reportRef));
+
       report.on('tileClicked', event => {
         if (onTileClicked) {
           onTileClicked(event.detail);
