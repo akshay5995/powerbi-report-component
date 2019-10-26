@@ -26,26 +26,26 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.6.0",
+    "@babel/cli": "^7.6.4",
+    "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.6.0",
-    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
     "ajv": "^6.10.2",
     "babel-loader": "^8.0.6",
     "concurrently": "^3.6.1",
     "css-loader": "^3.2.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
-    "react": "^16.9.0",
+    "react": "^16.11.0",
     "react-copy-to-clipboard": "^5.0.1",
-    "react-dom": "^16.9.0",
+    "react-dom": "^16.11.0",
     "react-dropdown": "^1.6.4",
     "react-splitter-layout": "^4.0.0",
     "style-loader": "^0.21.0",
-    "webpack": "^4.40.2",
+    "webpack": "^4.41.2",
     "webpack-cli": "^3.3.8",
-    "webpack-dev-server": "^3.8.0"
+    "webpack-dev-server": "^3.9.0"
   },
   "author": {
     "name": "Akshay Ram Vignesh A",
@@ -57,7 +57,7 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.8.0",
+    "powerbi-client": "^2.10.2",
     "prop-types": "^15.7.2"
   }
 }
