@@ -42,7 +42,7 @@
     "react-dom": "^16.11.0",
     "react-dropdown": "^1.6.4",
     "react-splitter-layout": "^4.0.0",
-    "style-loader": "^0.21.0",
+    "style-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.8",
     "webpack-dev-server": "^3.9.0"
