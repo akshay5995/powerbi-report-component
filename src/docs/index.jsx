@@ -199,6 +199,10 @@ class Demo extends Component {
                 console.log('Report Loaded!');
                 this.report = report;
               }}
+              onRender={report => {
+                console.log('Report Redered!');
+                this.report = report;
+              }}
               onSelectData={data => {
                 window.alert(`You clicked chart: ${data.visual.name}`);
               }}
