@@ -26,16 +26,16 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.4",
-    "@babel/core": "^7.7.4",
+    "@babel/cli": "^7.7.5",
+    "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/preset-env": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
     "@babel/preset-react": "^7.7.4",
     "ajv": "^6.10.2",
-    "all-contributors-cli": "^6.11.1",
+    "all-contributors-cli": "^6.11.2",
     "babel-loader": "^8.0.6",
     "concurrently": "^3.6.1",
-    "css-loader": "^3.2.0",
+    "css-loader": "^3.3.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "react": "^16.12.0",
@@ -58,7 +58,7 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.10.2",
+    "powerbi-client": "^2.10.3",
     "prop-types": "^15.7.2"
   }
 }
