@@ -12,7 +12,7 @@ It's a minimalistic React component for embedding a Microsoft PowerBI report or 
 
 ## Usuage
 
-```
+```javascript
 import React, {Component} from 'react';
 import Report from 'powerbi-report-component';
 
@@ -92,7 +92,7 @@ Inside your compoent where you're using { Report } component.
 
 _Constructor:_
 
-```
+```javascript
   ...
   constructor(props) {
     super(props);
@@ -104,8 +104,7 @@ _Constructor:_
 
 _Callback passed to the onLoad or onRender prop_
 
-```
-
+```javascript
   handleReportLoad = (report) => {
     this.report = report; // get the report object from callback and store it.
   }
@@ -119,7 +118,7 @@ _Callback passed to the onLoad or onRender prop_
 
 _using the_ this.report _to perform operations_
 
-```
+```javascript
   ...
 
   setFullscreen = () => {
@@ -143,8 +142,7 @@ _using the_ this.report _to perform operations_
 
 For Report Level Filters:
 
-```
-
+```javascript
   /*
     Example filter object used in microsoft's demo page:
 
@@ -183,8 +181,7 @@ For Report Level Filters:
 
 ## Dashboard events: (When embedType === "dashboard")
 
-```
-
+```javascript
 handleTileClicked = (data) => {
     console.log('Data from tile', data);
 }
@@ -200,15 +197,15 @@ Currently supported features:
 
 Page Change
 
-```
+```javascript
   onPageChange={(data) =>
-  console.log(`Page name :{data.newPage.displayName}`)
+    console.log(`Page name :{data.newPage.displayName}`)
   }
 ```
 
 Load
 
-```
+```javascript
   onLoad={(report) => {
     console.log('Report Loaded!');
     this.report = report;
@@ -218,7 +215,7 @@ Load
 
 Render
 
-```
+```javascript
   onRender={(report) => {
     console.log('Report Rendered!');
     this.report = report;
@@ -228,7 +225,7 @@ Render
 
 Button Clicked
 
-```
+```javascript
   onButtonClicked={(data) => {
     console.log(`Button ${data.title} of type ${data.type} Clicked!`);
     }
@@ -237,7 +234,7 @@ Button Clicked
 
 Filters Applied (In documentation, but not yet supported)
 
-```
+```javascript
   onFiltersApplied={(filters) => {
     console.log('Filters Applied!');
     }
@@ -246,7 +243,7 @@ Filters Applied (In documentation, but not yet supported)
 
 Command Triggered
 
-```
+```javascript
   onCommandTriggered={(extensionCommand) => {
     console.log('Extension Command Triggered!');
     }
@@ -255,7 +252,7 @@ Command Triggered
 
 Data Element Clicked
 
-```
+```javascript
   onSelectData={(data) =>
     console.log(`You clicked on chart: {data.visual.title}`)
   }
@@ -265,7 +262,7 @@ Data Element Clicked
 
 # Change Report Mode to View or Edit:
 
-```
+```javascript
   //mode can be "view" or "edit"
 
   changeMode = (mode) => this.report.switchMode(mode);
@@ -273,19 +270,19 @@ Data Element Clicked
 
 # Fullscreen
 
-```
+```javascript
   setFullscreen = () => this.report.fullscreen();
 ```
 
 # Print Report
 
-```
+```javascript
   printReport = () => this.report.print();
 ```
 
 # Set Filters
 
-```
+```javascript
     //example filter from microsoft's demo page
 
     const filter = {
@@ -318,7 +315,7 @@ Data Element Clicked
 
 # Get Filters
 
-```
+```javascript
   getFilter = () => this.report.getFilters().then(function (filters) {
         console.log(filters);
     }).catch(function (errors) {
@@ -329,8 +326,7 @@ Data Element Clicked
 
 # Remove Filters
 
-```
-
+```javascript
   removeFilters = () => this.report.removeFilters()
     .catch(function (errors) {
         console.log(errors);
@@ -340,8 +336,7 @@ Data Element Clicked
 
 # Show / Hide all visual headers:
 
-```
-
+```javascript
 toggleAllVisualHeaders = (bool) =>
 {
   const newSettings = {
