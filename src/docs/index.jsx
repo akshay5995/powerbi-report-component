@@ -94,6 +94,9 @@ class Demo extends Component {
     onTileClicked={data => {
       console.log('Data from tile', data);
     }}
+    onError={data => {
+      console.log('Error', data);
+    }}
   />`;
   }
 
@@ -166,6 +169,8 @@ class Demo extends Component {
       filterPaneEnabled: this.state.filterPaneEnabled === 'filter-true',
       navContentPaneEnabled:
         this.state.navContentPaneEnabled === 'nav-true',
+      hideErrors: false
+      
     };
 
     const filter = {
@@ -213,6 +218,9 @@ class Demo extends Component {
               }}
               onTileClicked={data => {
                 console.log('Data from tile', data);
+              }}
+              onError={data => {
+                console.log('Error', data);
               }}
             />
           ) : (
