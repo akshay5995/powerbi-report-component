@@ -68,6 +68,7 @@ class Report extends PureComponent {
       onButtonClicked,
       onFiltersApplied,
       onCommandTriggered,
+      onError,
     } = this.props;
 
     if (embedType === 'report') {
@@ -100,6 +101,11 @@ class Report extends PureComponent {
       report.on('commandTriggered', event => {
         if (onCommandTriggered) {
           onCommandTriggered(event.detail);
+        }
+      });
+      report.on('error', event => {
+        if (onError) {         
+          onError(event.detail);
         }
       });
     } else if (embedType === 'dashboard') {
@@ -144,6 +150,7 @@ Report.propTypes = {
   extraSettings: PropTypes.object,
   permissions: PropTypes.string.isRequired,
   onLoad: PropTypes.func,
+  onError: PropTypes.func,
   onSelectData: PropTypes.func,
   onPageChange: PropTypes.func,
   onTileClicked: PropTypes.func,
