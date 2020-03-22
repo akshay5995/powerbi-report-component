@@ -23,7 +23,12 @@ const initialState = {
   navContentPaneEnabled: 'nav-false',
   visualHeaderFlag: true,
   flag: false,
+  reportMode: 'view',
 };
+
+const embedTypeOptions = ['report', 'dashboard'];
+
+const reportModes = ['view', 'edit'];
 
 class Demo extends Component {
   constructor(props) {
@@ -37,6 +42,7 @@ class Demo extends Component {
     );
     this.onSelect = this.onSelect.bind(this);
     this.resetState = this.resetState.bind(this);
+    this.saveReport = this.saveReport.bind(this);
   }
 
   getCode(view = true) {
@@ -49,6 +55,7 @@ class Demo extends Component {
       permissions,
       dashboardId,
       pageName,
+      reportMode
     } = this.state;
     const viewAccessToken =
       accessToken && `${accessToken.slice(0, 10)}...`;
@@ -63,6 +70,7 @@ class Demo extends Component {
     embedId="${embedId}"
     dashboardId="${dashboardId}"
     pageName="${pageName}"
+    reportMode="${reportMode}" // "view" or "edit
     extraSettings={{
       filterPaneEnabled: ${this.state.filterPaneEnabled ===
         'filter-true'},
@@ -144,6 +152,16 @@ class Demo extends Component {
     this.setState(initialState, callback);
   }
 
+  async saveReport() {
+    if (this.report) {
+      try{
+        await this.report.save();
+      } catch (err) {
+        console.log("Error saving report", err);
+      }
+    }
+  }
+
   render() {
     const {
       embedType,
@@ -155,6 +173,7 @@ class Demo extends Component {
       pageName,
       dashboardId,
       flag,
+      reportMode
     } = this.state;
     const style = {
       report: {
@@ -162,8 +181,6 @@ class Demo extends Component {
         border: '0',
       },
     };
-
-    const embedTypeOptions = ['report', 'dashboard'];
 
     const extraSettings = {
       filterPaneEnabled: this.state.filterPaneEnabled === 'filter-true',
@@ -200,6 +217,7 @@ class Demo extends Component {
               permissions={permissions}
               pageName={pageName}
               style={style.report}
+              reportMode={this.state.reportMode}
               onLoad={report => {
                 console.log('Report Loaded!');
                 this.report = report;
@@ -247,6 +265,14 @@ class Demo extends Component {
                   options={embedTypeOptions}
                   onChange={this.onSelect('embedType')}
                   value={embedType}
+                />
+              </span>
+              <span>
+                <b className="fieldName">Report Mode (optional, default: "view")</b>
+                <Dropdown
+                  options={reportModes}
+                  onChange={this.onSelect('reportMode')}
+                  value={reportMode}
                 />
               </span>
               <span>
@@ -365,6 +391,7 @@ class Demo extends Component {
                 </Fragment>
               )}
               <span className="interactions">
+                <div>Actions using <code>report</code> reference</div>
                 <button
                   className="interactionBtn"
                   disabled={!flag}
@@ -441,6 +468,13 @@ class Demo extends Component {
                   }}
                 >
                   Print
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={this.saveReport}
+                >
+                  Save
                 </button>
               </span>
               <span className="runBtnHolder">

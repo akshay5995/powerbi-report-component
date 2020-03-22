@@ -6,6 +6,10 @@ import { models } from 'powerbi-client';
 import Embed from './Embed';
 import { clean } from './utils';
 
+const modes = ["view", "edit", "create"];
+  
+const validateMode = (mode) => modes.findIndex(m => mode === m) > -1;
+
 const createConfig = props => {
   if (props) {
     const {
@@ -69,45 +73,58 @@ class Report extends PureComponent {
       onFiltersApplied,
       onCommandTriggered,
       onError,
+      reportMode,
     } = this.props;
 
     if (embedType === 'report') {
       report.on('loaded', () => {
-        if (onLoad) onLoad(report);
+        if (onLoad) { 
+          if(validateMode(reportMode) && reportMode !== "view") {
+            report.switchMode(reportMode);
+          }
+          onLoad(report);
+        }
       });
       report.on('rendered', () => {
         if (onRender) onRender(report);
       });
+
       report.on('dataSelected', event => {
         if (onSelectData) {
           onSelectData(event.detail);
         }
       });
+
       report.on('pageChanged', event => {
         if (onPageChange) {
           onPageChange(event.detail);
         }
       });
+
       report.on('buttonClicked', event => {
         if (onButtonClicked) {
           onButtonClicked(event.detail);
         }
       });
+
       report.on('filtersApplied', event => {
         if (onFiltersApplied) {
           onFiltersApplied(event.detail);
         }
       });
+
       report.on('commandTriggered', event => {
         if (onCommandTriggered) {
           onCommandTriggered(event.detail);
         }
       });
+
       report.on('error', event => {
         if (onError) {         
           onError(event.detail);
         }
       });
+
     } else if (embedType === 'dashboard') {
       if (onLoad) onLoad(report, powerbi.get(reportRef));
 
@@ -155,6 +172,7 @@ Report.propTypes = {
   onPageChange: PropTypes.func,
   onTileClicked: PropTypes.func,
   style: PropTypes.object,
+  reportMode: PropTypes.string,
 };
 
 export default Report;

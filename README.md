@@ -57,6 +57,7 @@ class MyComponent extends Component {
     const extraSettings = {
             filterPaneEnabled: false, //true
             navContentPaneEnabled: false, //true
+            hideErrors: false // Use this *only* when you want to overide error experience i.e, use onError 
             // ... more custom settings
     };
     return (
@@ -68,6 +69,7 @@ class MyComponent extends Component {
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
             pageName="" // set as current page of the report
+            reportMode="" // open report in a particular mode "view" or "edit". If not passed 
             extraSettings={extraSettings}
             permissions="All" // View
             style={reportStyle}
@@ -254,7 +256,15 @@ Data Element Clicked
 
 ```javascript
   onSelectData={(data) =>
-    console.log(`You clicked on chart: {data.visual.title}`)
+    console.log(`You clicked on chart: ${data.visual.title}`);
+  }
+```
+
+Handle errors gracefully
+
+```javascript
+  onError={(data) => 
+     console.log(`Error: ${data}`);
   }
 ```
 
@@ -331,6 +341,21 @@ Data Element Clicked
     .catch(function (errors) {
         console.log(errors);
     });
+
+```
+
+# Save edited report when in "edit" mode (note: you need to have enogh permissions to save the report)
+
+```javascript
+    async saveReport() {
+    if (this.report) {
+      try{
+        await this.report.save();
+      } catch (err) {
+        console.log("Error saving report", err);
+      }
+    }
+  }
 
 ```
 
