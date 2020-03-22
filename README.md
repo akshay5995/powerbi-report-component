@@ -69,7 +69,7 @@ class MyComponent extends Component {
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
             pageName="" // set as current page of the report
-            reportMode="" // open report in a particular mode "view" or "edit". If not passed 
+            reportMode="view" // open report in a particular mode "view" or "edit".
             extraSettings={extraSettings}
             permissions="All" // View
             style={reportStyle}
