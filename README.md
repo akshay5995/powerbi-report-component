@@ -344,7 +344,8 @@ Handle errors gracefully
 
 ```
 
-# Save edited report when in "edit" mode (note: you need to have enogh permissions to save the report)
+# Save edited report when in "edit" mode 
+(note: you need to have enough permissions to save the report)
 
 ```javascript
     async saveReport() {
