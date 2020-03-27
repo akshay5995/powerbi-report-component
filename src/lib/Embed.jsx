@@ -17,6 +17,12 @@ const validateConfig = config => {
   }
 };
 
+const validateCreateReportConfig = config => {
+    if(!config.embedUrl)
+      return 'Embed URL is required';
+    return pbi.models.validateCreateReport(config);
+};
+
 class Embed extends PureComponent {
   constructor(props) {
     super(props);
@@ -35,7 +41,7 @@ class Embed extends PureComponent {
   }
 
   componentDidUpdate() {
-    const errors = validateConfig(this.state);
+    const errors = this.state.reportMode === 'create' ? validateCreateReportConfig(this.state) : validateConfig(this.state);
     if (!errors) {
       return this.embed(this.state);
     } else if (this.component !== null) {
@@ -45,7 +51,11 @@ class Embed extends PureComponent {
   }
 
   embed(config) {
+    if(config.reportMode === 'create')
+    this.component = powerbi.createReport(this.reportRef.current, config);
+    else {
     this.component = powerbi.embed(this.reportRef.current, config);
+    }
     if (this.props.performOnEmbed) {
       this.props.performOnEmbed(this.component, this.reportRef.current);
     }

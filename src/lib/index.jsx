@@ -22,8 +22,18 @@ const createConfig = props => {
       pageName,
       extraSettings,
       dashboardId,
+      datasetId,
+      reportMode
     } = props;
-
+    if(reportMode === 'create') {
+      return clean({
+        tokenType: models.TokenType[tokenType],
+        accessToken,
+        embedUrl,
+        datasetId,
+        reportMode,
+      });
+    }
     return clean({
       type: embedType,
       tokenType: models.TokenType[tokenType],
@@ -38,6 +48,8 @@ const createConfig = props => {
         navContentPaneEnabled: true,
         ...extraSettings,
       },
+      datasetId,
+      reportMode,
     });
   }
   return null;
@@ -76,7 +88,7 @@ class Report extends PureComponent {
       reportMode,
     } = this.props;
 
-    if (embedType === 'report') {
+    if (embedType === 'report' && reportMode !== 'create') {
       report.on('loaded', () => {
         if (onLoad) { 
           if(validateMode(reportMode) && reportMode !== "view") {
@@ -173,6 +185,7 @@ Report.propTypes = {
   onTileClicked: PropTypes.func,
   style: PropTypes.object,
   reportMode: PropTypes.string,
+  datasetId: PropTypes.string,
 };
 
 export default Report;

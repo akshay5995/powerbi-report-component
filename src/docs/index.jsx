@@ -23,12 +23,13 @@ const initialState = {
   navContentPaneEnabled: 'nav-false',
   visualHeaderFlag: true,
   flag: false,
-  reportMode: 'view',
+  reportMode: 'create',
+  datasetId: '',
 };
 
 const embedTypeOptions = ['report', 'dashboard'];
 
-const reportModes = ['view', 'edit'];
+const reportModes = ['view', 'edit','create'];
 
 class Demo extends Component {
   constructor(props) {
@@ -55,13 +56,29 @@ class Demo extends Component {
       permissions,
       dashboardId,
       pageName,
-      reportMode
+      reportMode,
+      datasetId,
     } = this.state;
     const viewAccessToken =
       accessToken && `${accessToken.slice(0, 10)}...`;
 
     const viewEmbedUrl = embedUrl && `${embedUrl.slice(0, 10)}...`;
-
+    if(reportMode === 'create') {
+      return `<Report embedType="${embedType}"
+      tokenType="${tokenType}"
+      accessToken="${view ? viewAccessToken : accessToken}"
+      accessToken={accessToken}
+      embedUrl="${view ? viewEmbedUrl : embedUrl}"
+      reportMode="${reportMode}"
+      datasetId="${datasetId}"
+      style={{
+        height: '100%',
+        border: '0',
+        padding: '20px',
+        background: '#eee'
+      }}
+    />`;
+    } else {
     return `<Report embedType="${embedType}"
     tokenType="${tokenType}"
     accessToken="${view ? viewAccessToken : accessToken}"
@@ -106,6 +123,7 @@ class Demo extends Component {
       console.log('Error', data);
     }}
   />`;
+}
   }
 
   handleChange(event) {
@@ -173,7 +191,8 @@ class Demo extends Component {
       pageName,
       dashboardId,
       flag,
-      reportMode
+      reportMode,
+      datasetId,
     } = this.state;
     const style = {
       report: {
@@ -206,6 +225,7 @@ class Demo extends Component {
       <div className="root">
         <SplitterLayout percentage secondaryInitialSize={70}>
           {this.state.flag ? (
+            reportMode === 'create' ?
             <Report
               embedType={embedType}
               tokenType={tokenType}
@@ -218,6 +238,7 @@ class Demo extends Component {
               pageName={pageName}
               style={style.report}
               reportMode={this.state.reportMode}
+              datasetId={datasetId}
               onLoad={report => {
                 console.log('Report Loaded!');
                 this.report = report;
@@ -240,6 +261,15 @@ class Demo extends Component {
               onError={data => {
                 console.log('Error', data);
               }}
+            /> :
+            <Report 
+            embedType={embedType}
+            tokenType={tokenType}
+            accessToken={accessToken}
+            embedUrl={embedUrl}
+            style={style.report}
+            reportMode={this.state.reportMode}
+            datasetId={datasetId}
             />
           ) : (
             <div className="placeholder">
@@ -302,7 +332,17 @@ class Demo extends Component {
                   required
                 />
               </span>
+              {reportMode === 'create' && (
               <span>
+                <b className="fieldName">Dataset Id</b>
+                <input
+                  name="datasetId"
+                  onChange={this.handleChange}
+                  value={datasetId}
+                />
+              </span>
+              )}
+              {reportMode !== 'create' && (<span>
                 <b className="fieldName">Embed Id</b>
                 <input
                   name="embedId"
@@ -311,7 +351,8 @@ class Demo extends Component {
                   required
                 />
               </span>
-              {reportFlag && (
+              )}
+              {reportMode !== 'create' && reportFlag && (
                 <Fragment>
                   <span>
                     <b className="fieldName">Page Name (optional)</b>
@@ -390,6 +431,7 @@ class Demo extends Component {
                   </span>
                 </Fragment>
               )}
+              {reportMode !== 'create' && (
               <span className="interactions">
                 <div>Actions using <code>report</code> reference</div>
                 <button
@@ -477,6 +519,7 @@ class Demo extends Component {
                   Save
                 </button>
               </span>
+              )}
               <span className="runBtnHolder">
                 <button
                   className="runBtn"
