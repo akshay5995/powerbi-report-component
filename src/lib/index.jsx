@@ -23,7 +23,7 @@ const createConfig = props => {
       extraSettings,
       dashboardId,
       datasetId,
-      reportMode
+      reportMode,
     } = props;
     if(reportMode === 'create') {
       return clean({
@@ -88,7 +88,9 @@ class Report extends PureComponent {
       reportMode,
     } = this.props;
 
-    if (embedType === 'report' && reportMode !== 'create') {
+    const isCreate = reportMode === 'create';
+
+    if (embedType === 'report' && !isCreate) {
       report.on('loaded', () => {
         if (onLoad) { 
           if(validateMode(reportMode) && reportMode !== "view") {
@@ -174,10 +176,10 @@ Report.propTypes = {
   tokenType: PropTypes.string.isRequired,
   accessToken: PropTypes.string.isRequired,
   embedUrl: PropTypes.string.isRequired,
-  embedId: PropTypes.string.isRequired,
+  embedId: PropTypes.string,
   pageName: PropTypes.string,
   extraSettings: PropTypes.object,
-  permissions: PropTypes.string.isRequired,
+  permissions: PropTypes.string,
   onLoad: PropTypes.func,
   onError: PropTypes.func,
   onSelectData: PropTypes.func,

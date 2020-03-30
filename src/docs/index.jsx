@@ -63,7 +63,10 @@ class Demo extends Component {
       accessToken && `${accessToken.slice(0, 10)}...`;
 
     const viewEmbedUrl = embedUrl && `${embedUrl.slice(0, 10)}...`;
-    if(reportMode === 'create') {
+
+    const isCreateMode = reportMode === 'create';
+
+    if(isCreateMode) {
       return `<Report embedType="${embedType}"
       tokenType="${tokenType}"
       accessToken="${view ? viewAccessToken : accessToken}"
@@ -221,11 +224,13 @@ class Demo extends Component {
 
     const reportFlag = embedType === 'report';
 
+    const isCreateMode = reportMode === 'create';
+
     return (
       <div className="root">
         <SplitterLayout percentage secondaryInitialSize={70}>
           {this.state.flag ? (
-            reportMode === 'create' ?
+            !isCreateMode ?
             <Report
               embedType={embedType}
               tokenType={tokenType}
@@ -332,7 +337,7 @@ class Demo extends Component {
                   required
                 />
               </span>
-              {reportMode === 'create' && (
+              {isCreateMode && (
               <span>
                 <b className="fieldName">Dataset Id</b>
                 <input
@@ -342,7 +347,7 @@ class Demo extends Component {
                 />
               </span>
               )}
-              {reportMode !== 'create' && (<span>
+              {!isCreateMode && (<span>
                 <b className="fieldName">Embed Id</b>
                 <input
                   name="embedId"
@@ -352,7 +357,7 @@ class Demo extends Component {
                 />
               </span>
               )}
-              {reportMode !== 'create' && reportFlag && (
+              {!isCreateMode && reportFlag && (
                 <Fragment>
                   <span>
                     <b className="fieldName">Page Name (optional)</b>
@@ -431,7 +436,7 @@ class Demo extends Component {
                   </span>
                 </Fragment>
               )}
-              {reportMode !== 'create' && (
+              {!isCreateMode && (
               <span className="interactions">
                 <div>Actions using <code>report</code> reference</div>
                 <button

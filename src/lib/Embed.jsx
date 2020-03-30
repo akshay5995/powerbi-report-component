@@ -2,26 +2,9 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import pbi from 'powerbi-client';
+import { validateConfig } from './utils';
 
 // powerbi object is global
-
-const validateConfig = config => {
-  switch (config.type) {
-    case 'report':
-      return pbi.models.validateReportLoad(config);
-    case 'dashboard':
-      return pbi.models.validateDashboardLoad(config);
-    default:
-      return 'Unknown config type';
-  }
-};
-
-const validateCreateReportConfig = config => {
-    if(!config.embedUrl)
-      return 'Embed URL is required';
-    return pbi.models.validateCreateReport(config);
-};
 
 class Embed extends PureComponent {
   constructor(props) {
@@ -41,7 +24,7 @@ class Embed extends PureComponent {
   }
 
   componentDidUpdate() {
-    const errors = this.state.reportMode === 'create' ? validateCreateReportConfig(this.state) : validateConfig(this.state);
+    const errors = validateConfig(this.state);
     if (!errors) {
       return this.embed(this.state);
     } else if (this.component !== null) {
@@ -51,10 +34,13 @@ class Embed extends PureComponent {
   }
 
   embed(config) {
-    if(config.reportMode === 'create')
-    this.component = powerbi.createReport(this.reportRef.current, config);
+    if (config.reportMode === 'create')
+      this.component = powerbi.createReport(
+        this.reportRef.current,
+        config
+      );
     else {
-    this.component = powerbi.embed(this.reportRef.current, config);
+      this.component = powerbi.embed(this.reportRef.current, config);
     }
     if (this.props.performOnEmbed) {
       this.props.performOnEmbed(this.component, this.reportRef.current);
