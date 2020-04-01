@@ -5,11 +5,11 @@ const defaultEmbedModes = ['view', 'edit', 'create'];
 const defaultOptions = {
   report: {
     mode: 'view',
-    embedModes: defaultEmbedModes,
+    embedModes: ['view', 'edit', 'create'],
   },
   dashboard: {
     mode: 'view',
-    embedModes: defaultEmbedModes.filter(x => x != 'create'),
+    embedModes: ['view'],
   },
 };
 
