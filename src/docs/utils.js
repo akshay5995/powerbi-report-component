@@ -29,7 +29,7 @@ const initializeState = type => ({
 });
 
 export {
-  embedTypes,'
+  embedTypes,
   defaultOptions,
   initializeState
 };

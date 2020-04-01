@@ -299,7 +299,7 @@ class Demo extends Component {
                 />
               </span>
               <span>
-                <b className="fieldName">Report Mode (optional, default: "view")</b>
+                <b className="fieldName">Mode (optional, default: "view")</b>
                 <Dropdown
                   options={defaultOptions[embedType].embedModes}
                   onChange={this.onSelect('reportMode')}

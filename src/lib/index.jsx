@@ -144,15 +144,19 @@ class Report extends PureComponent {
       report.on('saved', () => {
         if (onSave) onSave(report);
       });
+
     } else {
+
       report.on('loaded', () => {
         if (onLoad) { 
           onLoad(report);
         }
       });
+      
       report.on('rendered', () => {
         if (onRender) onRender(report);
       });
+      
       report.on('error', event => {
         if (onError) {         
           onError(event.detail);
