@@ -59,7 +59,7 @@ body {
 
 .runBtnHolder {
   grid-column-start: 1;
-  grid-row-start: 7;
+  grid-row-start: 8;
   margin: auto 0;
 }
 
@@ -127,6 +127,7 @@ input :required {
   padding: 15px;
   font-size: 14px;
   margin: 0;
+  min-height: 300px;
 }
 
 .codeHeader {

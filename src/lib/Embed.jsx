@@ -2,20 +2,9 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import pbi from 'powerbi-client';
+import { validateConfig } from './utils';
 
 // powerbi object is global
-
-const validateConfig = config => {
-  switch (config.type) {
-    case 'report':
-      return pbi.models.validateReportLoad(config);
-    case 'dashboard':
-      return pbi.models.validateDashboardLoad(config);
-    default:
-      return 'Unknown config type';
-  }
-};
 
 class Embed extends PureComponent {
   constructor(props) {
@@ -45,7 +34,14 @@ class Embed extends PureComponent {
   }
 
   embed(config) {
-    this.component = powerbi.embed(this.reportRef.current, config);
+    if (config.reportMode === 'create')
+      this.component = powerbi.createReport(
+        this.reportRef.current,
+        config
+      );
+    else {
+      this.component = powerbi.embed(this.reportRef.current, config);
+    }
     if (this.props.performOnEmbed) {
       this.props.performOnEmbed(this.component, this.reportRef.current);
     }

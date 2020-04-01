@@ -22,8 +22,18 @@ const createConfig = props => {
       pageName,
       extraSettings,
       dashboardId,
+      datasetId,
+      reportMode,
     } = props;
-
+    if(reportMode === 'create') {
+      return clean({
+        tokenType: models.TokenType[tokenType],
+        accessToken,
+        embedUrl,
+        datasetId,
+        reportMode,
+      });
+    }
     return clean({
       type: embedType,
       tokenType: models.TokenType[tokenType],
@@ -38,6 +48,8 @@ const createConfig = props => {
         navContentPaneEnabled: true,
         ...extraSettings,
       },
+      datasetId,
+      reportMode,
     });
   }
   return null;
@@ -74,9 +86,13 @@ class Report extends PureComponent {
       onCommandTriggered,
       onError,
       reportMode,
+      onSave,
     } = this.props;
 
+    const isCreate = reportMode === 'create';
+
     if (embedType === 'report') {
+      if(!isCreate) {
       report.on('loaded', () => {
         if (onLoad) { 
           if(validateMode(reportMode) && reportMode !== "view") {
@@ -125,6 +141,33 @@ class Report extends PureComponent {
         }
       });
 
+      report.on('saved', () => {
+        if (onSave) onSave(report);
+      });
+
+    } else {
+
+      report.on('loaded', () => {
+        if (onLoad) { 
+          onLoad(report);
+        }
+      });
+      
+      report.on('rendered', () => {
+        if (onRender) onRender(report);
+      });
+      
+      report.on('error', event => {
+        if (onError) {         
+          onError(event.detail);
+        }
+      });
+
+      report.on('saved', () => {
+        if (onSave) onSave(report);
+      });
+    }
+
     } else if (embedType === 'dashboard') {
       if (onLoad) onLoad(report, powerbi.get(reportRef));
 
@@ -162,10 +205,10 @@ Report.propTypes = {
   tokenType: PropTypes.string.isRequired,
   accessToken: PropTypes.string.isRequired,
   embedUrl: PropTypes.string.isRequired,
-  embedId: PropTypes.string.isRequired,
+  embedId: PropTypes.string,
   pageName: PropTypes.string,
   extraSettings: PropTypes.object,
-  permissions: PropTypes.string.isRequired,
+  permissions: PropTypes.string,
   onLoad: PropTypes.func,
   onError: PropTypes.func,
   onSelectData: PropTypes.func,
@@ -173,6 +216,7 @@ Report.propTypes = {
   onTileClicked: PropTypes.func,
   style: PropTypes.object,
   reportMode: PropTypes.string,
+  datasetId: PropTypes.string,
 };
 
 export default Report;
