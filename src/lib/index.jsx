@@ -86,11 +86,13 @@ class Report extends PureComponent {
       onCommandTriggered,
       onError,
       reportMode,
+      onSave,
     } = this.props;
 
     const isCreate = reportMode === 'create';
 
-    if (embedType === 'report' && !isCreate) {
+    if (embedType === 'report') {
+      if(!isCreate) {
       report.on('loaded', () => {
         if (onLoad) { 
           if(validateMode(reportMode) && reportMode !== "view") {
@@ -138,6 +140,29 @@ class Report extends PureComponent {
           onError(event.detail);
         }
       });
+
+      report.on('saved', () => {
+        if (onSave) onSave(report);
+      });
+    } else {
+      report.on('loaded', () => {
+        if (onLoad) { 
+          onLoad(report);
+        }
+      });
+      report.on('rendered', () => {
+        if (onRender) onRender(report);
+      });
+      report.on('error', event => {
+        if (onError) {         
+          onError(event.detail);
+        }
+      });
+
+      report.on('saved', () => {
+        if (onSave) onSave(report);
+      });
+    }
 
     } else if (embedType === 'dashboard') {
       if (onLoad) onLoad(report, powerbi.get(reportRef));

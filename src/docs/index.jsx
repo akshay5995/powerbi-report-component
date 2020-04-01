@@ -9,33 +9,13 @@ import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
 import './styles.css';
 import Report from '../lib';
-
-const initialState = {
-  embedType: 'report',
-  tokenType: 'Embed',
-  accessToken: '',
-  embedUrl: '',
-  embedId: '',
-  pageName: '',
-  dashboardId: '',
-  permissions: 'All',
-  filterPaneEnabled: 'filter-false',
-  navContentPaneEnabled: 'nav-false',
-  visualHeaderFlag: true,
-  flag: false,
-  reportMode: 'create',
-  datasetId: '',
-};
-
-const embedTypeOptions = ['report', 'dashboard'];
-
-const reportModes = ['view', 'edit','create'];
+import { initialState, types, defaultOptions } from './utils';
 
 class Demo extends Component {
   constructor(props) {
     super(props);
     this.report = null;
-    this.state = initialState;
+    this.state = initialState('report');
     this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
     this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(
@@ -170,7 +150,8 @@ class Demo extends Component {
   }
 
   resetState(callback) {
-    this.setState(initialState, callback);
+    const { embedType } = this.state;
+    this.setState(initialState(embedType), callback);
   }
 
   async saveReport() {
@@ -275,6 +256,21 @@ class Demo extends Component {
             style={style.report}
             reportMode={this.state.reportMode}
             datasetId={datasetId}
+            onLoad={report => {
+              console.log('Report Loaded!');
+              this.report = report;
+            }}
+            onRender={report => {
+              console.log('Report Redered!');
+              this.report = report;
+            }}
+            onSave={report => {
+              console.log('Report saved!');
+              this.report = report;
+            }}
+            onError={data => {
+              console.log('Error', data);
+            }}
             />
           ) : (
             <div className="placeholder">
@@ -297,7 +293,7 @@ class Demo extends Component {
               <span>
                 <b className="fieldName">Embed Type</b>
                 <Dropdown
-                  options={embedTypeOptions}
+                  options={types}
                   onChange={this.onSelect('embedType')}
                   value={embedType}
                 />
@@ -305,7 +301,7 @@ class Demo extends Component {
               <span>
                 <b className="fieldName">Report Mode (optional, default: "view")</b>
                 <Dropdown
-                  options={reportModes}
+                  options={defaultOptions[embedType].embedModes}
                   onChange={this.onSelect('reportMode')}
                   value={reportMode}
                 />
