@@ -9,13 +9,13 @@ import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
 import './styles.css';
 import Report from '../lib';
-import { initialState, types, defaultOptions } from './utils';
+import { initializeState, embedTypes, defaultOptions } from './utils';
 
 class Demo extends Component {
   constructor(props) {
     super(props);
     this.report = null;
-    this.state = initialState('report');
+    this.state = initializeState('report');
     this.handleChange = this.handleChange.bind(this);
     this.getCode = this.getCode.bind(this);
     this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(
@@ -151,7 +151,7 @@ class Demo extends Component {
 
   resetState(callback) {
     const { embedType } = this.state;
-    this.setState(initialState(embedType), callback);
+    this.setState(initializeState(embedType), callback);
   }
 
   async saveReport() {
@@ -293,7 +293,7 @@ class Demo extends Component {
               <span>
                 <b className="fieldName">Embed Type</b>
                 <Dropdown
-                  options={types}
+                  options={embedTypes}
                   onChange={this.onSelect('embedType')}
                   value={embedType}
                 />
