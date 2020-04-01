@@ -46,7 +46,8 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.10.3",
+    "@babel/plugin-transform-runtime": "^7.9.0"
   },
   "author": {
     "name": "Akshay Ram Vignesh A",
@@ -58,7 +59,6 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "@babel/plugin-transform-runtime": "^7.9.0",
     "powerbi-client": "^2.11.0",
     "prop-types": "^15.7.2"
   }
