@@ -1,20 +1,20 @@
-export const types = ['report', 'dashboard'];
+const embedTypes = ['report', 'dashboard'];
 
-export const defaultEmbedModes = ['view', 'edit', 'create'];
+const defaultEmbedModes = ['view', 'edit', 'create'];
 
-export const defaultOptions = {
+const defaultOptions = {
   report: {
-    defaultEmbedMode: 'view',
+    mode: 'view',
     embedModes: defaultEmbedModes,
   },
   dashboard: {
-    defaultEmbedMode: 'view',
+    mode: 'view',
     embedModes: defaultEmbedModes.filter(x => x != 'create'),
   },
 };
 
-export const initialState = mode => ({
-  embedType: mode,
+const initializeState = type => ({
+  embedType: type,
   tokenType: 'Embed',
   accessToken: '',
   embedUrl: '',
@@ -26,6 +26,12 @@ export const initialState = mode => ({
   navContentPaneEnabled: 'nav-false',
   visualHeaderFlag: true,
   flag: false,
-  reportMode: defaultOptions[mode].defaultEmbedMode,
+  reportMode: defaultOptions[type].mode,
   datasetId: '',
 });
+
+export {
+  embedTypes,'
+  defaultOptions,
+  initializeState
+};
