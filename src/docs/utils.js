@@ -1,7 +1,5 @@
 const embedTypes = ['report', 'dashboard'];
 
-const defaultEmbedModes = ['view', 'edit', 'create'];
-
 const defaultOptions = {
   report: {
     mode: 'view',
