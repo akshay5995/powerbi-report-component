@@ -54,11 +54,14 @@ class Embed extends PureComponent {
   }
 
   render() {
+    const { id } = this.state;
+
     return (
       <div
         className="report"
         style={this.props.style}
         ref={this.reportRef}
+        id={id}
       />
     );
   }
