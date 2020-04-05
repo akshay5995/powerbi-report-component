@@ -2,7 +2,7 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { validateConfig } from './utils';
+import { validateConfig } from './config';
 
 // powerbi object is global
 
@@ -34,6 +34,8 @@ class Embed extends PureComponent {
   }
 
   embed(config) {
+    console.log(config);
+    
     if (config.reportMode === 'create')
       this.component = powerbi.createReport(
         this.reportRef.current,

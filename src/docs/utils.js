@@ -1,5 +1,3 @@
-const embedTypes = ['report', 'dashboard'];
-
 const defaultOptions = {
   report: {
     mode: 'view',
@@ -9,7 +7,13 @@ const defaultOptions = {
     mode: 'view',
     embedModes: ['view'],
   },
+  tile: {
+    mode: 'view',
+    embedModes: ['view'],
+  },
 };
+
+const embedTypes = Object.keys(defaultOptions);
 
 const initializeState = type => ({
   embedType: type,
@@ -20,6 +24,7 @@ const initializeState = type => ({
   pageName: '',
   dashboardId: '',
   permissions: 'All',
+  tileId: '',
   filterPaneEnabled: 'filter-false',
   navContentPaneEnabled: 'nav-false',
   visualHeaderFlag: true,

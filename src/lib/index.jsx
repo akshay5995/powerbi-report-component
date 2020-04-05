@@ -2,58 +2,9 @@
 
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { models } from 'powerbi-client';
 import Embed from './Embed';
-import { clean } from './utils';
-
-const modes = ["view", "edit", "create"];
-  
-const validateMode = (mode) => modes.findIndex(m => mode === m) > -1;
-
-const createConfig = props => {
-  if (props) {
-    const {
-      embedType,
-      tokenType,
-      accessToken,
-      embedUrl,
-      embedId,
-      permissions,
-      pageName,
-      extraSettings,
-      dashboardId,
-      datasetId,
-      reportMode,
-    } = props;
-    if(reportMode === 'create') {
-      return clean({
-        tokenType: models.TokenType[tokenType],
-        accessToken,
-        embedUrl,
-        datasetId,
-        reportMode,
-      });
-    }
-    return clean({
-      type: embedType,
-      tokenType: models.TokenType[tokenType],
-      accessToken,
-      embedUrl,
-      id: embedId,
-      pageName: pageName,
-      dashboardId: dashboardId,
-      permissions: models.Permissions[permissions],
-      settings: {
-        filterPaneEnabled: true,
-        navContentPaneEnabled: true,
-        ...extraSettings,
-      },
-      datasetId,
-      reportMode,
-    });
-  }
-  return null;
-};
+import { createConfig } from './config'
+import { reportHandler, dashboardHandler, tileHandler } from "./onEmbedHandlers";
 
 class Report extends PureComponent {
   constructor(props) {
@@ -76,106 +27,14 @@ class Report extends PureComponent {
   performOnEmbed(report, reportRef) {
     const {
       embedType,
-      onLoad,
-      onRender,
-      onSelectData,
-      onPageChange,
-      onTileClicked,
-      onButtonClicked,
-      onFiltersApplied,
-      onCommandTriggered,
-      onError,
-      reportMode,
-      onSave,
+      reportMode
     } = this.props;
 
-    const isCreate = reportMode === 'create';
-
-    if (embedType === 'report') {
-      if(!isCreate) {
-      report.on('loaded', () => {
-        if (onLoad) { 
-          if(validateMode(reportMode) && reportMode !== "view") {
-            report.switchMode(reportMode);
-          }
-          onLoad(report);
-        }
-      });
-      report.on('rendered', () => {
-        if (onRender) onRender(report);
-      });
-
-      report.on('dataSelected', event => {
-        if (onSelectData) {
-          onSelectData(event.detail);
-        }
-      });
-
-      report.on('pageChanged', event => {
-        if (onPageChange) {
-          onPageChange(event.detail);
-        }
-      });
-
-      report.on('buttonClicked', event => {
-        if (onButtonClicked) {
-          onButtonClicked(event.detail);
-        }
-      });
-
-      report.on('filtersApplied', event => {
-        if (onFiltersApplied) {
-          onFiltersApplied(event.detail);
-        }
-      });
-
-      report.on('commandTriggered', event => {
-        if (onCommandTriggered) {
-          onCommandTriggered(event.detail);
-        }
-      });
-
-      report.on('error', event => {
-        if (onError) {         
-          onError(event.detail);
-        }
-      });
-
-      report.on('saved', () => {
-        if (onSave) onSave(report);
-      });
-
-    } else {
-
-      report.on('loaded', () => {
-        if (onLoad) { 
-          onLoad(report);
-        }
-      });
-      
-      report.on('rendered', () => {
-        if (onRender) onRender(report);
-      });
-      
-      report.on('error', event => {
-        if (onError) {         
-          onError(event.detail);
-        }
-      });
-
-      report.on('saved', () => {
-        if (onSave) onSave(report);
-      });
-    }
-
-    } else if (embedType === 'dashboard') {
-      if (onLoad) onLoad(report, powerbi.get(reportRef));
-
-      report.on('tileClicked', event => {
-        if (onTileClicked) {
-          onTileClicked(event.detail);
-        }
-      });
+    switch(embedType) {
+      case 'report': reportHandler(report, reportMode, this.props); break;
+      case 'dashboard': dashboardHandler(report, reportRef, this.props); break;
+      case 'tile': tileHandler(report, this.props); break;
+      default: break;
     }
   }
 
@@ -217,6 +76,7 @@ Report.propTypes = {
   style: PropTypes.object,
   reportMode: PropTypes.string,
   datasetId: PropTypes.string,
+  titleId: PropTypes.string,
 };
 
 export default Report;
