@@ -4,7 +4,7 @@
 ![license](https://img.shields.io/github/license/akshay5995/powerbi-report-component?color=blue&style=for-the-badge)
 ![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/akshay5995/powerbi-report-component?style=for-the-badge)
 
-It's a minimalistic React component for embedding a Microsoft PowerBI report or dashboard into your React application.
+It's a minimalistic React component for embedding a Microsoft PowerBI report, dashboard or tile into your React application.
 
 ## Installation
 
@@ -70,6 +70,7 @@ class MyComponent extends Component {
             embedId="" // report or dashboard Id goes here
             pageName="" // set as current page of the report
             reportMode="view" // open report in a particular mode "view" or "edit".
+            dashboardId={dashboardId} // required when embedType is "tile"
             extraSettings={extraSettings}
             permissions="All" // View
             style={reportStyle}
