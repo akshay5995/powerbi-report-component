@@ -1,5 +1,3 @@
-import pbi from 'powerbi-client';
-
 // Removes null, undefined and empty string from given object
 const clean = obj => {
   const propNames = Object.getOwnPropertyNames(obj);
@@ -15,26 +13,18 @@ const clean = obj => {
   return obj;
 };
 
-const validateTypeConfig = config => {
-  switch (config.type) {
-    case 'report':
-      return pbi.models.validateReportLoad(config);
-    case 'dashboard':
-      return pbi.models.validateDashboardLoad(config);
-    default:
-      return 'Unknown config type';
+const modes = ["view", "edit", "create"];
+  
+const validateMode = (mode) => modes.findIndex(m => mode === m) > -1;
+
+const validateAndInvokeCallback = (callback, data) => {
+  if(callback) { 
+    if(typeof(callback) == "function") {
+    callback(data)
+    } else {
+      throw "callback passed is not a function"
+    }
   }
-};
+}
 
-const validateCreateReportConfig = config => {
-  if(!config.embedUrl)
-    return 'Embed URL is required';
-  return pbi.models.validateCreateReport(config);
-};
-
-const validateConfig = config => {
-  const isCreateMode = config.reportMode === 'create';
-  return isCreateMode ? validateCreateReportConfig(config) : validateTypeConfig(config);
-};
-
-export { clean, validateConfig };
+export { clean, validateMode, validateAndInvokeCallback };

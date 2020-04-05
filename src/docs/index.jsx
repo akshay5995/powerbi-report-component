@@ -178,6 +178,7 @@ class Demo extends Component {
       reportMode,
       datasetId,
     } = this.state;
+
     const style = {
       report: {
         height: '100%',
@@ -204,7 +205,7 @@ class Demo extends Component {
     };
 
     const reportFlag = embedType === 'report';
-
+    const tileFlag = embedType === 'tile';
     const isCreateMode = reportMode === 'create';
 
     return (
@@ -343,6 +344,17 @@ class Demo extends Component {
                 />
               </span>
               )}
+              {tileFlag && (
+                <span>
+                <b className="fieldName">Dashboard ID</b>
+                <input
+                  name="dashboardId"
+                  onChange={this.handleChange}
+                  value={dashboardId}
+                  required
+                />
+              </span>               
+              )}
               {!isCreateMode && (<span>
                 <b className="fieldName">Embed Id</b>
                 <input
@@ -437,7 +449,7 @@ class Demo extends Component {
                 <div>Actions using <code>report</code> reference</div>
                 <button
                   className="interactionBtn"
-                  disabled={!flag}
+                  disabled={!flag || tileFlag}
                   onClick={() => {
                     if (this.report) {
                       this.report.fullscreen();
