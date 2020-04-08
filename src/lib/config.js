@@ -1,5 +1,5 @@
 import { models } from 'powerbi-client';
-import { clean } from "./utils";
+import { clean, isEmpty } from "./utils";
 import pbi from 'powerbi-client';
 
 const createConfig = props => {
@@ -16,7 +16,9 @@ const createConfig = props => {
         dashboardId,
         datasetId,
         reportMode,
+        theme,
       } = props;
+
       if(reportMode === 'create') {
         return clean({
           tokenType: models.TokenType[tokenType],
@@ -43,15 +45,26 @@ const createConfig = props => {
         },
         datasetId,
         reportMode,
+        theme: !isEmpty(theme)?{themeJson: theme}:null,
       });
     }
     return null;
   };
 
+  const validateCustomTheme = config => {
+    if(config.theme) {
+      err = pbi.models.validateCustomTheme(config.theme);
+      if(err) {
+        return []
+      }
+    }
+    return [];
+    };
+
   const validateTypeConfig = config => {
     switch (config.type) {
       case 'report':
-        return pbi.models.validateReportLoad(config);
+        return pbi.models.validateReportLoad(config) && validateCustomTheme(config);
       case 'dashboard':
         return pbi.models.validateDashboardLoad(config);
       case 'tile': 

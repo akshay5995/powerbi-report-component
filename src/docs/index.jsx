@@ -1,5 +1,3 @@
-/*  eslint-disable import/no-extraneous-dependencies */
-
 import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -10,6 +8,7 @@ import 'react-splitter-layout/lib/index.css';
 import './styles.css';
 import Report from '../lib';
 import { initializeState, embedTypes, defaultOptions } from './utils';
+import Popup from './Popup';
 
 class Demo extends Component {
   constructor(props) {
@@ -24,6 +23,9 @@ class Demo extends Component {
     this.onSelect = this.onSelect.bind(this);
     this.resetState = this.resetState.bind(this);
     this.saveReport = this.saveReport.bind(this);
+    this.showPopup = this.showPopup.bind(this);
+    this.hidePopup = this.hidePopup.bind(this);
+    this.resetTheme = this.resetTheme.bind(this);
   }
 
   getCode(view = true) {
@@ -38,6 +40,7 @@ class Demo extends Component {
       pageName,
       reportMode,
       datasetId,
+      theme
     } = this.state;
     const viewAccessToken =
       accessToken && `${accessToken.slice(0, 10)}...`;
@@ -71,6 +74,7 @@ class Demo extends Component {
     dashboardId="${dashboardId}"
     pageName="${pageName}"
     reportMode="${reportMode}" // "view" or "edit
+    theme="${JSON.stringify(theme)}"
     extraSettings={{
       filterPaneEnabled: ${this.state.filterPaneEnabled ===
         'filter-true'},
@@ -164,6 +168,31 @@ class Demo extends Component {
     }
   }
 
+  showPopup = () => {
+    this.setState({ show: true });
+  }
+  
+  async hidePopup(text) {
+    if(this.report) {
+    this.setState({ show: false });
+    try {
+      await this.report.applyTheme({themeJson: JSON.parse(text)});
+    } catch(err) {
+      console.log('error applying theme : '+JSON.stringify(err));
+    }
+    }
+  }
+
+  async resetTheme() {
+    if(this.report) {
+    try {
+      await this.report.resetTheme();
+    } catch(err) {
+      console.log('error resetting report theme : '+JSON.stringify(err));
+    }
+    }
+  }
+
   render() {
     const {
       embedType,
@@ -177,6 +206,8 @@ class Demo extends Component {
       flag,
       reportMode,
       datasetId,
+      theme,
+      show,
     } = this.state;
 
     const style = {
@@ -226,6 +257,7 @@ class Demo extends Component {
               style={style.report}
               reportMode={this.state.reportMode}
               datasetId={datasetId}
+              theme={theme || {}}
               onLoad={report => {
                 console.log('Report Loaded!');
                 this.report = report;
@@ -365,6 +397,17 @@ class Demo extends Component {
                 />
               </span>
               )}
+              <span>
+                <b className="fieldName">Custom Theme</b>
+                <textarea className="textarea"
+                  rows="5"
+                  cols="40"
+                  name="theme"
+                  onChange={this.handleChange}
+                  value={JSON.stringify(theme)}
+                  disabled={flag}
+              ></textarea>
+              </span>
               {!isCreateMode && reportFlag && (
                 <Fragment>
                   <span>
@@ -531,6 +574,20 @@ class Demo extends Component {
                 >
                   Save
                 </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={this.showPopup}
+                >
+                  Apply Theme
+                </button>
+                <button
+                  className="interactionBtn"
+                  disabled={!reportFlag || !flag}
+                  onClick={this.resetTheme}
+                >
+                  Reset Theme
+                </button>
               </span>
               )}
               <span className="runBtnHolder">
@@ -548,6 +605,7 @@ class Demo extends Component {
                 </button>
               </span>
             </div>
+            <Popup show={show} handleClose={this.hidePopup} handleText={this.handleText}/>
             <div className="code">
               <CopyToClipboard text={this.getCode(false)}>
                 <button className="copyBtn">Copy</button>
