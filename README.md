@@ -6,6 +6,8 @@
 
 It's a minimalistic React component for embedding a Microsoft PowerBI report, dashboard or tile into your React application.
 
+*Now the component has additional feature to create report in embedType = 'report' mode.*
+
 This repository is actively maintained by [Akshay Ram (akshay5995)](https://github.com/akshay5995) and [Satya J (satya-j)](https://github.com/satya-j).
 
 ## Installation
@@ -71,8 +73,9 @@ class MyComponent extends Component {
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
             pageName="" // set as current page of the report
-            reportMode="view" // open report in a particular mode "view" or "edit".
+            reportMode="view" // open report in a particular mode view/edit/create (create works only for embedType=report).
             dashboardId={dashboardId} // required when embedType is "tile"
+            datasetId={datasetId} // required for reportMode = "create"
             extraSettings={extraSettings}
             permissions="All" // View
             style={reportStyle}
@@ -81,6 +84,7 @@ class MyComponent extends Component {
             onSelectData={this.handleDataSelected}
             onPageChange={this.handlePageChange}
             onTileClicked={this.handleTileClicked}
+            onSave={this.handleReportSave} // works for edit and create
         />
     </div>
     );
@@ -213,6 +217,14 @@ Load
 ```javascript
   onLoad={(report) => {
     console.log('Report Loaded!');
+    this.report = report;
+    }
+  }
+```
+
+```javascript
+  onSave={(report) => {
+    console.log('Report Saved!');
     this.report = report;
     }
   }
