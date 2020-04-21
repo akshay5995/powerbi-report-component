@@ -31,8 +31,6 @@ class Embed extends PureComponent {
   }
 
   embed(config) {
-    console.log(config);
-    
     if (config.reportMode === 'create')
       this.component = powerbi.createReport(
         this.reportRef.current,
