@@ -1,6 +1,6 @@
 {
   "name": "powerbi-report-component",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "description": "It's a minimalistic react component to embed a Microsoft PowerBI report or dashboard into your react application.",
   "main": "lib/index.js",
   "scripts": {
