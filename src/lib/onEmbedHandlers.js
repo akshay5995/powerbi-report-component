@@ -7,11 +7,13 @@ const reportHandler = (report, reportMode, props) => {
         if(validateMode(reportMode) && reportMode !== "view") {
             report.switchMode(reportMode);
         }
-
         validateAndInvokeCallback(props.onLoad, report);
+        if(props.theme) report.applyTheme(props.theme);
       });
 
-      report.on('rendered', () => validateAndInvokeCallback(props.onRender, report));
+      report.on('rendered', () => {
+          validateAndInvokeCallback(props.onRender, report);
+        });
 
       report.on('error', event => validateAndInvokeCallback(props.onError, event.detail));
 

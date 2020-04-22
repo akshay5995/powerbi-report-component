@@ -31,10 +31,17 @@ const initializeState = type => ({
   flag: false,
   reportMode: defaultOptions[type].mode,
   datasetId: '',
+  theme: {},
+show: false
 });
+
+const isObject = obj => {
+  return (typeof obj === "object" && obj !== null) || typeof obj === "function";
+}
 
 export {
   embedTypes,
   defaultOptions,
-  initializeState
+  initializeState,
+  isObject,
 };
