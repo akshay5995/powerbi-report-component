@@ -15,7 +15,7 @@ const defaultOptions = {
 
 const embedTypes = Object.keys(defaultOptions);
 
-const initializeState = type => ({
+const initializeState = (type) => ({
   embedType: type,
   tokenType: 'Embed',
   accessToken: '',
@@ -33,8 +33,4 @@ const initializeState = type => ({
   datasetId: '',
 });
 
-export {
-  embedTypes,
-  defaultOptions,
-  initializeState
-};
+export { embedTypes, defaultOptions, initializeState };

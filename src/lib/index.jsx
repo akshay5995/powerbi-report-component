@@ -1,8 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Embed from './Embed';
-import { createConfig } from './config'
-import { reportHandler, dashboardHandler, tileHandler } from "./onEmbedHandlers";
+import { createConfig } from './config';
+import {
+  reportHandler,
+  dashboardHandler,
+  tileHandler,
+} from './onEmbedHandlers';
 
 class Report extends PureComponent {
   constructor(props) {
@@ -23,16 +27,20 @@ class Report extends PureComponent {
   }
 
   performOnEmbed(report, reportRef) {
-    const {
-      embedType,
-      reportMode
-    } = this.props;
+    const { embedType, reportMode } = this.props;
 
-    switch(embedType) {
-      case 'report': reportHandler(report, reportMode, this.props); break;
-      case 'dashboard': dashboardHandler(report, reportRef, this.props); break;
-      case 'tile': tileHandler(report, this.props); break;
-      default: break;
+    switch (embedType) {
+      case 'report':
+        reportHandler(report, reportMode, this.props);
+        break;
+      case 'dashboard':
+        dashboardHandler(report, reportRef, this.props);
+        break;
+      case 'tile':
+        tileHandler(report, this.props);
+        break;
+      default:
+        break;
     }
   }
 
