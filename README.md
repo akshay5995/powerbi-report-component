@@ -75,7 +75,7 @@ class MyComponent extends Component {
             pageName="" // set as current page of the report
             reportMode="view" // open report in a particular mode view/edit/create (create works only for embedType=report).
             dashboardId={dashboardId} // required when embedType is "tile"
-            datasetId={datasetId} // required for reportMode = "create"
+            datasetId={datasetId} // required for reportMode = "create" and optional for dynamic databinding in `report` on `view` mode
             extraSettings={extraSettings}
             permissions="All" // View
             style={reportStyle}

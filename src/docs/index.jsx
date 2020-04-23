@@ -44,7 +44,7 @@ class Demo extends Component {
 
     const isCreateMode = reportMode === 'create';
 
-    if(isCreateMode) {
+    if (isCreateMode) {
       return `<Report embedType="${embedType}"
       tokenType="${tokenType}"
       accessToken="${view ? viewAccessToken : accessToken}"
@@ -60,7 +60,7 @@ class Demo extends Component {
       }}
     />`;
     } else {
-    return `<Report embedType="${embedType}"
+      return `<Report embedType="${embedType}"
     tokenType="${tokenType}"
     accessToken="${view ? viewAccessToken : accessToken}"
     accessToken={accessToken}
@@ -70,10 +70,12 @@ class Demo extends Component {
     pageName="${pageName}"
     reportMode="${reportMode}" // "view" or "edit
     extraSettings={{
-      filterPaneEnabled: ${this.state.filterPaneEnabled ===
-        'filter-true'},
-      navContentPaneEnabled: ${this.state.navContentPaneEnabled ===
-        'nav-true'},
+      filterPaneEnabled: ${
+        this.state.filterPaneEnabled === 'filter-true'
+      },
+      navContentPaneEnabled: ${
+        this.state.navContentPaneEnabled === 'nav-true'
+      },
     }}
     permissions="${permissions}"
     style={{
@@ -104,7 +106,7 @@ class Demo extends Component {
       console.log('Error', data);
     }}
   />`;
-}
+    }
   }
 
   handleChange(event) {
@@ -113,7 +115,7 @@ class Demo extends Component {
     });
   }
 
-  onSelect = state => option => {
+  onSelect = (state) => (option) => {
     const { value } = option;
     this.resetState(() => this.setState({ [state]: value }));
   };
@@ -138,7 +140,7 @@ class Demo extends Component {
             'Visual header was successfully hidden for all the visuals in the report.'
           );
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     }
@@ -154,10 +156,10 @@ class Demo extends Component {
 
   async saveReport() {
     if (this.report) {
-      try{
+      try {
         await this.report.save();
       } catch (err) {
-        console.log("Error saving report", err);
+        console.log('Error saving report', err);
       }
     }
   }
@@ -188,8 +190,7 @@ class Demo extends Component {
       filterPaneEnabled: this.state.filterPaneEnabled === 'filter-true',
       navContentPaneEnabled:
         this.state.navContentPaneEnabled === 'nav-true',
-      hideErrors: false
-      
+      hideErrors: false,
     };
 
     const filter = {
@@ -210,67 +211,71 @@ class Demo extends Component {
       <div className="root">
         <SplitterLayout percentage secondaryInitialSize={70}>
           {this.state.flag ? (
-            !isCreateMode ?
-            <Report
-              embedType={embedType}
-              tokenType={tokenType}
-              accessToken={accessToken}
-              embedUrl={embedUrl}
-              embedId={embedId}
-              dashboardId={dashboardId}
-              extraSettings={extraSettings}
-              permissions={permissions}
-              pageName={pageName}
-              style={style.report}
-              reportMode={this.state.reportMode}
-              datasetId={datasetId}
-              onLoad={report => {
-                console.log('Report Loaded!');
-                this.report = report;
-              }}
-              onRender={report => {
-                console.log('Report Redered!');
-                this.report = report;
-              }}
-              onSelectData={data => {
-                window.alert(`You clicked chart: ${data.visual.name}`);
-              }}
-              onPageChange={data => {
-                console.log(
-                  `You changed page to: ${data.newPage.displayName}`
-                );
-              }}
-              onTileClicked={data => {
-                console.log('Data from tile', data);
-              }}
-              onError={data => {
-                console.log('Error', data);
-              }}
-            /> :
-            <Report 
-            embedType={embedType}
-            tokenType={tokenType}
-            accessToken={accessToken}
-            embedUrl={embedUrl}
-            style={style.report}
-            reportMode={this.state.reportMode}
-            datasetId={datasetId}
-            onLoad={report => {
-              console.log('Report Loaded!');
-              this.report = report;
-            }}
-            onRender={report => {
-              console.log('Report Redered!');
-              this.report = report;
-            }}
-            onSave={report => {
-              console.log('Report saved!');
-              this.report = report;
-            }}
-            onError={data => {
-              console.log('Error', data);
-            }}
-            />
+            !isCreateMode ? (
+              <Report
+                embedType={embedType}
+                tokenType={tokenType}
+                accessToken={accessToken}
+                embedUrl={embedUrl}
+                embedId={embedId}
+                dashboardId={dashboardId}
+                extraSettings={extraSettings}
+                permissions={permissions}
+                pageName={pageName}
+                style={style.report}
+                reportMode={this.state.reportMode}
+                datasetId={datasetId}
+                onLoad={(report) => {
+                  console.log('Report Loaded!');
+                  this.report = report;
+                }}
+                onRender={(report) => {
+                  console.log('Report Redered!');
+                  this.report = report;
+                }}
+                onSelectData={(data) => {
+                  window.alert(
+                    `You clicked chart: ${data.visual.name}`
+                  );
+                }}
+                onPageChange={(data) => {
+                  console.log(
+                    `You changed page to: ${data.newPage.displayName}`
+                  );
+                }}
+                onTileClicked={(data) => {
+                  console.log('Data from tile', data);
+                }}
+                onError={(data) => {
+                  console.log('Error', data);
+                }}
+              />
+            ) : (
+              <Report
+                embedType={embedType}
+                tokenType={tokenType}
+                accessToken={accessToken}
+                embedUrl={embedUrl}
+                style={style.report}
+                reportMode={this.state.reportMode}
+                datasetId={datasetId}
+                onLoad={(report) => {
+                  console.log('Report Loaded!');
+                  this.report = report;
+                }}
+                onRender={(report) => {
+                  console.log('Report Redered!');
+                  this.report = report;
+                }}
+                onSave={(report) => {
+                  console.log('Report saved!');
+                  this.report = report;
+                }}
+                onError={(data) => {
+                  console.log('Error', data);
+                }}
+              />
+            )
           ) : (
             <div className="placeholder">
               <h1>Report will be displayed in this section</h1>
@@ -298,7 +303,9 @@ class Demo extends Component {
                 />
               </span>
               <span>
-                <b className="fieldName">Mode (optional, default: "view")</b>
+                <b className="fieldName">
+                  Mode (optional, default: "view")
+                </b>
                 <Dropdown
                   options={defaultOptions[embedType].embedModes}
                   onChange={this.onSelect('reportMode')}
@@ -332,36 +339,41 @@ class Demo extends Component {
                   required
                 />
               </span>
-              {isCreateMode && (
-              <span>
-                <b className="fieldName">Dataset Id</b>
-                <input
-                  name="datasetId"
-                  onChange={this.handleChange}
-                  value={datasetId}
-                />
-              </span>
-              )}
               {tileFlag && (
                 <span>
-                <b className="fieldName">Dashboard ID</b>
-                <input
-                  name="dashboardId"
-                  onChange={this.handleChange}
-                  value={dashboardId}
-                  required
-                />
-              </span>               
+                  <b className="fieldName">Dashboard ID</b>
+                  <input
+                    name="dashboardId"
+                    onChange={this.handleChange}
+                    value={dashboardId}
+                    required
+                  />
+                </span>
               )}
-              {!isCreateMode && (<span>
-                <b className="fieldName">Embed Id</b>
-                <input
-                  name="embedId"
-                  onChange={this.handleChange}
-                  value={embedId}
-                  required
-                />
-              </span>
+              {!isCreateMode && (
+                <span>
+                  <b className="fieldName">Embed Id</b>
+                  <input
+                    name="embedId"
+                    onChange={this.handleChange}
+                    value={embedId}
+                    required
+                  />
+                </span>
+              )}
+              {reportFlag && (
+                <span>
+                  <b className="fieldName">
+                    Dataset Id
+                    {!isCreateMode &&
+                      ` (optional: view mode dynamic binding)`}
+                  </b>
+                  <input
+                    name="datasetId"
+                    onChange={this.handleChange}
+                    value={datasetId}
+                  />
+                </span>
               )}
               {!isCreateMode && reportFlag && (
                 <Fragment>
@@ -443,93 +455,97 @@ class Demo extends Component {
                 </Fragment>
               )}
               {!isCreateMode && (
-              <span className="interactions">
-                <div>Actions using <code>report</code> reference</div>
-                <button
-                  className="interactionBtn"
-                  disabled={!flag || tileFlag}
-                  onClick={() => {
-                    if (this.report) {
-                      this.report.fullscreen();
-                    }
-                  }}
-                >
-                  Fullscreen
-                </button>
-                <button
-                  className="interactionBtn"
-                  disabled={!reportFlag || !flag}
-                  onClick={() => {
-                    if (this.report) {
-                      this.report.switchMode('edit');
-                    }
-                  }}
-                >
-                  Edit Mode
-                </button>
-                <button
-                  className="interactionBtn"
-                  disabled={!reportFlag || !flag}
-                  onClick={() => {
-                    if (this.report) {
-                      this.report.switchMode('view');
-                    }
-                  }}
-                >
-                  View Mode
-                </button>
-                <button
-                  className="interactionBtn"
-                  disabled={!reportFlag || !flag}
-                  onClick={() => {
-                    if (this.report) {
-                      this.report.setFilters([filter]).catch(errors => {
-                        console.log(errors);
-                      });
-                    }
-                  }}
-                >
-                  Set Filter
-                </button>
-                <button
-                  className="interactionBtn"
-                  disabled={!reportFlag || !flag}
-                  onClick={() => {
-                    if (this.report) {
-                      this.report.removeFilters().catch(errors => {
-                        console.log(errors);
-                      });
-                    }
-                  }}
-                >
-                  Remove Filter
-                </button>
-                <button
-                  className="interactionBtn"
-                  disabled={!reportFlag || !flag}
-                  onClick={() => this.toggleAllVisualHeaders()}
-                >
-                  Toggle Visual Header
-                </button>
-                <button
-                  className="interactionBtn"
-                  disabled={!reportFlag || !flag}
-                  onClick={() => {
-                    if (this.report) {
-                      this.report.print();
-                    }
-                  }}
-                >
-                  Print
-                </button>
-                <button
-                  className="interactionBtn"
-                  disabled={!reportFlag || !flag}
-                  onClick={this.saveReport}
-                >
-                  Save
-                </button>
-              </span>
+                <span className="interactions">
+                  <div>
+                    Actions using <code>report</code> reference
+                  </div>
+                  <button
+                    className="interactionBtn"
+                    disabled={!flag || tileFlag}
+                    onClick={() => {
+                      if (this.report) {
+                        this.report.fullscreen();
+                      }
+                    }}
+                  >
+                    Fullscreen
+                  </button>
+                  <button
+                    className="interactionBtn"
+                    disabled={!reportFlag || !flag}
+                    onClick={() => {
+                      if (this.report) {
+                        this.report.switchMode('edit');
+                      }
+                    }}
+                  >
+                    Edit Mode
+                  </button>
+                  <button
+                    className="interactionBtn"
+                    disabled={!reportFlag || !flag}
+                    onClick={() => {
+                      if (this.report) {
+                        this.report.switchMode('view');
+                      }
+                    }}
+                  >
+                    View Mode
+                  </button>
+                  <button
+                    className="interactionBtn"
+                    disabled={!reportFlag || !flag}
+                    onClick={() => {
+                      if (this.report) {
+                        this.report
+                          .setFilters([filter])
+                          .catch((errors) => {
+                            console.log(errors);
+                          });
+                      }
+                    }}
+                  >
+                    Set Filter
+                  </button>
+                  <button
+                    className="interactionBtn"
+                    disabled={!reportFlag || !flag}
+                    onClick={() => {
+                      if (this.report) {
+                        this.report.removeFilters().catch((errors) => {
+                          console.log(errors);
+                        });
+                      }
+                    }}
+                  >
+                    Remove Filter
+                  </button>
+                  <button
+                    className="interactionBtn"
+                    disabled={!reportFlag || !flag}
+                    onClick={() => this.toggleAllVisualHeaders()}
+                  >
+                    Toggle Visual Header
+                  </button>
+                  <button
+                    className="interactionBtn"
+                    disabled={!reportFlag || !flag}
+                    onClick={() => {
+                      if (this.report) {
+                        this.report.print();
+                      }
+                    }}
+                  >
+                    Print
+                  </button>
+                  <button
+                    className="interactionBtn"
+                    disabled={!reportFlag || !flag || !isCreateMode}
+                    onClick={this.saveReport}
+                  >
+                    Save
+                  </button>
+                </span>
               )}
               <span className="runBtnHolder">
                 <button

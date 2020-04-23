@@ -1,5 +1,5 @@
 import { models } from 'powerbi-client';
-import { clean } from "./utils";
+import { clean, isEmptyObject } from "./utils";
 import pbi from 'powerbi-client';
 
 const createConfig = props => {
@@ -17,7 +17,7 @@ const createConfig = props => {
         datasetId,
         reportMode,
       } = props;
-      if(reportMode === 'create') {
+      if(embedType === 'report' && reportMode === 'create') {
         return clean({
           tokenType: models.TokenType[tokenType],
           accessToken,
@@ -26,6 +26,20 @@ const createConfig = props => {
           reportMode,
         });
       }
+
+      const cleanSettings = clean({
+        filterPaneEnabled: true,
+        navContentPaneEnabled: true,
+        ...extraSettings,
+      });
+
+      const cleanDataSetBinding = clean({
+        datasetId: datasetId
+      });
+
+      const settings = isEmptyObject(cleanSettings) ? {} : { settings: cleanSettings };
+
+      const datasetBinding = isEmptyObject(cleanDataSetBinding) ? {} : { datasetBinding: cleanDataSetBinding };
 
       return clean({
         type: embedType,
@@ -36,13 +50,9 @@ const createConfig = props => {
         pageName: pageName,
         dashboardId: dashboardId,
         permissions: models.Permissions[permissions],
-        settings: {
-          filterPaneEnabled: true,
-          navContentPaneEnabled: true,
-          ...extraSettings,
-        },
-        datasetId,
         reportMode,
+        ...settings,
+        ...datasetBinding
       });
     }
     return null;

@@ -1,7 +1,7 @@
 // Removes null, undefined and empty string from given object
-const clean = obj => {
+const clean = (obj) => {
   const propNames = Object.getOwnPropertyNames(obj);
-  propNames.forEach(element => {
+  propNames.forEach((element) => {
     if (
       obj[element] === null ||
       obj[element] === undefined ||
@@ -13,18 +13,26 @@ const clean = obj => {
   return obj;
 };
 
-const modes = ["view", "edit", "create"];
-  
-const validateMode = (mode) => modes.findIndex(m => mode === m) > -1;
+const modes = ['view', 'edit', 'create'];
+
+const validateMode = (mode) => modes.findIndex((m) => mode === m) > -1;
 
 const validateAndInvokeCallback = (callback, data) => {
-  if(callback) { 
-    if(typeof(callback) == "function") {
-    callback(data)
+  if (callback) {
+    if (typeof callback == 'function') {
+      callback(data);
     } else {
-      throw "callback passed is not a function"
+      throw 'callback passed is not a function';
     }
   }
-}
+};
 
-export { clean, validateMode, validateAndInvokeCallback };
+const isEmptyObject = (obj) =>
+  Object.keys(obj).length === 0 && obj.constructor === Object;
+
+export {
+  clean,
+  validateMode,
+  validateAndInvokeCallback,
+  isEmptyObject,
+};
