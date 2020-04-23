@@ -1,10 +1,10 @@
-import { validateMode, validateAndInvokeCallback } from './utils';
+import { validateAndInvokeCallback } from './utils';
 
 const reportHandler = (report, reportMode, props) => {
   const isCreateMode = reportMode === 'create';
 
   report.on('loaded', () => {
-    if (validateMode(reportMode) && reportMode !== 'view') {
+    if (reportMode === 'edit') {
       report.switchMode(reportMode);
     }
 

@@ -230,7 +230,7 @@ class Demo extends Component {
                   this.report = report;
                 }}
                 onRender={(report) => {
-                  console.log('Report Redered!');
+                  console.log('Report Rendered!');
                   this.report = report;
                 }}
                 onSelectData={(data) => {
