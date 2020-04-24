@@ -8,7 +8,7 @@ It's a minimalistic React component for embedding a Microsoft PowerBI report, da
 
 *Now the component has additional feature to create report in embedType = 'report' mode.*
 
-This repository is actively maintained by [Akshay Ram (akshay5995)](https://github.com/akshay5995) and [Satya J (satya-j)](https://github.com/satya-j).
+This repository is actively maintained by [Akshay Ram (akshay5995)](https://github.com/akshay5995) and [Satya J (satya64)](https://github.com/satya64).
 
 ## Installation
 
@@ -223,9 +223,8 @@ Load
 ```
 
 ```javascript
-  onSave={(report) => {
-    console.log('Report Saved!');
-    this.report = report;
+  onSave={(data) => {
+    console.log('Report Saved! Event data: '+data);
     }
   }
 ```
