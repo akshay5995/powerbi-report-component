@@ -17,10 +17,13 @@ const modes = ['view', 'edit', 'create'];
 
 const validateMode = (mode) => modes.findIndex((m) => mode === m) > -1;
 
-const validateAndInvokeCallback = (callback, data) => {
+const validateAndInvokeCallback = (callback, data, eventDetail) => {
   if (callback) {
     if (typeof callback == 'function') {
-      callback(data);
+      if(eventDetail)
+        callback(data, eventDetail);
+      else
+        callback(data);  
     } else {
       throw 'callback passed is not a function';
     }

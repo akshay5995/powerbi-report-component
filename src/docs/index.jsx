@@ -267,7 +267,7 @@ class Demo extends Component {
                   console.log('Report Redered!');
                   this.report = report;
                 }}
-                onSave={(report) => {
+                onSave={(report, eventDetail) => {
                   console.log('Report saved!');
                   this.report = report;
                 }}
