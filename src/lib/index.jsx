@@ -7,6 +7,7 @@ import {
   dashboardHandler,
   tileHandler,
 } from './onEmbedHandlers';
+import { debounce } from './utils';
 
 class Report extends PureComponent {
   constructor(props) {
@@ -31,13 +32,13 @@ class Report extends PureComponent {
 
     switch (embedType) {
       case 'report':
-        reportHandler(report, reportMode, this.props);
+        debounce(reportHandler(report, reportMode, this.props), 250);
         break;
       case 'dashboard':
-        dashboardHandler(report, reportRef, this.props);
+        debounce(dashboardHandler(report, reportRef, this.props), 250);
         break;
       case 'tile':
-        tileHandler(report, this.props);
+        debounce(tileHandler(report, this.props), 250);
         break;
       default:
         break;

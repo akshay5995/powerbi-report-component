@@ -1,7 +1,26 @@
 import { validateAndInvokeCallback } from './utils';
 
+const REPORT_EVENTS = [
+  'loaded',
+  'rendered',
+  'error',
+  'saved',
+  'dataSelected',
+  'pageChanged',
+  'buttonClicked',
+  'filtersApplied',
+  'commandTriggered',
+];
+const DASHBOARD_EVENTS = ['tileClicked'];
+const TILE_EVENTS = ['tileLoaded', 'tileClicked'];
+
+const clearAllHandlersAfterRerender = (report, events) => {
+  events.forEach((event) => report.off(event));
+};
+
 const reportHandler = (report, reportMode, props) => {
   const isCreateMode = reportMode === 'create';
+  clearAllHandlersAfterRerender(report, REPORT_EVENTS);
 
   report.on('loaded', () => {
     if (reportMode === 'edit') {
@@ -10,10 +29,6 @@ const reportHandler = (report, reportMode, props) => {
 
     validateAndInvokeCallback(props.onLoad, report);
   });
-
-  report.on('rendered', () =>
-    validateAndInvokeCallback(props.onRender, report)
-  );
 
   report.on('error', (event) =>
     validateAndInvokeCallback(props.onError, event.detail)
@@ -24,6 +39,10 @@ const reportHandler = (report, reportMode, props) => {
   );
 
   if (!isCreateMode) {
+    report.on('rendered', () =>
+      validateAndInvokeCallback(props.onRender, report)
+    );
+
     report.on('dataSelected', (event) =>
       validateAndInvokeCallback(props.onSelectData, event.detail)
     );
@@ -47,6 +66,8 @@ const reportHandler = (report, reportMode, props) => {
 };
 
 const dashboardHandler = (report, reportRef, props) => {
+  clearAllHandlersAfterRerender(report, DASHBOARD_EVENTS);
+
   if (props.onLoad) props.onLoad(report, powerbi.get(reportRef));
 
   report.on('tileClicked', (event) =>
@@ -55,6 +76,8 @@ const dashboardHandler = (report, reportRef, props) => {
 };
 
 const tileHandler = (report, props) => {
+  clearAllHandlersAfterRerender(report, TILE_EVENTS);
+
   report.on('tileLoaded', (event) =>
     validateAndInvokeCallback(props.onLoad, event.detail)
   );
