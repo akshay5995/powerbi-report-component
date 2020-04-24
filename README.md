@@ -80,7 +80,7 @@ class MyComponent extends Component {
             permissions="All" // View
             style={reportStyle}
             onLoad={this.handleReportLoad}
-            onRender={this.handleReportRender}
+            onRender={this.handleReportRender} // not allowed in `create`
             onSelectData={this.handleDataSelected}
             onPageChange={this.handlePageChange}
             onTileClicked={this.handleTileClicked}
