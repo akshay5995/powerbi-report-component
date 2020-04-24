@@ -19,8 +19,8 @@ const reportHandler = (report, reportMode, props) => {
     validateAndInvokeCallback(props.onError, event.detail)
   );
 
-  report.on('saved', () =>
-    validateAndInvokeCallback(props.onSave, report)
+  report.on('saved', (event) =>
+    validateAndInvokeCallback(props.onSave, event.detail)
   );
 
   if (!isCreateMode) {

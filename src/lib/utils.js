@@ -20,7 +20,7 @@ const validateMode = (mode) => modes.findIndex((m) => mode === m) > -1;
 const validateAndInvokeCallback = (callback, data) => {
   if (callback) {
     if (typeof callback == 'function') {
-      callback(data);
+      callback(data);  
     } else {
       throw 'callback passed is not a function';
     }
