@@ -25,7 +25,7 @@ class Embed extends PureComponent {
     if (!errors) {
       return this.embed(this.state);
     } else if (this.component !== null) {
-      this.reset();
+      return this.component.hasOwnProperty('reset') ? this.component.reset() : null;
     }
     return null;
   }
