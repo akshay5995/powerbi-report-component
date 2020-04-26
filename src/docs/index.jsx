@@ -96,7 +96,6 @@ class Demo extends Component {
       case 'dashboard':
         return (
           <Dashboard
-            embedType={embedType}
             tokenType={tokenType}
             accessToken={accessToken}
             embedUrl={embedUrl}
@@ -115,7 +114,6 @@ class Demo extends Component {
       case 'report':
         return isCreateMode ? (
           <Report
-            embedType={embedType}
             tokenType={tokenType}
             accessToken={accessToken}
             embedUrl={embedUrl}
@@ -139,7 +137,6 @@ class Demo extends Component {
           />
         ) : (
           <Report
-            embedType={embedType}
             tokenType={tokenType}
             accessToken={accessToken}
             embedUrl={embedUrl}

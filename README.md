@@ -69,14 +69,12 @@ class MyComponent extends Component {
     return (
     <div className="root">
         <Report
-            embedType="report" // "dashboard"
             tokenType="Embed" // "Aad"
             accessToken="" // accessToken goes here
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
             pageName="" // set as current page of the report
-            reportMode="view" // open report in a particular mode view/edit/create (create works only for embedType=report).
-            dashboardId={dashboardId} // required when embedType is "tile"
+            reportMode="view" // open report in a particular mode view/edit/create
             datasetId={datasetId} // required for reportMode = "create" and optional for dynamic databinding in `report` on `view` mode
             extraSettings={extraSettings}
             permissions="All" // View
@@ -102,13 +100,12 @@ import { Dashboard } from 'powerbi-report-component';
 
 // inside render
 <Dashboard
-  embedType={embedType}
   tokenType={tokenType}
   accessToken={accessToken}
   embedUrl={embedUrl}
   embedId={embedId}
   style={style.report}
-  pageView={pageView}  // 'fitToWidth' (default) , 'oneColumn', 'actualSize' 
+  pageView={pageView} // 'fitToWidth' (default) , 'oneColumn', 'actualSize'
   onLoad={(dashboard) => {
     console.log('Dashboard Loaded!');
     this.dashboard = dashboard; // get the dashboard object from callback and store it.(optional)

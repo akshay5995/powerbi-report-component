@@ -33,7 +33,6 @@ const Report = (props) => {
 };
 
 Report.propTypes = {
-  embedType: PropTypes.string.isRequired,
   tokenType: PropTypes.string.isRequired,
   accessToken: PropTypes.string.isRequired,
   embedUrl: PropTypes.string.isRequired,
