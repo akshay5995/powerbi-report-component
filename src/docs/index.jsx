@@ -260,16 +260,18 @@ class Demo extends Component {
                   value={embedType}
                 />
               </span>
-              <span>
-                <b className="fieldName">
-                  Mode (optional, default: "view")
-                </b>
-                <Dropdown
-                  options={defaultOptions[embedType].embedModes}
-                  onChange={this.onSelect('reportMode')}
-                  value={reportMode}
-                />
-              </span>
+              {reportFlag && (
+                <span>
+                  <b className="fieldName">
+                    Mode (optional, default: "view")
+                  </b>
+                  <Dropdown
+                    options={defaultOptions[embedType].embedModes}
+                    onChange={this.onSelect('reportMode')}
+                    value={reportMode}
+                  />
+                </span>
+              )}
               <span>
                 <b className="fieldName">Token Type</b>
                 <input
