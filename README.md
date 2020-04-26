@@ -102,7 +102,7 @@ import { Dashboard } from 'powerbi-report-component';
   accessToken={accessToken}
   embedUrl={embedUrl}
   embedId={embedId}
-  style={style}   // style object for dashboard component
+  style={style} // style object for dashboard component
   pageView={pageView} // 'fitToWidth' (default) , 'oneColumn', 'actualSize'
   onLoad={(dashboard) => {
     console.log('Dashboard Loaded!');
@@ -111,7 +111,7 @@ import { Dashboard } from 'powerbi-report-component';
   onTileClicked={(data) => {
     console.log('Data from tile', data);
   }}
-/>;
+/>
 ```
 
 ## Usuage for Tile
@@ -126,14 +126,14 @@ import { Tile } from 'powerbi-report-component';
   embedUrl={embedUrl}
   embedId={embedId}
   dashboardId={dashboardId}
-  style={style}   // style tile for report component
+  style={style} // style tile for report component
   onClick={(data) => {
     console.log('Data from tile', data);
   }}
   onLoad={(data) => {
     console.log('Tile loaded', data);
   }}
-/>;
+/>
 ```
 
 ## Report features and props you can pass into the component
