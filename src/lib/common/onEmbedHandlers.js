@@ -1,25 +1,18 @@
 import { validateAndInvokeCallback } from './utils';
+import {
+  DASHBOARD_EVENTS,
+  REPORT_EVENTS,
+  TILE_EVENTS,
+} from './constants';
 
-const REPORT_EVENTS = [
-  'loaded',
-  'rendered',
-  'error',
-  'saved',
-  'dataSelected',
-  'pageChanged',
-  'buttonClicked',
-  'filtersApplied',
-  'commandTriggered',
-];
-const DASHBOARD_EVENTS = ['tileClicked'];
-const TILE_EVENTS = ['tileLoaded', 'tileClicked'];
-
-const clearAllHandlersAfterRerender = (report, events) => {
-  events.forEach((event) => report.off(event));
+const clearAllHandlersAfterRerender = (embedInstance, events) => {
+  events.forEach((event) => embedInstance.off(event));
 };
 
-const reportHandler = (report, reportMode, props) => {
+const reportHandler = (report, props) => {
+  const { reportMode } = props;
   const isCreateMode = reportMode === 'create';
+
   clearAllHandlersAfterRerender(report, REPORT_EVENTS);
 
   report.on('loaded', () => {
@@ -65,25 +58,25 @@ const reportHandler = (report, reportMode, props) => {
   }
 };
 
-const dashboardHandler = (report, reportRef, props) => {
-  clearAllHandlersAfterRerender(report, DASHBOARD_EVENTS);
+const dashboardHandler = (dashboard, dashboardRef, props) => {
+  clearAllHandlersAfterRerender(dashboard, DASHBOARD_EVENTS);
 
-  if (props.onLoad) props.onLoad(report, powerbi.get(reportRef));
+  if (props.onLoad) props.onLoad(dashboard, powerbi.get(dashboardRef));
 
-  report.on('tileClicked', (event) =>
+  dashboard.on('tileClicked', (event) =>
     validateAndInvokeCallback(props.onTileClicked, event.detail)
   );
 };
 
-const tileHandler = (report, props) => {
-  clearAllHandlersAfterRerender(report, TILE_EVENTS);
+const tileHandler = (tile, props) => {
+  clearAllHandlersAfterRerender(tile, TILE_EVENTS);
 
-  report.on('tileLoaded', (event) =>
+  tile.on('tileLoaded', (event) =>
     validateAndInvokeCallback(props.onLoad, event.detail)
   );
 
-  report.on('tileClicked', (event) =>
-    validateAndInvokeCallback(props.onTileClicked, event.detail)
+  tile.on('tileClicked', (event) =>
+    validateAndInvokeCallback(props.onClick, event.detail)
   );
 };
 

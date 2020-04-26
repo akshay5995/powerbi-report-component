@@ -1,68 +1,40 @@
-import React, { PureComponent } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { validateConfig } from './config';
+import { validateConfig } from './common/config';
 
 // powerbi object is global
-class Embed extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.component = null;
-    this.reportRef = React.createRef();
-    this.updateState = this.updateState.bind(this);
-  }
+const Embed = ({ config, performOnEmbed, style }) => {
+  const { id } = config;
+  const reportEl = useRef(null);
 
-  componentDidMount() {
-    this.updateState(this.props.config);
-  }
+  const embed = useCallback(
+    (config) => {
+      let embedInstance;
+      if (config.reportMode === 'create')
+        embedInstance = powerbi.createReport(reportEl.current, config);
+      else {
+        embedInstance = powerbi.embed(reportEl.current, config);
+      }
+      if (performOnEmbed) {
+        performOnEmbed(embedInstance, reportEl.current);
+      }
+    },
+    [config]
+  );
 
-  static getDerivedStateFromProps(props, state) {
-    return { ...props.config };
-  }
-
-  componentDidUpdate() {
-    const errors = validateConfig(this.state);
+  useEffect(() => {
+    const errors = validateConfig(config);
     if (!errors) {
-      return this.embed(this.state);
-    } else if (this.component !== null) {
-      this.reset();
+      embed({ ...config });
+    } else {
+      throw new Error('invalid configuration passed');
     }
-    return null;
-  }
+  }, [config]);
 
-  embed(config) {
-    if (config.reportMode === 'create')
-      this.component = powerbi.createReport(
-        this.reportRef.current,
-        config
-      );
-    else {
-      this.component = powerbi.embed(this.reportRef.current, config);
-    }
-    if (this.props.performOnEmbed) {
-      this.props.performOnEmbed(this.component, this.reportRef.current);
-    }
-    return this.component;
-  }
-
-  updateState(config) {
-    const nextState = Object.assign({}, this.state, config);
-    this.setState(nextState);
-  }
-
-  render() {
-    const { id } = this.state;
-
-    return (
-      <div
-        className="report"
-        style={this.props.style}
-        ref={this.reportRef}
-        id={id}
-      />
-    );
-  }
-}
+  return (
+    <div className="report" style={style} ref={reportEl} id={id} />
+  );
+};
 
 Embed.propTypes = {
   config: PropTypes.object.isRequired,

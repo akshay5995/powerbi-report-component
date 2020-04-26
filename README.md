@@ -6,7 +6,7 @@
 
 It's a minimalistic React component for embedding a Microsoft PowerBI report, dashboard or tile into your React application.
 
-*Now the component has additional feature to create report in embedType = 'report' mode.*
+_Now the component has additional feature to create report in embedType = 'report' mode._
 
 This repository is actively maintained by [Akshay Ram (akshay5995)](https://github.com/akshay5995) and [Satya J (satya64)](https://github.com/satya64).
 
@@ -14,11 +14,11 @@ This repository is actively maintained by [Akshay Ram (akshay5995)](https://gith
 
 `npm i powerbi-report-component`
 
-## Usuage
+## Usuage for Report
 
 ```javascript
 import React, {Component} from 'react';
-import Report from 'powerbi-report-component';
+import { Report } from 'powerbi-report-component';
 
 class MyComponent extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ class MyComponent extends Component {
     // - scripts and data received from server, visuals are rendered on the browser
     // - flickering Power BI logo stops appearing but report is not fully ready to be consumed
 
-    this.report = report; // get the object from callback and store it.(optional)
+    this.report = report; // get the report object from callback and store it.(optional)
   }
 
   handleReportRender = (report) => {
@@ -43,7 +43,7 @@ class MyComponent extends Component {
     // - visuals finish rendering
     // - report is fully visible and ready for consumption
 
-    this.report = report; // get the object from callback and store it.(optional)
+    this.report = report; // get the report object from callback and store it.(optional)
   }
 
   handlePageChange = (data) => {
@@ -61,7 +61,7 @@ class MyComponent extends Component {
     const extraSettings = {
             filterPaneEnabled: false, //true
             navContentPaneEnabled: false, //true
-            hideErrors: false // Use this *only* when you want to overide error experience i.e, use onError 
+            hideErrors: false // Use this *only* when you want to overide error experience i.e, use onError
             // ... more custom settings
     };
     return (
@@ -93,9 +93,53 @@ class MyComponent extends Component {
 
 ```
 
-> this.report can be used to perform operations like 'Fullscreen' or 'Print the report'
+## Usuage for Dashboard
 
-### To use the report object returned by onLoad/onRender
+```javascript
+import { Dashboard } from 'powerbi-report-component';
+
+// inside render
+<Dashboard
+  embedType={embedType}
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  style={style.report}
+  pageView={pageView}  // 'fitToWidth' (default) , 'oneColumn', 'actualSize' 
+  onLoad={(dashboard) => {
+    console.log('Dashboard Loaded!');
+    this.dashboard = dashboard; // get the dashboard object from callback and store it.(optional)
+  }}
+  onTileClicked={(data) => {
+    console.log('Data from tile', data);
+  }}
+/>;
+```
+
+## Usuage for Tile
+
+```javascript
+import { Tile } from 'powerbi-report-component';
+
+// inside render
+<Tile
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  dashboardId={dashboardId}
+  style={style.report}
+  onClick={(data) => {
+    console.log('Data from tile', data);
+  }}
+  onLoad={(data) => {
+    console.log('Tile loaded', data);
+  }}
+/>;
+```
+
+## Report features and props you can pass into the component
 
 Inside your compoent where you're using { Report } component.
 
@@ -121,7 +165,6 @@ _Callback passed to the onLoad or onRender prop_
   handleReportRender = (report) => {
     this.report = report; // get the report object from callback and store it.
   }
-
   ...
 ```
 
@@ -165,8 +208,6 @@ For Report Level Filters:
         values: ["Lindseys"]
       };
   */
-
-
   ...
 
   setFilter = (filter) => this.report.setFilters([filter]).catch(function (errors) {
@@ -188,23 +229,7 @@ For Report Level Filters:
 
 ```
 
-## Dashboard events: (When embedType === "dashboard")
-
-```javascript
-handleTileClicked = (data) => {
-    console.log('Data from tile', data);
-}
-
-```
-
-### Features
-
-Currently supported features:
-
-1. Custom styling by passing style to your embedded report component.
-2. The component also lets you pass callbacks to trigger on events like:
-
-Page Change
+Report Page Change
 
 ```javascript
   onPageChange={(data) =>
@@ -212,7 +237,7 @@ Page Change
   }
 ```
 
-Load
+Report Load
 
 ```javascript
   onLoad={(report) => {
@@ -229,7 +254,7 @@ Load
   }
 ```
 
-Render
+Report Render
 
 ```javascript
   onRender={(report) => {
@@ -239,7 +264,7 @@ Render
   }
 ```
 
-Button Clicked
+Report Button Clicked
 
 ```javascript
   onButtonClicked={(data) => {
@@ -248,7 +273,7 @@ Button Clicked
   }
 ```
 
-Filters Applied (In documentation, but not yet supported)
+Report Filters Applied (In documentation, but not yet supported)
 
 ```javascript
   onFiltersApplied={(filters) => {
@@ -257,7 +282,7 @@ Filters Applied (In documentation, but not yet supported)
   }
 ```
 
-Command Triggered
+Report Command Triggered
 
 ```javascript
   onCommandTriggered={(extensionCommand) => {
@@ -266,7 +291,7 @@ Command Triggered
   }
 ```
 
-Data Element Clicked
+Report Data Element Clicked
 
 ```javascript
   onSelectData={(data) =>
@@ -274,37 +299,37 @@ Data Element Clicked
   }
 ```
 
-Handle errors gracefully
+Report Handle Errors
 
 ```javascript
-  onError={(data) => 
+  onError={(data) =>
      console.log(`Error: ${data}`);
   }
 ```
 
-3. Use ‘report’ object returned to parent component for:
+Use ‘report’ object returned to parent component for:
 
-# Change Report Mode to View or Edit:
-
-```javascript
-  //mode can be "view" or "edit"
-
-  changeMode = (mode) => this.report.switchMode(mode);
-```
-
-# Fullscreen
+1. Change Report Mode to View or Edit:
 
 ```javascript
-  setFullscreen = () => this.report.fullscreen();
+//mode can be "view" or "edit"
+
+changeMode = (mode) => this.report.switchMode(mode);
 ```
 
-# Print Report
+2. Fullscreen
 
 ```javascript
-  printReport = () => this.report.print();
+setFullscreen = () => this.report.fullscreen();
 ```
 
-# Set Filters
+3. Print Report
+
+```javascript
+printReport = () => this.report.print();
+```
+
+4. Set Filters
 
 ```javascript
     //example filter from microsoft's demo page
@@ -337,28 +362,31 @@ Handle errors gracefully
 
 ```
 
-# Get Filters
+5. Get Filters
 
 ```javascript
-  getFilter = () => this.report.getFilters().then(function (filters) {
-        console.log(filters);
-    }).catch(function (errors) {
-        console.log(errors);
-    });
-
-```
-
-# Remove Filters
-
-```javascript
-  removeFilters = () => this.report.removeFilters()
+getFilter = () =>
+  this.report
+    .getFilters()
+    .then(function (filters) {
+      console.log(filters);
+    })
     .catch(function (errors) {
-        console.log(errors);
+      console.log(errors);
     });
-
 ```
 
-# Save edited report when in "edit" mode 
+6. Remove Filters
+
+```javascript
+removeFilters = () =>
+  this.report.removeFilters().catch(function (errors) {
+    console.log(errors);
+  });
+```
+
+7. Save edited report when in "edit" mode
+
 (note: you need to have enough permissions to save the report)
 
 ```javascript
@@ -374,31 +402,76 @@ Handle errors gracefully
 
 ```
 
-# Show / Hide all visual headers:
+8. Show / Hide all visual headers:
 
 ```javascript
-toggleAllVisualHeaders = (bool) =>
-{
+toggleAllVisualHeaders = (bool) => {
   const newSettings = {
     visualSettings: {
       visualHeaders: [
         {
           settings: {
-            visible: bool,  // boolean variable
-          }
-        }
-      ]
-    }
-  }
-  this.report.updateSettings(newSettings)
+            visible: bool, // boolean variable
+          },
+        },
+      ],
+    },
+  };
+  this.report
+    .updateSettings(newSettings)
     .then(function () {
-      console.log("Visual header toggle successful.");
+      console.log('Visual header toggle successful.');
     })
     .catch(function (errors) {
       console.log(errors);
     });
-}
+};
+```
 
+## Dashboard features and props you can pass into the component
+
+Dashboard Load
+
+```javascript
+  onLoad={(dashboard) => {
+    console.log('Report Loaded!');
+    this.dashboard = dashboard;
+    }
+  }
+```
+
+Dashboard Tile Click
+
+```javascript
+onTileClicked = {(data) => {
+  console.log('Data from tile', data);
+}}
+```
+
+Use dashboard object returned to parent component for:
+
+1. Fullscreen
+
+```javascript
+setFullscreen = () => this.dashboard.fullscreen();
+```
+
+## Tile features and props you can pass into the component
+
+Tile Load
+
+```javascript
+  onLoad={(data) => {
+    console.log('Data from tile', data);
+  }}
+```
+
+Tile Click
+
+```javascript
+onClick = {(data) => {
+    console.log('Data from tile', data);
+}}
 ```
 
 For playgroud visit:

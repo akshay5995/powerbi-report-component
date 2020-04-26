@@ -1,12 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { render } from 'react-dom';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import SplitterLayout from 'react-splitter-layout';
 import 'react-splitter-layout/lib/index.css';
 import './styles.css';
-import Report from '../lib';
+import { Report, Dashboard, Tile } from '../lib';
 import { initializeState, embedTypes, defaultOptions } from './utils';
 
 class Demo extends Component {
@@ -15,98 +14,13 @@ class Demo extends Component {
     this.report = null;
     this.state = initializeState('report');
     this.handleChange = this.handleChange.bind(this);
-    this.getCode = this.getCode.bind(this);
     this.toggleAllVisualHeaders = this.toggleAllVisualHeaders.bind(
       this
     );
     this.onSelect = this.onSelect.bind(this);
     this.resetState = this.resetState.bind(this);
     this.saveReport = this.saveReport.bind(this);
-  }
-
-  getCode(view = true) {
-    const {
-      embedType,
-      tokenType,
-      accessToken,
-      embedUrl,
-      embedId,
-      permissions,
-      dashboardId,
-      pageName,
-      reportMode,
-      datasetId,
-    } = this.state;
-    const viewAccessToken =
-      accessToken && `${accessToken.slice(0, 10)}...`;
-
-    const viewEmbedUrl = embedUrl && `${embedUrl.slice(0, 10)}...`;
-
-    const isCreateMode = reportMode === 'create';
-
-    if (isCreateMode) {
-      return `<Report embedType="${embedType}"
-      tokenType="${tokenType}"
-      accessToken="${view ? viewAccessToken : accessToken}"
-      accessToken={accessToken}
-      embedUrl="${view ? viewEmbedUrl : embedUrl}"
-      reportMode="${reportMode}"
-      datasetId="${datasetId}"
-      style={{
-        height: '100%',
-        border: '0',
-        padding: '20px',
-        background: '#eee'
-      }}
-    />`;
-    } else {
-      return `<Report embedType="${embedType}"
-    tokenType="${tokenType}"
-    accessToken="${view ? viewAccessToken : accessToken}"
-    accessToken={accessToken}
-    embedUrl="${view ? viewEmbedUrl : embedUrl}"
-    embedId="${embedId}"
-    dashboardId="${dashboardId}"
-    pageName="${pageName}"
-    reportMode="${reportMode}" // "view" or "edit
-    extraSettings={{
-      filterPaneEnabled: ${
-        this.state.filterPaneEnabled === 'filter-true'
-      },
-      navContentPaneEnabled: ${
-        this.state.navContentPaneEnabled === 'nav-true'
-      },
-    }}
-    permissions="${permissions}"
-    style={{
-      height: '100%',
-      border: '0',
-      padding: '20px',
-      background: '#eee'
-    }}
-    onLoad={(report) => {
-      /*
-      you can set filters onLoad using:
-      this.report.setFilters([filter]).catch((errors) => {
-        console.log(errors);
-      });*/
-      console.log('Report Loaded!');
-      //this.report = report (Read docs to know how to use report object that is returned)
-    }}
-    onSelectData={(data) => { 
-      window.alert('You clicked chart:' + data.visual.title); 
-    }}
-    onPageChange={(data) => { 
-      console.log('You changed page to:' + data.newPage.displayName); 
-    }}
-    onTileClicked={data => {
-      console.log('Data from tile', data);
-    }}
-    onError={data => {
-      console.log('Error', data);
-    }}
-  />`;
-    }
+    this.renderByEmbedType = this.renderByEmbedType.bind(this);
   }
 
   handleChange(event) {
@@ -164,6 +78,115 @@ class Demo extends Component {
     }
   }
 
+  renderByEmbedType(isCreateMode, style, extraSettings) {
+    const {
+      embedType,
+      tokenType,
+      accessToken,
+      embedUrl,
+      embedId,
+      permissions,
+      pageName,
+      dashboardId,
+      reportMode,
+      datasetId,
+      pageView,
+    } = this.state;
+    switch (embedType) {
+      case 'dashboard':
+        return (
+          <Dashboard
+            embedType={embedType}
+            tokenType={tokenType}
+            accessToken={accessToken}
+            embedUrl={embedUrl}
+            embedId={embedId}
+            style={style.report}
+            pageView={pageView}
+            onLoad={(dashboard) => {
+              console.log('Dashboard Loaded!');
+              this.report = dashboard;
+            }}
+            onTileClicked={(data) => {
+              console.log('Data from tile', data);
+            }}
+          />
+        );
+      case 'report':
+        return isCreateMode ? (
+          <Report
+            embedType={embedType}
+            tokenType={tokenType}
+            accessToken={accessToken}
+            embedUrl={embedUrl}
+            style={style.report}
+            reportMode={reportMode}
+            datasetId={datasetId}
+            onLoad={(report) => {
+              console.log('Report Loaded!');
+              this.report = report;
+            }}
+            onRender={(report) => {
+              console.log('Report Redered!');
+              this.report = report;
+            }}
+            onSave={(data) => {
+              console.log('Report saved. Event data ', data);
+            }}
+            onError={(data) => {
+              console.log('Error', data);
+            }}
+          />
+        ) : (
+          <Report
+            embedType={embedType}
+            tokenType={tokenType}
+            accessToken={accessToken}
+            embedUrl={embedUrl}
+            embedId={embedId}
+            dashboardId={dashboardId}
+            extraSettings={extraSettings}
+            permissions={permissions}
+            pageName={pageName}
+            style={style.report}
+            reportMode={reportMode}
+            datasetId={datasetId}
+            onLoad={(report) => {
+              console.log('Report Loaded!');
+              this.report = report;
+            }}
+            onRender={(report) => {
+              console.log('Report Rendered!');
+              this.report = report;
+            }}
+            onSelectData={(data) => {
+              console.log('Data selected', data);
+            }}
+            onError={(data) => {
+              console.log('Error', data);
+            }}
+          />
+        );
+      case 'tile':
+        return (
+          <Tile
+            tokenType={tokenType}
+            accessToken={accessToken}
+            embedUrl={embedUrl}
+            embedId={embedId}
+            dashboardId={dashboardId}
+            style={style.report}
+            onClick={(data) => {
+              console.log('Data from tile', data);
+            }}
+            onLoad={(data) => {
+              console.log('Tile loaded', data);
+            }}
+          />
+        );
+    }
+  }
+
   render() {
     const {
       embedType,
@@ -177,6 +200,7 @@ class Demo extends Component {
       flag,
       reportMode,
       datasetId,
+      pageView,
     } = this.state;
 
     const style = {
@@ -205,76 +229,14 @@ class Demo extends Component {
 
     const reportFlag = embedType === 'report';
     const tileFlag = embedType === 'tile';
+    const isDashboard = embedType === 'dashboard';
     const isCreateMode = reportMode === 'create';
 
     return (
       <div className="root">
         <SplitterLayout percentage secondaryInitialSize={70}>
           {this.state.flag ? (
-            !isCreateMode ? (
-              <Report
-                embedType={embedType}
-                tokenType={tokenType}
-                accessToken={accessToken}
-                embedUrl={embedUrl}
-                embedId={embedId}
-                dashboardId={dashboardId}
-                extraSettings={extraSettings}
-                permissions={permissions}
-                pageName={pageName}
-                style={style.report}
-                reportMode={this.state.reportMode}
-                datasetId={datasetId}
-                onLoad={(report) => {
-                  console.log('Report Loaded!');
-                  this.report = report;
-                }}
-                onRender={(report) => {
-                  console.log('Report Rendered!');
-                  this.report = report;
-                }}
-                onSelectData={(data) => {
-                  window.alert(
-                    `You clicked chart: ${data.visual.name}`
-                  );
-                }}
-                onPageChange={(data) => {
-                  console.log(
-                    `You changed page to: ${data.newPage.displayName}`
-                  );
-                }}
-                onTileClicked={(data) => {
-                  console.log('Data from tile', data);
-                }}
-                onError={(data) => {
-                  console.log('Error', data);
-                }}
-              />
-            ) : (
-              <Report
-                embedType={embedType}
-                tokenType={tokenType}
-                accessToken={accessToken}
-                embedUrl={embedUrl}
-                style={style.report}
-                reportMode={this.state.reportMode}
-                datasetId={datasetId}
-                onLoad={(report) => {
-                  console.log('Report Loaded!');
-                  this.report = report;
-                }}
-                onRender={(report) => {
-                  console.log('Report Redered!');
-                  this.report = report;
-                }}
-                onSave={(data) => {
-                  console.log('Report saved. Event data ', data);
-                }}
-                onError={(data) => {
-                  console.log('Error', data);
-                }}
-              />
-            )
+            this.renderByEmbedType(isCreateMode, style, extraSettings)
           ) : (
             <div className="placeholder">
               <h1>Report will be displayed in this section</h1>
@@ -357,6 +319,18 @@ class Demo extends Component {
                     onChange={this.handleChange}
                     value={embedId}
                     required
+                  />
+                </span>
+              )}
+              {isDashboard && (
+                <span>
+                  <b className="fieldName">
+                    Page View (optional, default: "fitToWidth")
+                  </b>
+                  <Dropdown
+                    options={defaultOptions[embedType].pageViews}
+                    onChange={this.onSelect('pageView')}
+                    value={pageView}
                   />
                 </span>
               )}
@@ -560,14 +534,6 @@ class Demo extends Component {
                   Run
                 </button>
               </span>
-            </div>
-            <div className="code">
-              <CopyToClipboard text={this.getCode(false)}>
-                <button className="copyBtn">Copy</button>
-              </CopyToClipboard>
-              <pre>
-                <code className="language-css">{this.getCode()}</code>
-              </pre>
             </div>
             <footer>
               {'Made with ❤️ by '}
