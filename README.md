@@ -102,7 +102,7 @@ import { Dashboard } from 'powerbi-report-component';
   accessToken={accessToken}
   embedUrl={embedUrl}
   embedId={embedId}
-  style={style.report}
+  style={style}   // style object for dashboard component
   pageView={pageView} // 'fitToWidth' (default) , 'oneColumn', 'actualSize'
   onLoad={(dashboard) => {
     console.log('Dashboard Loaded!');
@@ -126,7 +126,7 @@ import { Tile } from 'powerbi-report-component';
   embedUrl={embedUrl}
   embedId={embedId}
   dashboardId={dashboardId}
-  style={style.report}
+  style={style}   // style tile for report component
   onClick={(data) => {
     console.log('Data from tile', data);
   }}
