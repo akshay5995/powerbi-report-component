@@ -6,6 +6,8 @@ const defaultOptions = {
   dashboard: {
     mode: 'view',
     embedModes: ['view'],
+    pageView: 'fitToWidth',
+    pageViews: ['fitToWidth', 'oneColumn', 'actualSize'],
   },
   tile: {
     mode: 'view',
@@ -31,6 +33,7 @@ const initializeState = (type) => ({
   flag: false,
   reportMode: defaultOptions[type].mode,
   datasetId: '',
+  pageView: defaultOptions[type].pageView,
 });
 
 export { embedTypes, defaultOptions, initializeState };
