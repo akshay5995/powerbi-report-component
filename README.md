@@ -8,7 +8,7 @@ It's a minimalistic React component for embedding a Microsoft PowerBI report, da
 
 This repository is actively maintained by [Akshay Ram (akshay5995)](https://github.com/akshay5995) and [Satya J (satya64)](https://github.com/satya64).
 
-Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog)
+Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and for the README file for version <=2.0.0. Please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0)
 
 ## Installation
 
