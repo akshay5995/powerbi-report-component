@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { validateConfig } from './common/config';
+import { generateRandomHexWithid } from './common/utils';
 
 // powerbi object is global
 const Embed = ({ config, performOnEmbed, style }) => {
   const { id } = config;
+  const randId = generateRandomHexWithid(id);
   const reportEl = useRef(null);
 
   const embed = useCallback(
@@ -32,7 +34,7 @@ const Embed = ({ config, performOnEmbed, style }) => {
   }, [config]);
 
   return (
-    <div className="report" style={style} ref={reportEl} id={id} />
+    <div className="report" style={style} ref={reportEl} id={randId} />
   );
 };
 

@@ -51,10 +51,19 @@ const debounce = (func, wait, immediate) => {
   };
 };
 
+const generateRandomHexWithid = (emdebId) => {
+  const randHex = Math.floor((1 + Math.random()) * 0x10000)
+    .toString(16)
+    .substring(1);
+
+  return `${emdebId}+${randHex}`;
+};
+
 export {
   clean,
   validateMode,
   validateAndInvokeCallback,
   isEmptyObject,
   debounce,
+  generateRandomHexWithid,
 };
