@@ -1,0 +1,52 @@
+html,
+body {
+  height: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS',
+    sans-serif;
+  overflow-y: hidden;
+}
+
+#app {
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.root {
+  display: flex;
+  flex-flow: column;
+  height: 100% !important;
+  width: 100% !important;
+
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
+
+    .config {
+      display: grid;
+      padding: 16px;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 70px auto auto auto;
+      grid-column-gap: 15px;
+      grid-row-gap: 15px;
+      grid-auto-flow: column;
+    
+      * > input {
+        width: 90%;
+        border: 1px solid #bbb;
+        border-radius: 5px;
+        font-size: 15px;
+        padding: 5px 10px;
+      }
+
+      .fieldName {
+        display: block;
+        width: 100%;
+      }
+    
+    }
+
+  }
+
+}

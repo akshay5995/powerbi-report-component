@@ -7,6 +7,9 @@ import 'react-splitter-layout/lib/index.css';
 import './styles.css';
 import { Report, Dashboard, Tile } from '../lib';
 import { initializeState, embedTypes, defaultOptions } from './utils';
+import ReportOptions  from './ReportOptions';
+import  DashboardOptions  from './DashboardOptions';
+import TileOptions  from './TileOptions';
 
 class Demo extends Component {
   constructor(props) {
@@ -18,6 +21,7 @@ class Demo extends Component {
       this
     );
     this.onSelect = this.onSelect.bind(this);
+    this.onSelectChild = this.onSelectChild.bind(this);
     this.resetState = this.resetState.bind(this);
     this.saveReport = this.saveReport.bind(this);
     this.renderByEmbedType = this.renderByEmbedType.bind(this);
@@ -31,6 +35,13 @@ class Demo extends Component {
 
   onSelect = (state) => (option) => {
     const { value } = option;
+    console.log(JSON.stringify(option));
+    this.resetState(() => this.setState({ [state]: value }));
+  };
+
+  onSelectChild = (state, option) => {
+    const { value } = option;
+    console.log(JSON.stringify(option));
     this.resetState(() => this.setState({ [state]: value }));
   };
 
@@ -261,171 +272,30 @@ class Demo extends Component {
                 />
               </span>
               {reportFlag && (
-                <span>
-                  <b className="fieldName">
-                    Mode (optional, default: "view")
-                  </b>
-                  <Dropdown
-                    options={defaultOptions[embedType].embedModes}
-                    onChange={this.onSelect('reportMode')}
-                    value={reportMode}
-                  />
-                </span>
-              )}
-              <span>
-                <b className="fieldName">Token Type</b>
-                <input
-                  name="tokenType"
-                  onChange={this.handleChange}
-                  value={tokenType}
-                  required
+                <ReportOptions 
+                  options={this.state}
+                  handleChange={this.handleChange}
+                  handleSelect={(name, option) => this.onSelectChild(name, option)}
+                  saveReport={this.saveReport}
                 />
-              </span>
-              <span>
-                <b className="fieldName">Token</b>
-                <input
-                  name="accessToken"
-                  onChange={this.handleChange}
-                  value={accessToken}
-                  required
-                />
-              </span>
-              <span>
-                <b className="fieldName">Embed Url</b>
-                <input
-                  name="embedUrl"
-                  onChange={this.handleChange}
-                  value={embedUrl}
-                  required
-                />
-              </span>
-              {tileFlag && (
-                <span>
-                  <b className="fieldName">Dashboard ID</b>
-                  <input
-                    name="dashboardId"
-                    onChange={this.handleChange}
-                    value={dashboardId}
-                    required
-                  />
-                </span>
               )}
-              {!isCreateMode && (
-                <span>
-                  <b className="fieldName">Embed Id</b>
-                  <input
-                    name="embedId"
-                    onChange={this.handleChange}
-                    value={embedId}
-                    required
-                  />
-                </span>
-              )}
-              {isDashboard && (
-                <span>
-                  <b className="fieldName">
-                    Page View (optional, default: "fitToWidth")
-                  </b>
-                  <Dropdown
-                    options={defaultOptions[embedType].pageViews}
-                    onChange={this.onSelect('pageView')}
-                    value={pageView}
-                  />
-                </span>
-              )}
-              {reportFlag && (
-                <span>
-                  <b className="fieldName">
-                    Dataset Id
-                    {!isCreateMode &&
-                      ` (optional: view mode dynamic binding)`}
-                  </b>
-                  <input
-                    name="datasetId"
-                    onChange={this.handleChange}
-                    value={datasetId}
-                  />
-                </span>
-              )}
-              {!isCreateMode && reportFlag && (
-                <Fragment>
-                  <span>
-                    <b className="fieldName">Page Name (optional)</b>
-                    <input
-                      name="pageName"
-                      onChange={this.handleChange}
-                      value={pageName}
-                      required
-                    />
-                  </span>
-                  <span>
-                    <b className="fieldName">Permissions</b>
-                    <input
-                      name="permissions"
-                      onChange={this.handleChange}
-                      value={permissions}
-                      required
-                    />
-                  </span>
-                  <span>
-                    <b className="fieldName">Display Nav Pane</b>
-                    <span>
-                      <input
-                        checked={
-                          this.state.navContentPaneEnabled ===
-                          'nav-true'
-                        }
-                        type="radio"
-                        value="nav-true"
-                        name="navContentPaneEnabled"
-                        onChange={this.handleChange}
-                      />
-                      True
-                    </span>
-                    <span>
-                      <input
-                        checked={
-                          this.state.navContentPaneEnabled ===
-                          'nav-false'
-                        }
-                        type="radio"
-                        value="nav-false"
-                        name="navContentPaneEnabled"
-                        onChange={this.handleChange}
-                      />
-                      False
-                    </span>
-                  </span>
-                  <span>
-                    <b className="fieldName">Display Filter Pane</b>
-                    <span>
-                      <input
-                        checked={
-                          this.state.filterPaneEnabled === 'filter-true'
-                        }
-                        type="radio"
-                        value="filter-true"
-                        name="filterPaneEnabled"
-                        onChange={this.handleChange}
-                      />
-                      True
-                    </span>
-                    <span>
-                      <input
-                        checked={
-                          this.state.filterPaneEnabled ===
-                          'filter-false'
-                        }
-                        type="radio"
-                        value="filter-false"
-                        name="filterPaneEnabled"
-                        onChange={this.handleChange}
-                      />
-                      False
-                    </span>
-                  </span>
-                </Fragment>
-              )}
+              {
+                isDashboard && (
+                  <DashboardOptions 
+                  options={this.state}
+                  handleChange={this.handleChange}
+                  handleSelect={(name, option) => this.onSelectChild(name, option)}/>
+                )
+              }
+              {
+                tileFlag && (
+                  <TileOptions 
+                  options={this.state}
+                  handleChange={this.handleChange}
+                  handleSelect={(name, option) => this.onSelectChild(name, option)}/>
+                )
+              }
+              {/*              
               {!isCreateMode && (
                 <span className="interactions">
                   <div>
@@ -519,6 +389,7 @@ class Demo extends Component {
                   </button>
                 </span>
               )}
+               */}
               <span className="runBtnHolder">
                 <button
                   className="runBtn"
