@@ -1,4 +1,7 @@
 const defaultOptions = {
+  common: {
+    tokenType: ['Embed', 'Aad'],
+  },
   report: {
     mode: 'view',
     embedModes: ['view', 'edit', 'create'],

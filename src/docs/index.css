@@ -1,0 +1,75 @@
+html,
+body,
+#app,
+.main {
+  height: 100%;
+}
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+
+.site-layout-header {
+  color: #fff !important;
+  margin: 18px !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.title-dark {
+  color: #fff !important;
+  padding: 14px 12px !important;
+}
+
+.title-light {
+  color: #000 !important;
+  padding: 14px 12px !important;
+}
+
+.ant-layout-content {
+  margin: 12px;
+  background: snow;
+}
+
+.ant-tabs {
+  height: 100%;
+}
+
+.ant-tabs-content-animated {
+  height: 90%;
+}
+
+.ant-tabs-nav-scroll {
+  margin: 8px 12px;
+}
+
+.tab-content {
+  padding: 8px 12px;
+}
+
+.ant-layout-footer {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  padding: 12px 50px !important;
+}
+
+.ant-menu-item {
+  font-size: 16px !important;
+}
+
+.ant-form {
+  height: 100% !important;
+  padding: 24px !important;
+  overflow-y: auto !important;
+}
+
+.ant-tabs-tabpane {
+  margin-top: -22px !important;
+}
+
+.report > iframe {
+  border: 0 !important;
+}
