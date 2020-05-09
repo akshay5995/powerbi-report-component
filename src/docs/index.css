@@ -54,6 +54,8 @@ body,
   justify-content: space-between;
   font-weight: bold;
   padding: 12px 50px !important;
+  flex-flow: row;
+  flex-wrap: wrap;
 }
 
 .ant-menu-item {
