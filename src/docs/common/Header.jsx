@@ -1,11 +1,11 @@
 import React from 'react';
-import { Breadcrumb, Switch, Typography } from 'antd';
-import { HomeOutlined, BulbFilled } from '@ant-design/icons';
+import { Breadcrumb, Switch, Typography, Space } from 'antd';
+import { HomeOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
 const Header = ({ title, setDarkMode, isDarkMode }) => {
-  const onChange = (checked) => setDarkMode(!checked);
+  const onChange = (checked) => setDarkMode(checked);
 
   const genereateImportStatement = () => {
     let importComponent = title === 'Create Report' ? 'Report' : title;
@@ -25,11 +25,13 @@ const Header = ({ title, setDarkMode, isDarkMode }) => {
           </Text>
         </Breadcrumb.Item>
       </Breadcrumb>
+      <Space>
+      <Text strong>Dark Mode</Text>
       <Switch
-        checkedChildren={<BulbFilled />}
-        checked={!isDarkMode}
+        checked={isDarkMode}
         onChange={onChange}
       />
+      </Space>
     </div>
   );
 };
