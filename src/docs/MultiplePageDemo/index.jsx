@@ -240,9 +240,15 @@ const ReportDemo = () => {
               </Title>
               <Text>
                 The filters are hardcoded for the purposes of this demo
-                particular demo
+                particular demo.
               </Text>
-              <Button type="link">Click here to see the code</Button>
+              <Button
+                type="link"
+                href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/MultiplePageDemo/index.jsx#L41"
+                target="_blank"
+              >
+                Click here to see the code
+              </Button>
             </div>
           </TabPane>
         </Tabs>
