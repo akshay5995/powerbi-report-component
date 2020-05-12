@@ -7,6 +7,7 @@ import CreateReport from './CreateReport';
 import Report from './Report';
 import Tile from './Tile';
 import Dashboard from './Dashboard';
+import MultiplePageDemo from './MultiplePageDemo';
 import './index.css';
 import { useLocalStorage } from './hooks/useLocalStorage';
 
@@ -26,6 +27,8 @@ const App = () => {
         return <Tile />;
       case 'Create Report':
         return <CreateReport />;
+      case 'Multiple Pages':
+        return <MultiplePageDemo />;
       default:
         return null;
     }

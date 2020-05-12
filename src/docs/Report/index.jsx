@@ -79,6 +79,9 @@ const ReportDemo = () => {
               onError={(data) => {
                 console.log('Error', data);
               }}
+              onPageChange={(data) => {
+                console.log(data);
+              }}
             />
           )}
         </TabPane>

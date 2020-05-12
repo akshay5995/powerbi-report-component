@@ -5,6 +5,8 @@ import {
   PieChartTwoTone,
   FundTwoTone,
   EditTwoTone,
+  CopyTwoTone,
+  LinkOutlined,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -13,7 +15,9 @@ const { Title } = Typography;
 const SideNav = ({ darkMode, selected, onSelect }) => {
   const theme = darkMode ? 'dark' : 'light';
 
-  const onClick = ({ key }) => onSelect(key);
+  const onClick = ({ key }) => {
+    if (key !== '_msDemoLink') onSelect(key);
+  };
 
   return (
     <Sider theme={theme} breakpoint="lg" collapsedWidth="0">
@@ -53,6 +57,21 @@ const SideNav = ({ darkMode, selected, onSelect }) => {
           icon={<EditTwoTone style={{ fontSize: '18px' }} />}
         >
           Create Report
+        </Menu.Item>
+        <Menu.Item
+          key="Multiple Pages"
+          icon={<CopyTwoTone style={{ fontSize: '18px' }} />}
+        >
+          Multiple Pages
+        </Menu.Item>
+        <Menu.Item key="_msDemoLink" icon={<LinkOutlined />}>
+          <a
+            href="https://microsoft.github.io/PowerBI-JavaScript/demo/v2-demo/index.html#"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Microsoft's demo
+          </a>
         </Menu.Item>
       </Menu>
     </Sider>
