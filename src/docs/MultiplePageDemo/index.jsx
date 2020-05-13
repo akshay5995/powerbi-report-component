@@ -7,10 +7,11 @@ import {
 } from '@ant-design/icons';
 import { Report } from '../../lib';
 import Form from './Form';
+import Info from '../common/InfoTab';
 
 const { Content } = Layout;
 const { TabPane } = Tabs;
-const { Text, Title } = Typography;
+const { Text } = Typography;
 
 const initalReportProps = {
   tokenType: 'Embed',
@@ -234,22 +235,23 @@ const ReportDemo = () => {
             }
             key="info"
           >
-            <div style={{ padding: '24px' }}>
-              <Title level={4} type="warning">
-                Why the warning?
-              </Title>
+            <Info
+              title="Why the warning?"
+              titleType="warning"
+              key="info"
+            >
               <Text>
                 The filters are hardcoded for the purposes of this demo
                 particular demo.
+                <Button
+                  type="link"
+                  href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/MultiplePageDemo/index.jsx#L41"
+                  target="_blank"
+                >
+                  Click here to see the code
+                </Button>
               </Text>
-              <Button
-                type="link"
-                href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/MultiplePageDemo/index.jsx#L41"
-                target="_blank"
-              >
-                Click here to see the code
-              </Button>
-            </div>
+            </Info>
           </TabPane>
         </Tabs>
       </Content>
