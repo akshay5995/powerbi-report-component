@@ -47,7 +47,6 @@ Report.propTypes = {
   onRender: PropTypes.func,
   onError: PropTypes.func,
   onButtonClicked: PropTypes.func,
-  onFiltersApplied: PropTypes.func,
   onSelectData: PropTypes.func,
   onPageChange: PropTypes.func,
   onCommandTriggered: PropTypes.func,

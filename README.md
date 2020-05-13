@@ -270,15 +270,6 @@ Report Button Clicked
   }
 ```
 
-Report Filters Applied (In documentation, but not yet supported)
-
-```javascript
-  onFiltersApplied={(filters) => {
-    console.log('Filters Applied!');
-    }
-  }
-```
-
 Report Command Triggered
 
 ```javascript
