@@ -48,10 +48,6 @@ const reportHandler = (report, props) => {
       validateAndInvokeCallback(props.onButtonClicked, event.detail)
     );
 
-    report.on('filtersApplied', (event) =>
-      validateAndInvokeCallback(props.onFiltersApplied, event.detail)
-    );
-
     report.on('commandTriggered', (event) =>
       validateAndInvokeCallback(props.onCommandTriggered, event.detail)
     );
