@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Embed from '../Embed';
-import { createReportConfig } from '../common/config';
+import Embed from '../common/Embed';
+import { createReportConfig } from '../utils/config';
 import { reportHandler } from '../common/onEmbedHandlers';
-import { debounce, isEmptyObject } from '../common/utils';
+import { debounce, isEmptyObject } from '../utils';
 
 const Report = (props) => {
   const [currentConfig, setCurrentConfig] = useState({});

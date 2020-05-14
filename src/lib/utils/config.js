@@ -1,5 +1,5 @@
 import { models } from 'powerbi-client';
-import { clean, isEmptyObject } from './utils';
+import { clean, isEmptyObject } from '.';
 import pbi from 'powerbi-client';
 
 const createReportConfig = (props) => {

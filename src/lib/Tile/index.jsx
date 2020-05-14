@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Embed from '../Embed';
-import { createTileConfig } from '../common/config';
+import Embed from '../common/Embed';
+import { createTileConfig } from '../utils/config';
 import { tileHandler } from '../common/onEmbedHandlers';
-import { debounce, isEmptyObject } from '../common/utils';
+import { debounce, isEmptyObject } from '../utils';
 
 const Tile = (props) => {
   const [currentConfig, setCurrentConfig] = useState({});

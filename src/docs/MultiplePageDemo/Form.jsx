@@ -1,16 +1,19 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
-
-const layout = {
-  labelCol: {
-    span: 3,
-  },
-  wrapperCol: {
-    span: 18,
-  },
-};
+import { layout, tailLayout } from '../common/formLayoutStyles';
 
 const ReportForm = ({ onSubmit, initalReportProps }) => {
+  const onResetForm = () => {
+    window.location.reload();
+  };
+
+  const [isSubmit, setIsSubmit] = React.useState(false);
+
+  const onSumitForm = ({ reportProps }) => {
+    setIsSubmit(true);
+    onSubmit({ reportProps });
+  };
+
   return (
     <Form
       {...layout}
@@ -18,7 +21,7 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       colon={false}
       title="Multiple page demo"
       name="reportProps"
-      onFinish={onSubmit}
+      onFinish={onSumitForm}
       initialValues={{ reportProps: initalReportProps }}
     >
       <Form.Item
@@ -87,9 +90,12 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       >
         <Input placeholder="Page Name 2" />
       </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
-        <Button type="primary" htmlType="submit">
-          Embed Report
+      <Form.Item {...tailLayout}>
+        <Button disabled={isSubmit} type="primary" htmlType="submit">
+          Embed
+        </Button>
+        <Button danger disabled={!isSubmit} onClick={onResetForm}>
+          Reset
         </Button>
       </Form.Item>
     </Form>

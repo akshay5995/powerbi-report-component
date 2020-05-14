@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import Embed from '../Embed';
-import { createDashboardConfig } from '../common/config';
+import Embed from '../common/Embed';
+import { createDashboardConfig } from '../utils/config';
 import { dashboardHandler } from '../common/onEmbedHandlers';
-import { debounce, isEmptyObject } from '../common/utils';
+import { debounce, isEmptyObject } from '../utils';
 
 const Dashboard = (props) => {
   const [currentConfig, setCurrentConfig] = useState({});

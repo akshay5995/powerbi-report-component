@@ -111,7 +111,7 @@ import { Dashboard } from 'powerbi-report-component';
   onTileClicked={(data) => {
     console.log('Data from tile', data);
   }}
-/>
+/>;
 ```
 
 ## Usuage for Tile
@@ -133,7 +133,51 @@ import { Tile } from 'powerbi-report-component';
   onLoad={(data) => {
     console.log('Tile loaded', data);
   }}
-/>
+/>;
+```
+
+# Like hooks ? You'll love this :)
+
+### useReport
+
+```js
+import React, { useEffect, useRef } from "react";
+import { useReport } from powerbi-report-component;
+
+const MyReport = ({accessToken, embedUrl, reportId}) => {
+  const reportRef = useRef(null);
+  const [report, setEmbed] = useReport();
+
+  const myReportConfig = {
+    type: 'report',
+    tokenType: "embed,
+    accessToken: accessToken,
+    embedUrl: embedUrl,
+    id: reportId,
+    settings: {
+        filterPaneEnabled: true,
+        navContentPaneEnabled: true
+    }
+};
+
+
+  useEffect(() => {
+    setEmbed(reportEl, myReportConfig);
+  }, []);
+
+ const handleclick = () => {
+     // you can use "report" from useReport like
+     if(report) report.print();
+  }
+
+  return (
+    <div className="report-container">
+      <div className="report" ref={reportEl} />
+      <button onClick={handleclick}>Print my report</button>
+    </div>
+  );
+};
+
 ```
 
 ## Report features and props you can pass into the component
@@ -295,7 +339,9 @@ Report Handle Errors
   }
 ```
 
-Use ‘report’ object returned to parent component for:
+Use ‘report’ object returned to parent component or from `useReport` for:
+
+Note: you wouldn't use `this` if you're using `report` from `useReport` hook.
 
 1. Change Report Mode to View or Edit:
 

@@ -1,23 +1,26 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
-
-const layout = {
-  labelCol: {
-    span: 3,
-  },
-  wrapperCol: {
-    span: 18,
-  },
-};
+import { layout, tailLayout } from '../common/formLayoutStyles';
 
 const TileForm = ({ onSubmit, initalTileProps }) => {
+  const onResetForm = () => {
+    window.location.reload();
+  };
+
+  const [isSubmit, setIsSubmit] = React.useState(false);
+
+  const onSumitForm = ({ tileProps }) => {
+    setIsSubmit(true);
+    onSubmit({ tileProps });
+  };
+
   return (
     <Form
       {...layout}
       size="large"
       colon={false}
       name="tileProps"
-      onFinish={onSubmit}
+      onFinish={onSumitForm}
       initialValues={{ tileProps: initalTileProps }}
     >
       <Form.Item
@@ -60,9 +63,12 @@ const TileForm = ({ onSubmit, initalTileProps }) => {
       >
         <Input placeholder="Embed Id" />
       </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
-        <Button type="primary" htmlType="submit">
-          Embed Tile
+      <Form.Item {...tailLayout}>
+        <Button disabled={isSubmit} type="primary" htmlType="submit">
+          Embed
+        </Button>
+        <Button danger disabled={!isSubmit} onClick={onResetForm}>
+          Reset
         </Button>
       </Form.Item>
     </Form>

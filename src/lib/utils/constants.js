@@ -6,7 +6,6 @@ const REPORT_EVENTS = [
   'dataSelected',
   'pageChanged',
   'buttonClicked',
-  'filtersApplied',
   'commandTriggered',
 ];
 const DASHBOARD_EVENTS = ['tileClicked'];

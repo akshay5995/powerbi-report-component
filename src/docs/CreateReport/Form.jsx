@@ -1,23 +1,26 @@
 import React from 'react';
-import { Form, Input, Button, Select, Switch } from 'antd';
-
-const layout = {
-  labelCol: {
-    span: 3,
-  },
-  wrapperCol: {
-    span: 18,
-  },
-};
+import { Form, Input, Button, Select } from 'antd';
+import { layout, tailLayout } from '../common/formLayoutStyles';
 
 const ReportForm = ({ onSubmit, initalReportProps }) => {
+  const onResetForm = () => {
+    window.location.reload();
+  };
+
+  const [isSubmit, setIsSubmit] = React.useState(false);
+
+  const onSumitForm = ({ reportProps }) => {
+    setIsSubmit(true);
+    onSubmit({ reportProps });
+  };
+
   return (
     <Form
       {...layout}
       size="large"
       colon={false}
       name="reportProps"
-      onFinish={onSubmit}
+      onFinish={onSumitForm}
       initialValues={{ reportProps: initalReportProps }}
     >
       <Form.Item
@@ -61,9 +64,12 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       >
         <Input placeholder="Dataset Id" />
       </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
-        <Button type="primary" htmlType="submit">
-          Embed Report
+      <Form.Item {...tailLayout}>
+        <Button disabled={isSubmit} type="primary" htmlType="submit">
+          Embed
+        </Button>
+        <Button danger disabled={!isSubmit} onClick={onResetForm}>
+          Reset
         </Button>
       </Form.Item>
     </Form>
