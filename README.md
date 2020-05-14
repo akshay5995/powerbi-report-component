@@ -139,7 +139,7 @@ import { Tile } from 'powerbi-report-component';
 # Like hooks ? You'll love this :)
 Provides a more barebones approach for embedding.
 
-### useReport
+### useReport (available from v2.1.0)
 
 ```javascript
 import React, { useEffect, useRef } from "react";
