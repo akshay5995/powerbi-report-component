@@ -1,9 +1,9 @@
-import { validateAndInvokeCallback } from './utils';
+import { validateAndInvokeCallback } from '../utils';
 import {
   DASHBOARD_EVENTS,
   REPORT_EVENTS,
   TILE_EVENTS,
-} from './constants';
+} from '../utils/constants';
 
 const clearAllHandlersAfterRerender = (embedInstance, events) => {
   events.forEach((event) => embedInstance.off(event));

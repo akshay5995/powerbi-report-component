@@ -1,23 +1,26 @@
 import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
-
-const layout = {
-  labelCol: {
-    span: 3,
-  },
-  wrapperCol: {
-    span: 18,
-  },
-};
+import { layout, tailLayout } from '../common/formLayoutStyles';
 
 const DashboardForm = ({ onSubmit, initalDashboardProps }) => {
+  const onResetForm = () => {
+    window.location.reload();
+  };
+
+  const [isSubmit, setIsSubmit] = React.useState(false);
+
+  const onSumitForm = ({ dashboardProps }) => {
+    setIsSubmit(true);
+    onSubmit({ dashboardProps });
+  };
+
   return (
     <Form
       {...layout}
       size="large"
       colon={false}
       name="dashboardProps"
-      onFinish={onSubmit}
+      onFinish={onSumitForm}
       initialValues={{ dashboardProps: initalDashboardProps }}
     >
       <Form.Item
@@ -61,9 +64,12 @@ const DashboardForm = ({ onSubmit, initalDashboardProps }) => {
           <Select.Option value="actualtSize">actualtSize</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 10 }}>
-        <Button type="primary" htmlType="submit">
-          Embed Dashboard
+      <Form.Item {...tailLayout}>
+        <Button disabled={isSubmit} type="primary" htmlType="submit">
+          Embed
+        </Button>
+        <Button danger disabled={!isSubmit} onClick={onResetForm}>
+          Reset
         </Button>
       </Form.Item>
     </Form>

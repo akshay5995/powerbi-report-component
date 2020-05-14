@@ -136,6 +136,53 @@ import { Tile } from 'powerbi-report-component';
 />
 ```
 
+# Like hooks ? You'll love this :)
+Provides a more barebones approach for embedding.
+
+### useReport
+
+```javascript
+import React, { useEffect, useRef } from "react";
+import { useReport } from powerbi-report-component;
+
+const MyReport = ({accessToken, embedUrl, reportId}) => {
+  const reportRef = useRef(null);
+  const [report, setEmbed] = useReport();
+
+  const myReportConfig = {
+    type: 'report',
+    tokenType: "embed,
+    accessToken: accessToken,
+    embedUrl: embedUrl,
+    id: reportId,
+    settings: {
+        filterPaneEnabled: true,
+        navContentPaneEnabled: true
+    }
+};
+
+  // !important
+  useEffect(() => {
+    // call inside useEffect so the we have the reportEl (reference available)
+    setEmbed(reportEl, myReportConfig);
+  }, []);
+
+ const handleclick = () => {
+     // you can use "report" from useReport like
+     if(report) report.print();
+  }
+
+  return (
+    <div className="report-container">
+      <div className="report" ref={reportEl} />
+      <button onClick={handleclick}>Print my report</button>
+    </div>
+  );
+}
+
+export default MyReport;
+```
+
 ## Report features and props you can pass into the component
 
 Inside your compoent where you're using { Report } component.
@@ -295,7 +342,9 @@ Report Handle Errors
   }
 ```
 
-Use ‘report’ object returned to parent component for:
+Use ‘report’ object returned to parent component or from `useReport` for:
+
+Note: you wouldn't use `this` if you're using `report` from `useReport` hook.
 
 1. Change Report Mode to View or Edit:
 

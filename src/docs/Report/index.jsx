@@ -73,6 +73,9 @@ const ReportDemo = () => {
               onLoad={(report) => {
                 console.log('Report Loaded!');
               }}
+              onRender={(report) => {
+                console.log('Report Rendered');
+              }}
               onSelectData={(data) => {
                 console.log('Data selected', data);
               }}
@@ -80,7 +83,7 @@ const ReportDemo = () => {
                 console.log('Error', data);
               }}
               onPageChange={(data) => {
-                console.log(data);
+                console.log('Page changed', data);
               }}
             />
           )}

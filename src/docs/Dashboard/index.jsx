@@ -68,7 +68,7 @@ const DashboardDemo = () => {
                 console.log('Data from tile', data);
               }}
               onLoad={(data) => {
-                console.log('Tile loaded', data);
+                console.log('Dashboard loaded', data);
               }}
             />
           )}
