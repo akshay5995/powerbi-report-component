@@ -137,7 +137,7 @@ import { Tile } from 'powerbi-report-component';
 ```
 
 # Like hooks ? You'll love this :)
-Provides a more barebones approach for embedding
+Provides a more barebones approach for embedding.
 
 ### useReport
 
@@ -161,8 +161,9 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
     }
 };
 
-
+  // !important
   useEffect(() => {
+    // call inside useEffect so the we have the reportEl (reference available)
     setEmbed(reportEl, myReportConfig);
   }, []);
 
