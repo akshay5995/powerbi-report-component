@@ -111,7 +111,7 @@ import { Dashboard } from 'powerbi-report-component';
   onTileClicked={(data) => {
     console.log('Data from tile', data);
   }}
-/>;
+/>
 ```
 
 ## Usuage for Tile
@@ -133,14 +133,15 @@ import { Tile } from 'powerbi-report-component';
   onLoad={(data) => {
     console.log('Tile loaded', data);
   }}
-/>;
+/>
 ```
 
 # Like hooks ? You'll love this :)
+Provides a more barebones approach for embedding
 
 ### useReport
 
-```js
+```javascript
 import React, { useEffect, useRef } from "react";
 import { useReport } from powerbi-report-component;
 
@@ -176,8 +177,9 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
       <button onClick={handleclick}>Print my report</button>
     </div>
   );
-};
+}
 
+export default MyReport;
 ```
 
 ## Report features and props you can pass into the component
