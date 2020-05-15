@@ -136,14 +136,14 @@ import { Tile } from 'powerbi-report-component';
 />
 ```
 
-# Like hooks ? You'll love this :)
-Provides a more barebones approach for embedding.
-
+## Like hooks ? You'll love this :)
 ### useReport (available from v2.1.0)
 
+Provides a more find grained approach for embedding. (where you're in control)
+
 ```javascript
-import React, { useEffect, useRef } from "react";
-import { useReport } from powerbi-report-component;
+import React, { useEffect, useRef } from 'react';
+import { useReport } from 'powerbi-report-component';
 
 const MyReport = ({accessToken, embedUrl, reportId}) => {
   const reportRef = useRef(null);
