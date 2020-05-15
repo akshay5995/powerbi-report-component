@@ -135,9 +135,22 @@ const validateConfig = (config) => {
     : validateTypeConfig(config);
 };
 
+const createEmbedConfigBasedOnEmbedType = (config) => {
+  const { embedType } = config;
+  switch (embedType) {
+    case 'report':
+      return createReportConfig(config);
+    case 'dashboard':
+      return createDashboardConfig(config);
+    case 'tile':
+      return createTileConfig(config);
+  }
+};
+
 export {
   validateConfig,
   createReportConfig,
   createDashboardConfig,
   createTileConfig,
+  createEmbedConfigBasedOnEmbedType,
 };
