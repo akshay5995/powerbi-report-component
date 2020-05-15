@@ -163,8 +163,8 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
 
   // !important
   useEffect(() => {
-    // call inside useEffect so the we have the reportEl (reference available)
-    setEmbed(reportEl, myReportConfig);
+    // call inside useEffect so the we have the reportRef (reference available)
+    setEmbed(reportRef, myReportConfig);
   }, []);
 
  const handleclick = () => {
@@ -174,7 +174,7 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
 
   return (
     <div className="report-container">
-      <div className="report" ref={reportEl} />
+      <div className="report" ref={reportRef} />
       <button onClick={handleclick}>Print my report</button>
     </div>
   );
