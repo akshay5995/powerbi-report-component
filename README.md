@@ -151,7 +151,7 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
 
   const myReportConfig = {
     type: 'report',
-    tokenType: "embed,
+    tokenType: 'embed',
     accessToken: accessToken,
     embedUrl: embedUrl,
     id: reportId,
