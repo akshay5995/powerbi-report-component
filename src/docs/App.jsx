@@ -10,6 +10,7 @@ import Dashboard from './Dashboard';
 import MultiplePageDemo from './MultiplePageDemo';
 import './index.css';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import UseReportDemo from './UseReportDemo';
 
 const App = () => {
   const [embedType, setEmbedType] = React.useState('Report');
@@ -29,6 +30,8 @@ const App = () => {
         return <CreateReport />;
       case 'Multiple Pages':
         return <MultiplePageDemo />;
+      case 'useReport':
+        return <UseReportDemo />;
       default:
         return null;
     }

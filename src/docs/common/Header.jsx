@@ -4,11 +4,22 @@ import { HomeOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
 
+const titleImportMap = {
+  'Create Report': 'Report',
+  'Multiple Pages': 'Report',
+  Report: 'Report',
+  Dashboard: 'Dashboard',
+  Tile: 'Tile',
+  useReport: 'useReport',
+};
+
+const embedTypes = new Set(['Report', 'Dashboard', 'Tile']);
+
 const Header = ({ title, setDarkMode, isDarkMode }) => {
   const onChange = (checked) => setDarkMode(checked);
 
   const genereateImportStatement = () => {
-    let importComponent = title === 'Create Report' ? 'Report' : title;
+    const importComponent = titleImportMap[title];
     return `import { ${importComponent} } from 'powerbi-report-component';`;
   };
 
@@ -17,7 +28,7 @@ const Header = ({ title, setDarkMode, isDarkMode }) => {
       <Breadcrumb>
         <Breadcrumb.Item href="">
           <HomeOutlined />
-          <Text strong>Embed Type</Text>
+          {embedTypes.has(title) && <Text strong>Embed Type</Text>}
         </Breadcrumb.Item>
         <Breadcrumb.Item>
           <Text strong copyable={{ text: genereateImportStatement() }}>
@@ -26,11 +37,8 @@ const Header = ({ title, setDarkMode, isDarkMode }) => {
         </Breadcrumb.Item>
       </Breadcrumb>
       <Space>
-      <Text strong>Dark Mode</Text>
-      <Switch
-        checked={isDarkMode}
-        onChange={onChange}
-      />
+        <Text strong>Dark Mode</Text>
+        <Switch checked={isDarkMode} onChange={onChange} />
       </Space>
     </div>
   );

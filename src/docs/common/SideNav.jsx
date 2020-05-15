@@ -7,6 +7,7 @@ import {
   EditTwoTone,
   CopyTwoTone,
   LinkOutlined,
+  ExperimentTwoTone,
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -63,6 +64,12 @@ const SideNav = ({ darkMode, selected, onSelect }) => {
           icon={<CopyTwoTone style={{ fontSize: '18px' }} />}
         >
           Multiple Pages
+        </Menu.Item>
+        <Menu.Item
+          key="useReport"
+          icon={<ExperimentTwoTone style={{ fontSize: '18px' }} />}
+        >
+          useReport
         </Menu.Item>
         <Menu.Item key="_msDemoLink" icon={<LinkOutlined />}>
           <a
