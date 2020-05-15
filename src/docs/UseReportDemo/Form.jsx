@@ -24,7 +24,7 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       initialValues={{ reportProps: initalReportProps }}
     >
       <Form.Item
-        label="Token Type"
+        label="Embed Type"
         name={['reportProps', 'embedType']}
         rules={[{ required: true }]}
       >

@@ -152,10 +152,10 @@ const MyReport = ({ accessToken, embedUrl, reportId }) => {
 
   const myReportConfig = {
     embedType: 'report',
-    tokenType: 'embed',
+    tokenType: 'Embed',
     accessToken: accessToken,
     embedUrl: embedUrl,
-    id: reportId,
+    embedId: embedId,
     settings: {
       filterPaneEnabled: false,
       navContentPaneEnabled: false,
