@@ -136,23 +136,22 @@ import { Tile } from 'powerbi-report-component';
 />
 ```
 
-# Like hooks ? You'll love this :)
+## Like hooks ? You'll love this :)
+### useReport (will be available from v2.1.1)
 
-Provides a more barebones approach for embedding.
-
-### useReport
+Provides a more find grained approach for embedding. (where you're in control)
 
 ```javascript
-import React, { useEffect, useRef } from "react";
-import { useReport } from powerbi-report-component;
+import React, { useEffect, useRef } from 'react';
+import { useReport } from 'powerbi-report-component';
 
 const MyReport = ({accessToken, embedUrl, reportId}) => {
   const reportRef = useRef(null);
   const [report, setEmbed] = useReport();
 
   const myReportConfig = {
-    type: 'report',
-    tokenType: "embed',
+    embedType: 'report',
+    tokenType: 'embed',
     accessToken: accessToken,
     embedUrl: embedUrl,
     id: reportId,
@@ -160,12 +159,12 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
         filterPaneEnabled: false,
         navContentPaneEnabled: false
     }
-};
+  };
 
   // !important
   useEffect(() => {
-    // call inside useEffect so the we have the reportEl (reference available)
-    setEmbed(reportEl, myReportConfig);
+    // call inside useEffect so the we have the reportRef (reference available)
+    setEmbed(reportRef, myReportConfig);
   }, []);
 
  const handleclick = () => {
@@ -175,7 +174,7 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
 
   return (
     <div className="report-container">
-      <div className="report" ref={reportEl} />
+      <div className="report" ref={reportRef} />
       <button onClick={handleclick}>Print my report</button>
     </div>
   );
