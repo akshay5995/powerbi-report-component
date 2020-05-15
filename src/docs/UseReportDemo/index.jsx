@@ -139,7 +139,7 @@ const UseReportDemo = () => {
             </Text>
             <Button
               type="link"
-              href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/UseReportHookDemo/index.jsx"
+              href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/UseReportDemo/index.jsx#L56"
               target="_blank"
             >
               Click here to see the code
