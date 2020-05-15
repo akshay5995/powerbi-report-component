@@ -146,7 +146,7 @@ Provides a more find grained approach for embedding. (where you're in control)
 import React, { useEffect, useRef } from 'react';
 import { useReport } from 'powerbi-report-component';
 
-const MyReport = ({ accessToken, embedUrl, reportId }) => {
+const MyReport = ({ accessToken, embedUrl, embedId }) => {
   const reportRef = useRef(null);
   const [report, setEmbed] = useReport();
 
