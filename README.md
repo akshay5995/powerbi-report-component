@@ -137,7 +137,8 @@ import { Tile } from 'powerbi-report-component';
 ```
 
 ## Like hooks ? You'll love this :)
-### useReport (will be available from v2.1.1)
+
+### useReport (available from v2.1.1)
 
 Provides a more find grained approach for embedding. (where you're in control)
 
@@ -145,7 +146,7 @@ Provides a more find grained approach for embedding. (where you're in control)
 import React, { useEffect, useRef } from 'react';
 import { useReport } from 'powerbi-report-component';
 
-const MyReport = ({accessToken, embedUrl, reportId}) => {
+const MyReport = ({ accessToken, embedUrl, reportId }) => {
   const reportRef = useRef(null);
   const [report, setEmbed] = useReport();
 
@@ -156,9 +157,9 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
     embedUrl: embedUrl,
     id: reportId,
     settings: {
-        filterPaneEnabled: false,
-        navContentPaneEnabled: false
-    }
+      filterPaneEnabled: false,
+      navContentPaneEnabled: false,
+    },
   };
 
   // !important
@@ -167,10 +168,10 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
     setEmbed(reportRef, myReportConfig);
   }, []);
 
- const handleclick = () => {
-     // you can use "report" from useReport like
-     if(report) report.print();
-  }
+  const handleclick = () => {
+    // you can use "report" from useReport like
+    if (report) report.print();
+  };
 
   return (
     <div className="report-container">
@@ -178,7 +179,7 @@ const MyReport = ({accessToken, embedUrl, reportId}) => {
       <button onClick={handleclick}>Print my report</button>
     </div>
   );
-}
+};
 
 export default MyReport;
 ```
