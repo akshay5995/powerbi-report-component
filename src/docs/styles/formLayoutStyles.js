@@ -14,4 +14,8 @@ const tailLayout = {
   },
 };
 
-export { layout, tailLayout };
+const buttonStyle = {
+  margin: '0 8px',
+};
+
+export { layout, tailLayout, buttonStyle };

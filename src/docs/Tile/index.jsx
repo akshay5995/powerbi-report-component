@@ -26,6 +26,10 @@ const TileDemo = () => {
     [tileProps]
   );
 
+  const onReset = React.useCallback(() => {
+    setIsValidConfig(false);
+  }, [isVaildConfig]);
+
   return (
     <Content>
       <Tabs activeKey={activeTab} onTabClick={onTabClick}>
@@ -41,6 +45,7 @@ const TileDemo = () => {
           <Form
             initalTileProps={initalTileProps}
             onSubmit={renderWithTileProps}
+            onReset={onReset}
           />
         </TabPane>
         <TabPane
