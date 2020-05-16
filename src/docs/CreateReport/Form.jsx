@@ -2,16 +2,17 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { layout, tailLayout } from '../common/formLayoutStyles';
 
-const ReportForm = ({ onSubmit, initalReportProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
-
+const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ reportProps }) => {
+  const onSubmitForm = ({ reportProps }) => {
     setIsSubmit(true);
     onSubmit({ reportProps });
+  };
+
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
   };
 
   return (
@@ -20,7 +21,7 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       size="large"
       colon={false}
       name="reportProps"
-      onFinish={onSumitForm}
+      onFinish={onSubmitForm}
       initialValues={{ reportProps: initalReportProps }}
     >
       <Form.Item
@@ -28,7 +29,7 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
         name={['reportProps', 'tokenType']}
         rules={[{ required: true }]}
       >
-        <Select placeholder="Token Type">
+        <Select placeholder="Token Type" disabled={isSubmit}>
           <Select.Option value="Embed">Embed</Select.Option>
           <Select.Option value="Aad">Aad</Select.Option>
         </Select>
@@ -38,14 +39,14 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
         label="Token"
         rules={[{ required: true, message: 'Token is required' }]}
       >
-        <Input placeholder="Embed or Aad Token" />
+        <Input placeholder="Embed or Aad Token" disabled={isSubmit}/>
       </Form.Item>
       <Form.Item
         name={['reportProps', 'embedUrl']}
         label="Embed Url"
         rules={[{ required: true, message: 'Embed Url is required' }]}
       >
-        <Input placeholder="Embed Url" />
+        <Input placeholder="Embed Url" disabled={isSubmit}/>
       </Form.Item>
       <Form.Item label="Mode" name={['reportProps', 'reportMode']}>
         <Select placeholder="Mode (Create)">

@@ -2,16 +2,18 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { layout, tailLayout } from '../common/formLayoutStyles';
 
-const DashboardForm = ({ onSubmit, initalDashboardProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
+const DashboardForm = ({ onSubmit, initalDashboardProps, onReset }) => {
 
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ dashboardProps }) => {
+  const onSubmitForm = ({ dashboardProps }) => {
     setIsSubmit(true);
     onSubmit({ dashboardProps });
+  };
+  
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
   };
 
   return (
@@ -20,7 +22,7 @@ const DashboardForm = ({ onSubmit, initalDashboardProps }) => {
       size="large"
       colon={false}
       name="dashboardProps"
-      onFinish={onSumitForm}
+      onFinish={onSubmitForm}
       initialValues={{ dashboardProps: initalDashboardProps }}
     >
       <Form.Item

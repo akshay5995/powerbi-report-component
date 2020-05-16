@@ -29,6 +29,10 @@ const ReportDemo = () => {
     [reportProps]
   );
 
+  const onReset = React.useCallback(() => {
+    setIsValidConfig(false);
+  }, [isVaildConfig]);
+
   return (
     <Content>
       <Tabs activeKey={activeTab} onTabClick={onTabClick}>
@@ -44,6 +48,7 @@ const ReportDemo = () => {
           <Form
             initalReportProps={initalReportProps}
             onSubmit={renderWithReportProps}
+            onReset={onReset}
           />
         </TabPane>
         <TabPane

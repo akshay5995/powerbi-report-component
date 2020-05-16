@@ -74,6 +74,10 @@ const ReportDemo = () => {
     [reportProps]
   );
 
+  const onReset = React.useCallback(() => {
+    setIsValidConfig(false);
+  }, [isVaildConfig]);
+
   const extraSettings = {
     filterPaneEnabled: false,
     navContentPaneEnabled: false,
@@ -116,6 +120,7 @@ const ReportDemo = () => {
             <Form
               initalReportProps={initalReportProps}
               onSubmit={renderWithReportProps}
+              onReset={onReset}
             />
           </TabPane>
           <TabPane

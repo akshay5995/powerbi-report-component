@@ -2,16 +2,18 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { layout, tailLayout } from '../common/formLayoutStyles';
 
-const TileForm = ({ onSubmit, initalTileProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
+const TileForm = ({ onSubmit, initalTileProps, onReset }) => {
 
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ tileProps }) => {
+  const onSubmitForm = ({ tileProps }) => {
     setIsSubmit(true);
     onSubmit({ tileProps });
+  };
+
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
   };
 
   return (
@@ -20,7 +22,7 @@ const TileForm = ({ onSubmit, initalTileProps }) => {
       size="large"
       colon={false}
       name="tileProps"
-      onFinish={onSumitForm}
+      onFinish={onSubmitForm}
       initialValues={{ tileProps: initalTileProps }}
     >
       <Form.Item
