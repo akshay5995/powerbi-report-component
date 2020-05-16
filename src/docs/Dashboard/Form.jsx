@@ -1,17 +1,19 @@
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
-import { layout, tailLayout } from '../common/formLayoutStyles';
+import { Form, Input, Select } from 'antd';
+import { layout } from '../styles/formLayoutStyles';
+import FormButtonGroup from '../common/FormButtonGroup';
 
-const DashboardForm = ({ onSubmit, initalDashboardProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
-
+const DashboardForm = ({ onSubmit, initalDashboardProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ dashboardProps }) => {
+  const onSubmitForm = ({ dashboardProps }) => {
     setIsSubmit(true);
     onSubmit({ dashboardProps });
+  };
+
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
   };
 
   return (
@@ -20,7 +22,7 @@ const DashboardForm = ({ onSubmit, initalDashboardProps }) => {
       size="large"
       colon={false}
       name="dashboardProps"
-      onFinish={onSumitForm}
+      onFinish={onSubmitForm}
       initialValues={{ dashboardProps: initalDashboardProps }}
     >
       <Form.Item
@@ -64,14 +66,7 @@ const DashboardForm = ({ onSubmit, initalDashboardProps }) => {
           <Select.Option value="actualtSize">actualtSize</Select.Option>
         </Select>
       </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button disabled={isSubmit} type="primary" htmlType="submit">
-          Embed
-        </Button>
-        <Button danger disabled={!isSubmit} onClick={onResetForm}>
-          Reset
-        </Button>
-      </Form.Item>
+      <FormButtonGroup isSubmit={isSubmit} onReset={onResetForm} />
     </Form>
   );
 };

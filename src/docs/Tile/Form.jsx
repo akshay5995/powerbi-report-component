@@ -1,17 +1,19 @@
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
-import { layout, tailLayout } from '../common/formLayoutStyles';
+import { Form, Input, Select } from 'antd';
+import { layout } from '../styles/formLayoutStyles';
+import FormButtonGroup from '../common/FormButtonGroup';
 
-const TileForm = ({ onSubmit, initalTileProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
-
+const TileForm = ({ onSubmit, initalTileProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ tileProps }) => {
+  const onSubmitForm = ({ tileProps }) => {
     setIsSubmit(true);
     onSubmit({ tileProps });
+  };
+
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
   };
 
   return (
@@ -20,7 +22,7 @@ const TileForm = ({ onSubmit, initalTileProps }) => {
       size="large"
       colon={false}
       name="tileProps"
-      onFinish={onSumitForm}
+      onFinish={onSubmitForm}
       initialValues={{ tileProps: initalTileProps }}
     >
       <Form.Item
@@ -63,14 +65,7 @@ const TileForm = ({ onSubmit, initalTileProps }) => {
       >
         <Input placeholder="Embed Id" />
       </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button disabled={isSubmit} type="primary" htmlType="submit">
-          Embed
-        </Button>
-        <Button danger disabled={!isSubmit} onClick={onResetForm}>
-          Reset
-        </Button>
-      </Form.Item>
+      <FormButtonGroup isSubmit={isSubmit} onReset={onResetForm} />
     </Form>
   );
 };

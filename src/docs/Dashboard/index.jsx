@@ -28,6 +28,10 @@ const DashboardDemo = () => {
     [dashboardProps]
   );
 
+  const onReset = React.useCallback(() => {
+    setIsValidConfig(false);
+  }, [isVaildConfig]);
+
   return (
     <Content>
       <Tabs activeKey={activeTab} onTabClick={onTabClick}>
@@ -43,6 +47,7 @@ const DashboardDemo = () => {
           <Form
             initalDashboardProps={initalDashboardProps}
             onSubmit={renderWithDashboardrops}
+            onReset={onReset}
           />
         </TabPane>
         <TabPane

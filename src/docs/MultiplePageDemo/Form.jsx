@@ -1,17 +1,19 @@
 import React from 'react';
-import { Form, Input, Button, Select } from 'antd';
-import { layout, tailLayout } from '../common/formLayoutStyles';
+import { Form, Input, Select } from 'antd';
+import { layout } from '../styles/formLayoutStyles';
+import FormButtonGroup from '../common/FormButtonGroup';
 
-const ReportForm = ({ onSubmit, initalReportProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
-
+const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ reportProps }) => {
+  const onSubmitForm = ({ reportProps }) => {
     setIsSubmit(true);
     onSubmit({ reportProps });
+  };
+
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
   };
 
   return (
@@ -21,7 +23,7 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       colon={false}
       title="Multiple page demo"
       name="reportProps"
-      onFinish={onSumitForm}
+      onFinish={onSubmitForm}
       initialValues={{ reportProps: initalReportProps }}
     >
       <Form.Item
@@ -90,14 +92,7 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
       >
         <Input placeholder="Page Name 2" />
       </Form.Item>
-      <Form.Item {...tailLayout}>
-        <Button disabled={isSubmit} type="primary" htmlType="submit">
-          Embed
-        </Button>
-        <Button danger disabled={!isSubmit} onClick={onResetForm}>
-          Reset
-        </Button>
-      </Form.Item>
+      <FormButtonGroup isSubmit={isSubmit} onReset={onResetForm} />
     </Form>
   );
 };
