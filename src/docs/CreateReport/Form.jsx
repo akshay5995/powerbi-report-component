@@ -39,14 +39,14 @@ const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
         label="Token"
         rules={[{ required: true, message: 'Token is required' }]}
       >
-        <Input placeholder="Embed or Aad Token"/>
+        <Input placeholder="Embed or Aad Token" />
       </Form.Item>
       <Form.Item
         name={['reportProps', 'embedUrl']}
         label="Embed Url"
         rules={[{ required: true, message: 'Embed Url is required' }]}
       >
-        <Input placeholder="Embed Url"/>
+        <Input placeholder="Embed Url" />
       </Form.Item>
       <Form.Item label="Mode" name={['reportProps', 'reportMode']}>
         <Select placeholder="Mode (Create)">
