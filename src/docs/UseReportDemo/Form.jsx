@@ -2,10 +2,7 @@ import React from 'react';
 import { Form, Input, Button, Select } from 'antd';
 import { layout, tailLayout } from '../common/formLayoutStyles';
 
-const ReportForm = ({ onSubmit, initalReportProps }) => {
-  const onResetForm = () => {
-    window.location.reload();
-  };
+const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
 
   const [isSubmit, setIsSubmit] = React.useState(false);
 
@@ -14,6 +11,11 @@ const ReportForm = ({ onSubmit, initalReportProps }) => {
     onSubmit({ reportProps });
   };
 
+  const onResetForm = () => {
+    setIsSubmit(false);
+    onReset(false);
+  };
+  
   return (
     <Form
       {...layout}
