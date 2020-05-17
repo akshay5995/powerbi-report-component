@@ -162,7 +162,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
     },
   };
 
-  // !important
+  // important
   useEffect(() => {
     // call inside useEffect so the we have the reportRef (reference available)
     setEmbed(reportRef, myReportConfig);

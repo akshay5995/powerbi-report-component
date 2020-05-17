@@ -56,7 +56,7 @@ const UseReportDemo = () => {
     if (report) report.print();
   };
 
-  // !important: make sure we have reportRef
+  // important: make sure we have reportRef
   React.useEffect(() => {
     if (isVaildConfig) {
       setEmbed(reportRef, {
