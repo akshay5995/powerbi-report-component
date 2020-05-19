@@ -22,7 +22,7 @@ const validateAndInvokeCallback = (callback, data) => {
     if (typeof callback == 'function') {
       callback(data);
     } else {
-      throw 'callback passed is not a function';
+      throw Error('callback passed is not a function');
     }
   }
 };
@@ -51,12 +51,12 @@ const debounce = (func, wait, immediate) => {
   };
 };
 
-const generateRandomHexWithid = (emdebId) => {
+const generateRandomHexWithId = (embedId) => {
   const randHex = Math.floor((1 + Math.random()) * 0x10000)
     .toString(16)
     .substring(1);
 
-  return `${emdebId}+${randHex}`;
+  return `${embedId}+${randHex}`;
 };
 
 export {
@@ -65,5 +65,5 @@ export {
   validateAndInvokeCallback,
   isEmptyObject,
   debounce,
-  generateRandomHexWithid,
+  generateRandomHexWithId,
 };

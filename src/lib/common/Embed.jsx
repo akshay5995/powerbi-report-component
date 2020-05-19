@@ -1,11 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { generateRandomHexWithid } from '../utils';
+import { generateRandomHexWithId } from '../utils';
 import { _useReport } from '../hooks/useReport';
 
 const Embed = ({ config, performOnEmbed, style }) => {
   const { id } = config;
-  const randId = generateRandomHexWithid(id);
+  const randId = generateRandomHexWithId(id);
   const reportEl = useRef(null);
   const [_, setEmbed] = _useReport(performOnEmbed);
 

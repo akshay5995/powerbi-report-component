@@ -119,7 +119,9 @@ const validateTypeConfig = (config) => {
     case 'tile':
       return pbi.models.validateTileLoad(config);
     default:
-      throw 'Unknown config type allowed types are report, dashboard or tile';
+      throw Error(
+        'Unknown config type allowed types are report, dashboard or tile'
+      );
   }
 };
 
