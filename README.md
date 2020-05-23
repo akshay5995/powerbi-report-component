@@ -140,7 +140,7 @@ import { Tile } from 'powerbi-report-component';
 
 ### useReport (available from v2.1.1)
 
-Provides a more find grained approach for embedding. (where you're in control)
+Provides a more fine grained approach for embedding. (where you're in control)
 
 ```javascript
 import React, { useEffect, useRef } from 'react';
