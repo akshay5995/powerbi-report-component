@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { validateConfig } from '../utils/config';
+import { parseConfigErrors, validateConfig } from '../utils/config';
 import { createEmbedConfigBasedOnEmbedType } from '../utils/config';
 
 // powerbi object is global
@@ -12,7 +12,8 @@ function _useReport(performOnEmbed = null) {
     if (!errors) {
       embed(embedDivRef.current, embedConfig);
     } else {
-      throw new Error('invalid configuration passed');
+      const errorString = parseConfigErrors(errors);
+      throw new Error(errorString || 'invalid configuration passed');
     }
   };
 
@@ -46,7 +47,8 @@ function useReport() {
     if (!errors) {
       embed(ref.current, embedConfig);
     } else {
-      throw new Error('invalid configuration passed');
+      const errorString = parseConfigErrors(errors);
+      throw new Error(errorString || 'invalid configuration passed');
     }
   };
 
