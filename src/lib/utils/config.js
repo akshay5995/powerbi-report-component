@@ -149,10 +149,20 @@ const createEmbedConfigBasedOnEmbedType = (config) => {
   }
 };
 
+const parseConfigErrors = (errors) => {
+  let parsedError = "";
+  if (Array.isArray(errors) && errors.length) {
+    parsedError = errors.map(error => error.detailedMessage || error.message || "")
+      .filter(x => x).join(", ");
+  }
+  return parsedError;
+}
+
 export {
   validateConfig,
   createReportConfig,
   createDashboardConfig,
   createTileConfig,
   createEmbedConfigBasedOnEmbedType,
+  parseConfigErrors,
 };
