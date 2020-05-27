@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { parseConfigErrors, validateConfig } from '../utils/config';
-import { createEmbedConfigBasedOnEmbedType } from '../utils/config';
+import { parseConfigErrors, validateConfig, createEmbedConfigBasedOnEmbedType } from '../utils/config';
 
 // powerbi object is global
 // used inside Embed.jsx has more logic tied to props of Embed.
