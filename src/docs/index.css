@@ -49,6 +49,14 @@ body,
   padding: 8px 12px;
 }
 
+.ant-tabs-content {
+  height: 100%;
+}
+
+.ant-tabs-tab {
+  padding: 12px 8px !important;
+}
+
 .ant-layout-footer {
   display: flex;
   justify-content: space-between;

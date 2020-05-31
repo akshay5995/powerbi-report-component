@@ -3,10 +3,11 @@
   "version": "2.1.3",
   "description": "It's a minimalistic react component to embed a Microsoft PowerBI report or dashboard into your react application.",
   "main": "lib/index.js",
+  "types": "lib/types.d.ts",
   "scripts": {
     "dev": "concurrently \"npm run lib:watch\" \"npm run docs\"",
-    "lib": "babel src/lib -d lib --copy-files",
-    "lib:watch": "babel src/lib -w -d lib --copy-files",
+    "lib": "tsc",
+    "lib:watch": "tsc -w",
     "docs": "webpack-dev-server --mode development",
     "docs:prod": "webpack --mode production",
     "publish:demo": "npm run docs:prod && gh-pages -d docs"
@@ -18,7 +19,8 @@
     "bi",
     "embed",
     "report",
-    "dashboard"
+    "dashboard",
+    "tile"
   ],
   "license": "MIT",
   "peerDependencies": {
@@ -26,15 +28,18 @@
     "react-dom": "^16.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.0",
-    "@babel/core": "^7.10.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-transform-runtime": "^7.10.0",
-    "@babel/preset-env": "^7.10.0",
-    "@babel/preset-react": "^7.10.0",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
+    "@babel/preset-react": "^7.10.1",
+    "@types/react": "^16.9.35",
+    "@types/react-dom": "^16.9.8",
+    "@types/zen-observable": "^0.8.0",
     "ajv": "^6.12.2",
     "all-contributors-cli": "^6.15.0",
-    "antd": "^4.2.5",
+    "antd": "^4.3.0",
     "babel-loader": "^8.1.0",
     "concurrently": "^3.6.1",
     "css-loader": "^3.5.3",
@@ -44,6 +49,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "style-loader": "^0.21.0",
+    "typescript": "^3.9.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
@@ -59,7 +65,6 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.11.0",
-    "prop-types": "^15.7.2"
+    "powerbi-client": "^2.11.0"
   }
 }

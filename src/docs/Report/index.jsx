@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Tabs, Badge } from 'antd';
 import { FormOutlined, CheckCircleTwoTone } from '@ant-design/icons';
-import { Report } from '../../lib';
+import { Report } from '../../../lib';
 import Form from './Form';
 
 const { Content } = Layout;
