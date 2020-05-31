@@ -10,6 +10,8 @@ This repository is actively maintained by [Akshay Ram (akshay5995)](https://gith
 
 Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0) for the README for versions <=2.0.0.
 
+_*Typescript support from >=2.2.0*_
+
 ## Installation
 
 `npm i powerbi-report-component`
