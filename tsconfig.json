@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "es2017",
+            "es7",
+            "es6",
+            "dom"
+        ],
+        "esModuleInterop": true,
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": true,
+        "outDir": "lib",
+        "strict": true,
+        "jsx": "react",
+        "removeComments": true
+    },
+    "include": [
+        "./src"
+    ],
+    "exclude": [
+        "node_modules",
+        "lib",
+        "**/__tests__/*"
+    ]
+}

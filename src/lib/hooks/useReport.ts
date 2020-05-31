@@ -1,12 +1,21 @@
 import { useState } from 'react';
-import { parseConfigErrors, validateConfig, createEmbedConfigBasedOnEmbedType } from '../utils/config';
+import {
+  parseConfigErrors,
+  validateConfig,
+  createEmbedConfigBasedOnEmbedType,
+} from '../utils/config';
+import { Config } from '../types';
+
+declare type UseReport = [any, (ref: any, config: Config) => void];
 
 // powerbi object is global
 // used inside Embed.jsx has more logic tied to props of Embed.
-function _useReport(performOnEmbed = null) {
+function _useReport(
+  performOnEmbed: (report: any, reportRef?: any) => void
+): UseReport {
   const [report, _setEmbedInstance] = useState(null);
 
-  const setEmbed = (embedDivRef, embedConfig) => {
+  const setEmbed = (embedDivRef: any, embedConfig: Config): void => {
     const errors = validateConfig(embedConfig);
     if (!errors) {
       embed(embedDivRef.current, embedConfig);
@@ -16,31 +25,32 @@ function _useReport(performOnEmbed = null) {
     }
   };
 
-  const embed = (ref, config) => {
+  const embed = (ref: any, config: Config) => {
     const { reportMode } = config;
     const isCreateMode = reportMode === 'create';
     let embedInstance;
 
-    if (isCreateMode) embedInstance = powerbi.createReport(ref, config);
+    if (isCreateMode)
+      embedInstance = window.powerbi.createReport(ref, config as any);
     else {
-      embedInstance = powerbi.embed(ref, config);
+      embedInstance = window.powerbi.embed(ref, config as any);
     }
 
     if (performOnEmbed) {
       performOnEmbed(embedInstance, ref);
     }
 
-    _setEmbedInstance(embedInstance);
+    _setEmbedInstance(embedInstance as any);
   };
 
   return [report, setEmbed];
 }
 
 // cleaner and a default API to export
-function useReport() {
+function useReport(): UseReport {
   const [report, _setEmbedInstance] = useState(null);
 
-  const setEmbed = (ref, config) => {
+  const setEmbed = (ref: any, config: Config): void => {
     const embedConfig = createEmbedConfigBasedOnEmbedType(config);
     const errors = validateConfig(embedConfig);
     if (!errors) {
@@ -51,9 +61,9 @@ function useReport() {
     }
   };
 
-  const embed = (ref, config) => {
-    const embedInstance = powerbi.embed(ref, config);
-    _setEmbedInstance(embedInstance);
+  const embed = (ref: any, config: Config) => {
+    const embedInstance = window.powerbi.embed(ref, config as any);
+    _setEmbedInstance(embedInstance as any);
   };
 
   return [report, setEmbed];

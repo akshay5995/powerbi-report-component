@@ -1,19 +1,13 @@
 import { validateAndInvokeCallback } from '../utils';
 import {
-  DASHBOARD_EVENTS,
-  REPORT_EVENTS,
-  TILE_EVENTS,
-} from '../utils/constants';
+  ReportProps,
+  DashboardProps,
+  TileProps,
+} from '../types';
 
-const clearAllHandlersAfterRerender = (embedInstance, events) => {
-  events.forEach((event) => embedInstance.off(event));
-};
-
-const reportHandler = (report, props) => {
+const reportHandler = (report: any, props: ReportProps): void => {
   const { reportMode } = props;
   const isCreateMode = reportMode === 'create';
-
-  clearAllHandlersAfterRerender(report, REPORT_EVENTS);
 
   report.on('loaded', () => {
     if (reportMode === 'edit') {
@@ -23,11 +17,11 @@ const reportHandler = (report, props) => {
     validateAndInvokeCallback(props.onLoad, report);
   });
 
-  report.on('error', (event) =>
+  report.on('error', (event: any) =>
     validateAndInvokeCallback(props.onError, event.detail)
   );
 
-  report.on('saved', (event) =>
+  report.on('saved', (event: any) =>
     validateAndInvokeCallback(props.onSave, event.detail)
   );
 
@@ -36,42 +30,43 @@ const reportHandler = (report, props) => {
       validateAndInvokeCallback(props.onRender, report)
     );
 
-    report.on('dataSelected', (event) =>
+    report.on('dataSelected', (event: any) =>
       validateAndInvokeCallback(props.onSelectData, event.detail)
     );
 
-    report.on('pageChanged', (event) =>
+    report.on('pageChanged', (event: any) =>
       validateAndInvokeCallback(props.onPageChange, event.detail)
     );
 
-    report.on('buttonClicked', (event) =>
+    report.on('buttonClicked', (event: any) =>
       validateAndInvokeCallback(props.onButtonClicked, event.detail)
     );
 
-    report.on('commandTriggered', (event) =>
+    report.on('commandTriggered', (event: any) =>
       validateAndInvokeCallback(props.onCommandTriggered, event.detail)
     );
   }
 };
 
-const dashboardHandler = (dashboard, dashboardRef, props) => {
-  clearAllHandlersAfterRerender(dashboard, DASHBOARD_EVENTS);
+const dashboardHandler = (
+  dashboard: any,
+  dashboardRef: any,
+  props: DashboardProps
+): void => {
+  if (props.onLoad)
+    props.onLoad(dashboard, (window.powerbi as any).get(dashboardRef));
 
-  if (props.onLoad) props.onLoad(dashboard, powerbi.get(dashboardRef));
-
-  dashboard.on('tileClicked', (event) =>
+  dashboard.on('tileClicked', (event: any) =>
     validateAndInvokeCallback(props.onTileClicked, event.detail)
   );
 };
 
-const tileHandler = (tile, props) => {
-  clearAllHandlersAfterRerender(tile, TILE_EVENTS);
-
-  tile.on('tileLoaded', (event) =>
+const tileHandler = (tile: any, props: TileProps): void => {
+  tile.on('tileLoaded', (event: any) =>
     validateAndInvokeCallback(props.onLoad, event.detail)
   );
 
-  tile.on('tileClicked', (event) =>
+  tile.on('tileClicked', (event: any) =>
     validateAndInvokeCallback(props.onClick, event.detail)
   );
 };

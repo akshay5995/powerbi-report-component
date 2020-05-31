@@ -5,7 +5,7 @@ import {
   CheckCircleTwoTone,
   InfoCircleOutlined,
 } from '@ant-design/icons';
-import { Report } from '../../lib';
+import { Report } from '../../../lib';
 import Form from './Form';
 import Info from '../common/InfoTab';
 
@@ -124,6 +124,33 @@ const ReportDemo = () => {
             />
           </TabPane>
           <TabPane
+            tab={
+              <span>
+                <InfoCircleOutlined />
+                Info
+              </span>
+            }
+            key="info"
+          >
+            <Info
+              title="Why the warning?"
+              titleType="warning"
+              key="info"
+            >
+              <Text>
+                The filters are hardcoded for the purposes of this demo
+                particular demo.
+                <Button
+                  type="link"
+                  href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/MultiplePageDemo/index.jsx#L41"
+                  target="_blank"
+                >
+                  Click here to see the code
+                </Button>
+              </Text>
+            </Info>
+          </TabPane>
+          <TabPane
             disabled={!isVaildConfig}
             tab={
               <Badge dot={isVaildConfig}>
@@ -230,33 +257,6 @@ const ReportDemo = () => {
                 />
               )}
             </div>
-          </TabPane>
-          <TabPane
-            tab={
-              <span>
-                <InfoCircleOutlined />
-                Info
-              </span>
-            }
-            key="info"
-          >
-            <Info
-              title="Why the warning?"
-              titleType="warning"
-              key="info"
-            >
-              <Text>
-                The filters are hardcoded for the purposes of this demo
-                particular demo.
-                <Button
-                  type="link"
-                  href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/MultiplePageDemo/index.jsx#L41"
-                  target="_blank"
-                >
-                  Click here to see the code
-                </Button>
-              </Text>
-            </Info>
           </TabPane>
         </Tabs>
       </Content>

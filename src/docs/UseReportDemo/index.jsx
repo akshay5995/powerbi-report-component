@@ -5,7 +5,7 @@ import {
   CheckCircleTwoTone,
   InfoCircleOutlined,
 } from '@ant-design/icons';
-import { useReport } from '../../lib';
+import { useReport } from '../../../lib';
 import Form from './Form';
 import Info from '../common/InfoTab';
 
@@ -86,6 +86,30 @@ const UseReportDemo = () => {
         </TabPane>
         <TabPane
           tab={
+            <span>
+              <InfoCircleOutlined />
+              Info
+            </span>
+          }
+          key="info"
+        >
+          <Info title="Why the warning?" titleType="warning" key="info">
+            <Text>
+              We show the report tab as default we ensure that the
+              reportRef set. Currently demo is available for only
+              embedType "report"
+            </Text>
+            <Button
+              type="link"
+              href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/UseReportDemo/index.jsx#L56"
+              target="_blank"
+            >
+              Click here to see the code
+            </Button>
+          </Info>
+        </TabPane>
+        <TabPane
+          tab={
             <Badge dot={isVaildConfig}>
               <span>
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
@@ -126,30 +150,6 @@ const UseReportDemo = () => {
             }}
             ref={reportRef}
           />
-        </TabPane>
-        <TabPane
-          tab={
-            <span>
-              <InfoCircleOutlined />
-              Info
-            </span>
-          }
-          key="info"
-        >
-          <Info title="Why the warning?" titleType="warning" key="info">
-            <Text>
-              We show the report tab as default we ensure that the
-              reportRef set. Currently demo is available for only
-              embedType "report"
-            </Text>
-            <Button
-              type="link"
-              href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/UseReportDemo/index.jsx#L56"
-              target="_blank"
-            >
-              Click here to see the code
-            </Button>
-          </Info>
         </TabPane>
       </Tabs>
     </Content>
