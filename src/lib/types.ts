@@ -36,7 +36,7 @@ export interface DashboardProps {
   embedUrl: string;
   embedId: string;
   pageView: PageView;
-  style?: string;
+  style?: any;
   onLoad?: Function;
   onTileClicked?: Function;
 }
