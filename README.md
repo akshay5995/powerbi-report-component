@@ -15,7 +15,7 @@ Existing users of the package please refer to Change Log [here](https://github.c
 
 _*Typescript support from >=2.2.0*_
 
-*Please import using `import { Report, Dashboard, Tile } from powerbi-report-component/lib`*
+*Please import using `import { Report, Dashboard, Tile } from 'powerbi-report-component/lib';`*
 
 ## Installation
 
