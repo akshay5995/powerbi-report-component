@@ -11,11 +11,11 @@ This repository is actively maintained by [Akshay Ram (akshay5995)](https://gith
 Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0) for the README for versions <=2.0.0.
 
 
-### Note about 2.2.0
+### [Important] Note about 2.2.0 (see issue [here](https://github.com/akshay5995/powerbi-report-component/issues/227#issuecomment-636569552)))
 
 _*Typescript support from >=2.2.0*_
 
-*Please import using `powerbi-report-component/lib`*
+*Please import using `import { Report, Dashboard, Tile } from powerbi-report-component/lib`*
 
 ## Installation
 
