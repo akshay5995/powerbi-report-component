@@ -3,7 +3,7 @@
   "version": "2.2.0",
   "description": "It's a minimalistic react component to embed a Microsoft PowerBI report or dashboard into your react application.",
   "main": "lib/index.js",
-  "types": "lib/types.d.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "dev": "concurrently \"npm run lib:watch\" \"npm run docs\"",
     "lib": "tsc",
