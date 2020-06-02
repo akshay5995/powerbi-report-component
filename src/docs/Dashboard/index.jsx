@@ -7,20 +7,20 @@ import Form from './Form';
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-const initalDashboardProps = {
+const initialDashboardProps = {
   tokenType: 'Embed',
 };
 
 const DashboardDemo = () => {
   const [dashboardProps, setDashboardProps] = React.useState(
-    initalDashboardProps
+    initialDashboardProps
   );
-  const [isVaildConfig, setIsValidConfig] = React.useState(false);
+  const [isValidConfig, setIsValidConfig] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('form');
 
   const onTabClick = (key, event) => setActiveTab(key);
 
-  const renderWithDashboardrops = React.useCallback(
+  const renderWithDashboardProps = React.useCallback(
     ({ dashboardProps }) => {
       setDashboardProps(dashboardProps);
       setIsValidConfig(true);
@@ -30,7 +30,7 @@ const DashboardDemo = () => {
 
   const onReset = React.useCallback(() => {
     setIsValidConfig(false);
-  }, [isVaildConfig]);
+  }, [isValidConfig]);
 
   return (
     <Content>
@@ -45,15 +45,15 @@ const DashboardDemo = () => {
           key="form"
         >
           <Form
-            initalDashboardProps={initalDashboardProps}
-            onSubmit={renderWithDashboardrops}
+            initialDashboardProps={initialDashboardProps}
+            onSubmit={renderWithDashboardProps}
             onReset={onReset}
           />
         </TabPane>
         <TabPane
-          disabled={!isVaildConfig}
+          disabled={!isValidConfig}
           tab={
-            <Badge dot={isVaildConfig}>
+            <Badge dot={isValidConfig}>
               <span>
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
                 Dashboard
@@ -62,7 +62,7 @@ const DashboardDemo = () => {
           }
           key="dashboard"
         >
-          {isVaildConfig && (
+          {isValidConfig && (
             <Dashboard
               {...dashboardProps}
               style={{

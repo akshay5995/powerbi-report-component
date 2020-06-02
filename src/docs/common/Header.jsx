@@ -18,7 +18,7 @@ const embedTypes = new Set(['Report', 'Dashboard', 'Tile']);
 const Header = ({ title, setDarkMode, isDarkMode }) => {
   const onChange = (checked) => setDarkMode(checked);
 
-  const genereateImportStatement = () => {
+  const generateImportStatement = () => {
     const importComponent = titleImportMap[title];
     return `import { ${importComponent} } from 'powerbi-report-component';`;
   };
@@ -31,7 +31,7 @@ const Header = ({ title, setDarkMode, isDarkMode }) => {
           {embedTypes.has(title) && <Text strong>Embed Type</Text>}
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <Text strong copyable={{ text: genereateImportStatement() }}>
+          <Text strong copyable={{ text: generateImportStatement() }}>
             {title}
           </Text>
         </Breadcrumb.Item>

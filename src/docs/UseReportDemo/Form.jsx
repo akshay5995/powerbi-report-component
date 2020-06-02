@@ -3,10 +3,10 @@ import { Form, Input, Select } from 'antd';
 import { layout } from '../styles/formLayoutStyles';
 import FormButtonGroup from '../common/FormButtonGroup';
 
-const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
+const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSumitForm = ({ reportProps }) => {
+  const onSubmitForm = ({ reportProps }) => {
     setIsSubmit(true);
     onSubmit({ reportProps });
   };
@@ -22,8 +22,8 @@ const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
       size="large"
       colon={false}
       name="reportProps"
-      onFinish={onSumitForm}
-      initialValues={{ reportProps: initalReportProps }}
+      onFinish={onSubmitForm}
+      initialValues={{ reportProps: initialReportProps }}
     >
       <Form.Item
         label="Embed Type"

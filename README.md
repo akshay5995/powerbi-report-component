@@ -16,7 +16,7 @@ Existing users of the package please refer to Change Log [here](https://github.c
 
 `npm i powerbi-report-component`
 
-## Usuage for Report
+## Usage for Report
 
 ```javascript
 import React, {Component} from 'react';
@@ -25,7 +25,7 @@ import { Report } from 'powerbi-report-component';
 class MyComponent extends Component {
   constructor(props) {
     super(props);
-    this.report = null; // to store the loaded report's object to perform operations like print, fullscreen etc..
+    this.report = null; // to store the loaded report's object to perform operations like print, full screen etc..
   }
   ...
   handleDataSelected = (data) => {
@@ -63,7 +63,7 @@ class MyComponent extends Component {
     const extraSettings = {
             filterPaneEnabled: false, //true
             navContentPaneEnabled: false, //true
-            hideErrors: false // Use this *only* when you want to overide error experience i.e, use onError
+            hideErrors: false // Use this *only* when you want to override error experience i.e, use onError
             // ... more custom settings
     };
     return (
@@ -93,7 +93,7 @@ class MyComponent extends Component {
 
 ```
 
-## Usuage for Dashboard
+## Usage for Dashboard
 
 ```javascript
 import { Dashboard } from 'powerbi-report-component';
@@ -116,7 +116,7 @@ import { Dashboard } from 'powerbi-report-component';
 />
 ```
 
-## Usuage for Tile
+## Usage for Tile
 
 ```javascript
 import { Tile } from 'powerbi-report-component';
@@ -188,7 +188,7 @@ export default MyReport;
 
 ## Report features and props you can pass into the component
 
-Inside your compoent where you're using { Report } component.
+Inside your component where you're using { Report } component.
 
 _Constructor:_
 
@@ -514,7 +514,7 @@ onClick = {(data) => {
 }}
 ```
 
-For playgroud visit:
+For playground visit:
 
 > http://akshay5995.github.io/powerbi-report-component
 

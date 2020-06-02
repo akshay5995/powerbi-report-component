@@ -7,16 +7,16 @@ import Form from './Form';
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-const initalReportProps = {
+const initialReportProps = {
   tokenType: 'Embed',
   reportMode: 'create',
 };
 
 const ReportDemo = () => {
   const [reportProps, setReportProps] = React.useState(
-    initalReportProps
+    initialReportProps
   );
-  const [isVaildConfig, setIsValidConfig] = React.useState(false);
+  const [isValidConfig, setIsValidConfig] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('form');
 
   const onTabClick = (key, event) => setActiveTab(key);
@@ -31,7 +31,7 @@ const ReportDemo = () => {
 
   const onReset = React.useCallback(() => {
     setIsValidConfig(false);
-  }, [isVaildConfig]);
+  }, [isValidConfig]);
 
   return (
     <Content>
@@ -46,15 +46,15 @@ const ReportDemo = () => {
           key="form"
         >
           <Form
-            initalReportProps={initalReportProps}
+            initialReportProps={initialReportProps}
             onSubmit={renderWithReportProps}
             onReset={onReset}
           />
         </TabPane>
         <TabPane
-          disabled={!isVaildConfig}
+          disabled={!isValidConfig}
           tab={
-            <Badge dot={isVaildConfig}>
+            <Badge dot={isValidConfig}>
               <span>
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
                 Create Report
@@ -63,7 +63,7 @@ const ReportDemo = () => {
           }
           key="report"
         >
-          {isVaildConfig && (
+          {isValidConfig && (
             <Report
               style={{
                 height: '100%',
@@ -74,7 +74,7 @@ const ReportDemo = () => {
                 console.log('Report Loaded!');
               }}
               onRender={(report) => {
-                console.log('Report Redered!');
+                console.log('Report Rendered!');
               }}
               onSave={(data) => {
                 console.log('Report saved. Event data ', data);

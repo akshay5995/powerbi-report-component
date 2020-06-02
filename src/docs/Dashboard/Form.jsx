@@ -3,7 +3,7 @@ import { Form, Input, Select } from 'antd';
 import { layout } from '../styles/formLayoutStyles';
 import FormButtonGroup from '../common/FormButtonGroup';
 
-const DashboardForm = ({ onSubmit, initalDashboardProps, onReset }) => {
+const DashboardForm = ({ onSubmit, initialDashboardProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
   const onSubmitForm = ({ dashboardProps }) => {
@@ -23,7 +23,7 @@ const DashboardForm = ({ onSubmit, initalDashboardProps, onReset }) => {
       colon={false}
       name="dashboardProps"
       onFinish={onSubmitForm}
-      initialValues={{ dashboardProps: initalDashboardProps }}
+      initialValues={{ dashboardProps: initialDashboardProps }}
     >
       <Form.Item
         label="Token Type"
@@ -63,7 +63,7 @@ const DashboardForm = ({ onSubmit, initalDashboardProps, onReset }) => {
         <Select placeholder="Page View (optional)">
           <Select.Option value="fitToWidth">fitToWidth</Select.Option>
           <Select.Option value="oneColumn">oneColumn</Select.Option>
-          <Select.Option value="actualtSize">actualtSize</Select.Option>
+          <Select.Option value="actualSize">actualSize</Select.Option>
         </Select>
       </Form.Item>
       <FormButtonGroup isSubmit={isSubmit} onReset={onResetForm} />

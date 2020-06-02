@@ -7,13 +7,13 @@ import Form from './Form';
 const { Content } = Layout;
 const { TabPane } = Tabs;
 
-const initalTileProps = {
+const initialTileProps = {
   tokenType: 'Embed',
 };
 
 const TileDemo = () => {
-  const [tileProps, setTileProps] = React.useState(initalTileProps);
-  const [isVaildConfig, setIsValidConfig] = React.useState(false);
+  const [tileProps, setTileProps] = React.useState(initialTileProps);
+  const [isValidConfig, setIsValidConfig] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('form');
 
   const onTabClick = (key, event) => setActiveTab(key);
@@ -28,7 +28,7 @@ const TileDemo = () => {
 
   const onReset = React.useCallback(() => {
     setIsValidConfig(false);
-  }, [isVaildConfig]);
+  }, [isValidConfig]);
 
   return (
     <Content>
@@ -43,15 +43,15 @@ const TileDemo = () => {
           key="form"
         >
           <Form
-            initalTileProps={initalTileProps}
+            initialTileProps={initialTileProps}
             onSubmit={renderWithTileProps}
             onReset={onReset}
           />
         </TabPane>
         <TabPane
-          disabled={!isVaildConfig}
+          disabled={!isValidConfig}
           tab={
-            <Badge dot={isVaildConfig}>
+            <Badge dot={isValidConfig}>
               <span>
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
                 Tile
@@ -60,7 +60,7 @@ const TileDemo = () => {
           }
           key="tile"
         >
-          {isVaildConfig && (
+          {isValidConfig && (
             <Tile
               style={{
                 height: '100%',

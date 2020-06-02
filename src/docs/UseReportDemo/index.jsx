@@ -13,16 +13,16 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 const { Text } = Typography;
 
-const initalReportProps = {
+const initialReportProps = {
   embedType: 'report',
   tokenType: 'Embed',
 };
 
 const UseReportDemo = () => {
   const [reportProps, setReportProps] = React.useState(
-    initalReportProps
+    initialReportProps
   );
-  const [isVaildConfig, setIsValidConfig] = React.useState(false);
+  const [isValidConfig, setIsValidConfig] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('report');
 
   const reportRef = React.useRef(null);
@@ -44,27 +44,27 @@ const UseReportDemo = () => {
 
   const onReset = React.useCallback(() => {
     setIsValidConfig(false);
-  }, [isVaildConfig]);
+  }, [isValidConfig]);
 
   const extraSettings = {
     filterPaneEnabled: false,
     navContentPaneEnabled: false,
   };
 
-  const handleclick = () => {
+  const handleClick = () => {
     // you can use "report" from useReport like
     if (report) report.print();
   };
 
   // important: make sure we have reportRef
   React.useEffect(() => {
-    if (isVaildConfig) {
+    if (isValidConfig) {
       setEmbed(reportRef, {
         ...reportProps,
         settings: extraSettings,
       });
     }
-  }, [isVaildConfig]);
+  }, [isValidConfig]);
 
   return (
     <Content>
@@ -79,7 +79,7 @@ const UseReportDemo = () => {
           key="form"
         >
           <Form
-            initalReportProps={initalReportProps}
+            initialReportProps={initialReportProps}
             onSubmit={renderWithReportProps}
             onReset={onReset}
           />
@@ -110,7 +110,7 @@ const UseReportDemo = () => {
         </TabPane>
         <TabPane
           tab={
-            <Badge dot={isVaildConfig}>
+            <Badge dot={isValidConfig}>
               <span>
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
                 Report
@@ -133,10 +133,10 @@ const UseReportDemo = () => {
               closable
             />
             <Button
-              disabled={!isVaildConfig}
+              disabled={!isValidConfig}
               type="primary"
               shape="round"
-              onClick={handleclick}
+              onClick={handleClick}
               style={{ margin: '8px' }}
             >
               Print report

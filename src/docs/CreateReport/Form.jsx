@@ -3,7 +3,7 @@ import { Form, Input, Select } from 'antd';
 import { layout } from '../styles/formLayoutStyles';
 import FormButtonGroup from '../common/FormButtonGroup';
 
-const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
+const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
   const onSubmitForm = ({ reportProps }) => {
@@ -23,7 +23,7 @@ const ReportForm = ({ onSubmit, initalReportProps, onReset }) => {
       colon={false}
       name="reportProps"
       onFinish={onSubmitForm}
-      initialValues={{ reportProps: initalReportProps }}
+      initialValues={{ reportProps: initialReportProps }}
     >
       <Form.Item
         label="Token Type"

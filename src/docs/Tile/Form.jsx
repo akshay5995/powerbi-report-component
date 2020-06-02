@@ -3,7 +3,7 @@ import { Form, Input, Select } from 'antd';
 import { layout } from '../styles/formLayoutStyles';
 import FormButtonGroup from '../common/FormButtonGroup';
 
-const TileForm = ({ onSubmit, initalTileProps, onReset }) => {
+const TileForm = ({ onSubmit, initialTileProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
   const onSubmitForm = ({ tileProps }) => {
@@ -23,7 +23,7 @@ const TileForm = ({ onSubmit, initalTileProps, onReset }) => {
       colon={false}
       name="tileProps"
       onFinish={onSubmitForm}
-      initialValues={{ tileProps: initalTileProps }}
+      initialValues={{ tileProps: initialTileProps }}
     >
       <Form.Item
         label="Token Type"
@@ -56,7 +56,7 @@ const TileForm = ({ onSubmit, initalTileProps, onReset }) => {
           { required: true, message: 'Dashboard Id is required' },
         ]}
       >
-        <Input placeholder="Dasboard Id" />
+        <Input placeholder="Dashboard Id" />
       </Form.Item>
       <Form.Item
         name={['tileProps', 'embedId']}
