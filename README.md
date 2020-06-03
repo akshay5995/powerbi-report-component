@@ -158,7 +158,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
     accessToken: accessToken,
     embedUrl: embedUrl,
     embedId: embedId,
-    settings: {
+    extraSettings: {
       filterPaneEnabled: false,
       navContentPaneEnabled: false,
     },
@@ -184,6 +184,74 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
 };
 
 export default MyReport;
+```
+
+## Passing in custom layout for useReport hook.
+
+Example is taken from powerbi js wiki: [Custom-Layout](https://github.com/Microsoft/PowerBI-JavaScript/wiki/Custom-Layout).
+
+```javascript
+import { models } from 'powerbi-client'; // Import from the dependency
+
+// Example layout config 
+const layoutSettings = {
+  layoutType: models.LayoutType.Custom,
+  customLayout: {
+    pageSize: {
+      type: models.PageSizeType.Custom,
+      width: 1600,
+      height: 1200,
+    },
+    displayOption: models.DisplayOption.ActualSize,
+    pagesLayout: {
+      ReportSection1: {
+        defaultLayout: {
+          displayState: {
+            mode: models.VisualContainerDisplayMode.Hidden,
+          },
+        },
+        visualsLayout: {
+          VisualContainer1: {
+            x: 1,
+            y: 1,
+            z: 1,
+            width: 400,
+            height: 300,
+            displayState: {
+              mode: models.VisualContainerDisplayMode.Visible,
+            },
+          },
+          VisualContainer2: {
+            displayState: {
+              mode: models.VisualContainerDisplayMode.Visible,
+            },
+          },
+        },
+      },
+    },
+  },
+};
+
+// Create your config
+const myReportConfig = {
+  embedType: 'report',
+  tokenType: 'Embed',
+  accessToken: accessToken,
+  embedUrl: embedUrl,
+  embedId: embedId,
+  extraSettings: {
+    filterPaneEnabled: false,
+    navContentPaneEnabled: false,
+    ...layoutSettings, // layout config
+  },
+};
+
+
+// Inside your component
+useEffect(() => {
+  setEmbed(reportRef, myReportConfig);
+}, []);
+
 ```
 
 ## Report features and props you can pass into the component
