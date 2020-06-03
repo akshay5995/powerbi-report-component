@@ -1,4 +1,4 @@
-# Powerbi Report Component
+# PowerBI Report Component
 
 ![downloads](https://img.shields.io/npm/dw/powerbi-report-component?label=npm%20downloads&style=for-the-badge)
 ![license](https://img.shields.io/github/license/akshay5995/powerbi-report-component?color=blue&style=for-the-badge)
