@@ -61,7 +61,7 @@ const UseReportDemo = () => {
     if (isValidConfig) {
       setEmbed(reportRef, {
         ...reportProps,
-        settings: extraSettings,
+        extraSettings,
       });
     }
   }, [isValidConfig]);
