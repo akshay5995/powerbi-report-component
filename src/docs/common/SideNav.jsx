@@ -27,7 +27,7 @@ const SideNav = ({ darkMode, selected, onSelect }) => {
         level={4}
         copyable={{ text: 'npm i powerbi-report-component' }}
       >
-        PowerBi Report Component
+        PowerBI Report Component
       </Title>
       <Menu
         theme={theme}
