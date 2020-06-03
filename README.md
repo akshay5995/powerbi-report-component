@@ -170,7 +170,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
     setEmbed(reportRef, myReportConfig);
   }, []);
 
-  const handleclick = () => {
+  const handleClick = () => {
     // you can use "report" from useReport like
     if (report) report.print();
   };
@@ -178,7 +178,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
   return (
     <div className="report-container">
       <div className="report" ref={reportRef} />
-      <button onClick={handleclick}>Print my report</button>
+      <button onClick={handleClick}>Print my report</button>
     </div>
   );
 };
