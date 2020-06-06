@@ -13,15 +13,15 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 const { Text } = Typography;
 
-const initalReportProps = {
+const initialReportProps = {
   tokenType: 'Embed',
 };
 
 const ReportDemo = () => {
   const [reportProps, setReportProps] = React.useState(
-    initalReportProps
+    initialReportProps
   );
-  const [isVaildConfig, setIsValidConfig] = React.useState(false);
+  const [isValidConfig, setIsValidConfig] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('form');
 
   const onTabClick = (key, event) => setActiveTab(key);
@@ -76,7 +76,7 @@ const ReportDemo = () => {
 
   const onReset = React.useCallback(() => {
     setIsValidConfig(false);
-  }, [isVaildConfig]);
+  }, [isValidConfig]);
 
   const extraSettings = {
     filterPaneEnabled: false,
@@ -118,7 +118,7 @@ const ReportDemo = () => {
             key="form"
           >
             <Form
-              initalReportProps={initalReportProps}
+              initialReportProps={initialReportProps}
               onSubmit={renderWithReportProps}
               onReset={onReset}
             />
@@ -151,9 +151,9 @@ const ReportDemo = () => {
             </Info>
           </TabPane>
           <TabPane
-            disabled={!isVaildConfig}
+            disabled={!isValidConfig}
             tab={
-              <Badge dot={isVaildConfig}>
+              <Badge dot={isValidConfig}>
                 <span>
                   <CheckCircleTwoTone twoToneColor="#52c41a" />
                   Report
@@ -212,7 +212,7 @@ const ReportDemo = () => {
               </div>
             </div>
             <div style={{ display: 'flex', height: '100%' }}>
-              {isVaildConfig && (
+              {isValidConfig && (
                 <Report
                   style={{
                     height: '100%',
@@ -234,7 +234,7 @@ const ReportDemo = () => {
                   }}
                 />
               )}
-              {isVaildConfig && (
+              {isValidConfig && (
                 <Report
                   style={{
                     height: '100%',
