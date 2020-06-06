@@ -5,16 +5,17 @@ import {
   TileProps,
 } from '../types';
 
-const reportHandler = (report: any, props: ReportProps): void => {
+const reportHandler = (report: any, reportRef: any, props: ReportProps): void => {
   const { reportMode } = props;
   const isCreateMode = reportMode === 'create';
+  const reportInstance = window.powerbi.get(reportRef)
 
   report.on('loaded', () => {
     if (reportMode === 'edit') {
       report.switchMode(reportMode);
     }
 
-    validateAndInvokeCallback(props.onLoad, report);
+    validateAndInvokeCallback(props.onLoad, reportInstance);
   });
 
   report.on('error', (event: any) =>
@@ -27,7 +28,7 @@ const reportHandler = (report: any, props: ReportProps): void => {
 
   if (!isCreateMode) {
     report.on('rendered', () =>
-      validateAndInvokeCallback(props.onRender, report)
+      validateAndInvokeCallback(props.onRender, reportInstance)
     );
 
     report.on('dataSelected', (event: any) =>
@@ -54,7 +55,7 @@ const dashboardHandler = (
   props: DashboardProps
 ): void => {
   if (props.onLoad)
-    props.onLoad(dashboard, (window.powerbi as any).get(dashboardRef));
+    props.onLoad(dashboard, window.powerbi.get(dashboardRef));
 
   dashboard.on('tileClicked', (event: any) =>
     validateAndInvokeCallback(props.onTileClicked, event.detail)

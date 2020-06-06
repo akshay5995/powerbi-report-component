@@ -8,8 +8,8 @@ const Report = (props: ReportProps) => {
   const [currentConfig, setCurrentConfig] = React.useState<Config | null>(null);
 
   const performOnEmbed = React.useCallback(
-    (report) => {
-      reportHandler(report, props);
+    (report, reportRef) => {
+      reportHandler(report, reportRef, props);
     },
     [props]
   );

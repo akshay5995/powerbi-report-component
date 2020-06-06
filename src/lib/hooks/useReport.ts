@@ -62,7 +62,8 @@ function useReport(): UseReport {
   };
 
   const embed = (ref: any, config: Config) => {
-    const embedInstance = window.powerbi.embed(ref, config as any);
+    const _embed = window.powerbi.embed(ref, config as any);
+    const embedInstance = window.powerbi.get(ref);
     _setEmbedInstance(embedInstance as any);
   };
 
