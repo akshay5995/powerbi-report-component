@@ -70,6 +70,21 @@ const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
       >
         <Input placeholder="Embed Id" />
       </Form.Item>
+      <Form.Item
+        label="Permissions"
+        name={['reportProps', 'permissions']}
+      >
+        <Select placeholder="Permissions (default: View)">
+          <Select.Option value="View">View</Select.Option>
+          <Select.Option value="All">All</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label="Mode" name={['reportProps', 'reportMode']}>
+        <Select placeholder="Mode (default: View)">
+          <Select.Option value="View">View</Select.Option>
+          <Select.Option value="Edit">Edit</Select.Option>
+        </Select>
+      </Form.Item>
       <FormButtonGroup isSubmit={isSubmit} onReset={onResetForm} />
     </Form>
   );

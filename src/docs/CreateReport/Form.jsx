@@ -51,7 +51,7 @@ const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
       </Form.Item>
       <Form.Item label="Mode" name={['reportProps', 'reportMode']}>
         <Select placeholder="Mode (Create)">
-          <Select.Option value="create">Create</Select.Option>
+          <Select.Option value="Create">Create</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item

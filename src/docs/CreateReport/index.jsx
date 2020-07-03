@@ -9,7 +9,7 @@ const { TabPane } = Tabs;
 
 const initialReportProps = {
   tokenType: 'Embed',
-  reportMode: 'create',
+  reportMode: 'Create',
 };
 
 const ReportDemo = () => {

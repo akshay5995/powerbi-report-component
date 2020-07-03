@@ -74,17 +74,17 @@ class MyComponent extends Component {
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
             pageName="" // set as current page of the report
-            reportMode="view" // open report in a particular mode view/edit/create
-            datasetId={datasetId} // required for reportMode = "create" and optional for dynamic databinding in `report` on `view` mode
+            reportMode="View" // open report in a particular mode View/Edit/Create
+            datasetId={datasetId} // required for reportMode = "Create" and optional for dynamic databinding in `report` on `View` mode
             extraSettings={extraSettings}
-            permissions="All" // View
+            permissions="All" // View, For "Edit" mode permissions should be "All"
             style={reportStyle}
             onLoad={this.handleReportLoad}
-            onRender={this.handleReportRender} // not allowed in `create`
+            onRender={this.handleReportRender} // not allowed in "Create" mode
             onSelectData={this.handleDataSelected}
             onPageChange={this.handlePageChange}
             onTileClicked={this.handleTileClicked}
-            onSave={this.handleReportSave} // works for edit and create
+            onSave={this.handleReportSave} // works for "Edit" and "Create"
         />
     </div>
     );
@@ -158,6 +158,8 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
     accessToken: accessToken,
     embedUrl: embedUrl,
     embedId: embedId,
+    reportMode: "View", // "Edit"
+    permissions: "View", // "All" (when using "Edit" mode)
     extraSettings: {
       filterPaneEnabled: false,
       navContentPaneEnabled: false,
@@ -420,7 +422,7 @@ Note: you wouldn't use `this` if you're using `report` from `useReport` hook.
 1. Change Report Mode to View or Edit:
 
 ```javascript
-//mode can be "view" or "edit"
+//mode can be "View" or "Edit"
 
 changeMode = (mode) => this.report.switchMode(mode);
 ```
@@ -493,7 +495,7 @@ removeFilters = () =>
   });
 ```
 
-7. Save edited report when in "edit" mode
+7. Save edited report when in "Edit" mode
 
 (note: you need to have enough permissions to save the report)
 
