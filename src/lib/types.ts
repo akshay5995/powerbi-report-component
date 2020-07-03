@@ -1,4 +1,4 @@
-export type ReportModes = 'view' | 'edit' | 'create';
+export type ReportModes = 'View' | 'Edit' | 'Create';
 
 export type EmbedType = 'report' | 'dashboard' | 'tile';
 

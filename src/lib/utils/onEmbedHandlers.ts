@@ -1,19 +1,16 @@
 import { validateAndInvokeCallback } from '../utils';
-import {
-  ReportProps,
-  DashboardProps,
-  TileProps,
-} from '../types';
+import { ReportProps, DashboardProps, TileProps } from '../types';
 
-const reportHandler = (report: any, reportRef: any, props: ReportProps): void => {
+const reportHandler = (
+  report: any,
+  reportRef: any,
+  props: ReportProps
+): void => {
   const { reportMode } = props;
-  const isCreateMode = reportMode === 'create';
-  const reportInstance = window.powerbi.get(reportRef)
+  const isCreateMode = reportMode === 'Create';
+  const reportInstance = window.powerbi.get(reportRef);
 
   report.on('loaded', () => {
-    if (reportMode === 'edit') {
-      report.switchMode(reportMode);
-    }
 
     validateAndInvokeCallback(props.onLoad, reportInstance);
   });

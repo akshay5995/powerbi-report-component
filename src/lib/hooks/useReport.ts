@@ -27,7 +27,7 @@ function _useReport(
 
   const embed = (ref: any, config: Config) => {
     const { reportMode } = config;
-    const isCreateMode = reportMode === 'create';
+    const isCreateMode = reportMode === 'Create';
     let embedInstance;
 
     if (isCreateMode)

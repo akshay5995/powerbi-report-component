@@ -14,7 +14,10 @@ const clean = (obj: any) => {
   return obj;
 };
 
-const validateAndInvokeCallback = (callback: Function | undefined, data: any) => {
+const validateAndInvokeCallback = (
+  callback: Function | undefined,
+  data: any
+) => {
   if (!!callback) {
     callback(data);
   }

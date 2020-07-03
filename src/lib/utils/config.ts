@@ -22,7 +22,7 @@ const createReportConfig = (props: ReportProps): Config => {
     reportMode,
   } = props;
 
-  if (reportMode === 'create') {
+  if (reportMode === "Create") {
     return clean({
       type: 'report',
       tokenType: models.TokenType[tokenType],
@@ -62,6 +62,7 @@ const createReportConfig = (props: ReportProps): Config => {
     embedUrl,
     id: embedId,
     pageName,
+    viewMode: models.ViewMode[reportMode],
     permissions: models.Permissions[permissions],
     reportMode,
     ...settings,
@@ -122,7 +123,7 @@ const validateCreateReportConfig = (config: any): IError[] => {
 };
 
 const validateConfig = (config: any): IError[] => {
-  const isCreateMode = config.reportMode === 'create';
+  const isCreateMode = config.reportMode === 'Create';
   return isCreateMode
     ? validateCreateReportConfig(config)
     : validateTypeConfig(config);
