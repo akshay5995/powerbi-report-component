@@ -12,6 +12,11 @@ Existing users of the package please refer to Change Log [here](https://github.c
 
 ### [New] Typescript support from >=2.2.2
 
+### [Change Log] >=2.2.4
+- **(Breaking change)** `reportMode` prop and config will accept `View`, `Edit` and `Create`. (previously it was `edit`/`view`/`create`)(case sensitive)
+- **(Enhancement)**  Now you can `Edit` mode in `useReport` hook.
+
+
 ## Installation
 
 `npm i powerbi-report-component`
