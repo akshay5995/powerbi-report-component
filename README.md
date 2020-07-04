@@ -14,7 +14,7 @@ Existing users of the package please refer to Change Log [here](https://github.c
 
 ### [Change Log] >=2.2.4
 - **(Breaking change)** `reportMode` prop and config will accept `View`, `Edit` and `Create`. (previously it was `edit`/`view`/`create`)(case sensitive)
-- **(Enhancement)**  Now you can `Edit` mode in `useReport` hook.
+- **(Enhancement)**  Now you can use `Edit` mode in `useReport` hook.
 
 
 ## Installation
