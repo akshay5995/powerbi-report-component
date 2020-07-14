@@ -10,6 +10,8 @@ This repository is actively maintained by [Akshay Ram (akshay5995)](https://gith
 
 Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0) for the README for versions <=2.0.0.
 
+### [New Embed Type] ReportVisual(as part of a feature request)
+
 ### [New] Typescript support from >=2.2.2
 
 ### [Change Log] >=2.3.0
@@ -139,6 +141,32 @@ import { Tile } from 'powerbi-report-component';
   }}
   onLoad={(data) => {
     console.log('Tile loaded', data);
+  }}
+/>
+```
+
+## [New] Usage for ReportVisual
+
+```javascript
+import { ReportVisual } from 'powerbi-report-component';
+
+// inside render
+<ReportVisual
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  pageName={pageName}
+  visualName={visualName}
+  style={style} // style tile for report component
+  onSelectData={(data) => {
+    console.log('Data from ReportVisual', data);
+  }}
+  onLoad={(data) => {
+    console.log('ReportVisual loaded', data);
+  }}
+  onRender={(data) => {
+    console.log('ReportVisual rendered', data);
   }}
 />
 ```
