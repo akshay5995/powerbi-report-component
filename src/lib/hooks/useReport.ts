@@ -17,7 +17,7 @@ function _useReport(
 
   const setEmbed = (embedDivRef: any, embedConfig: Config): void => {
     const errors = validateConfig(embedConfig);
-    if (!errors) {
+    if (!errors || errors.length === 0) {
       embed(embedDivRef.current, embedConfig);
     } else {
       const errorString = parseConfigErrors(errors);
@@ -53,7 +53,7 @@ function useReport(): UseReport {
   const setEmbed = (ref: any, config: Config): void => {
     const embedConfig = createEmbedConfigBasedOnEmbedType(config);
     const errors = validateConfig(embedConfig);
-    if (!errors) {
+    if (!errors || errors.length === 0) {
       embed(ref.current, embedConfig);
     } else {
       const errorString = parseConfigErrors(errors);

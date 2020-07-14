@@ -1,5 +1,10 @@
 import { validateAndInvokeCallback } from '../utils';
-import { ReportProps, DashboardProps, TileProps } from '../types';
+import {
+  ReportProps,
+  DashboardProps,
+  TileProps,
+  ReportVisualProps,
+} from '../types';
 
 const reportHandler = (
   report: any,
@@ -11,7 +16,6 @@ const reportHandler = (
   const reportInstance = window.powerbi.get(reportRef);
 
   report.on('loaded', () => {
-
     validateAndInvokeCallback(props.onLoad, reportInstance);
   });
 
@@ -46,6 +50,26 @@ const reportHandler = (
   }
 };
 
+const reportVisualHandler = (
+  reportVisual: any,
+  reportRef: any,
+  props: ReportVisualProps
+): void => {
+  const reportInstance = window.powerbi.get(reportRef);
+
+  reportVisual.on('loaded', () => {
+    validateAndInvokeCallback(props.onLoad, reportInstance);
+  });
+
+  reportVisual.on('rendered', () =>
+    validateAndInvokeCallback(props.onRender, reportInstance)
+  );
+
+  reportVisual.on('dataSelected', (event: any) =>
+    validateAndInvokeCallback(props.onSelectData, event.detail)
+  );
+};
+
 const dashboardHandler = (
   dashboard: any,
   dashboardRef: any,
@@ -69,4 +93,9 @@ const tileHandler = (tile: any, props: TileProps): void => {
   );
 };
 
-export { reportHandler, dashboardHandler, tileHandler };
+export {
+  reportHandler,
+  dashboardHandler,
+  tileHandler,
+  reportVisualHandler,
+};

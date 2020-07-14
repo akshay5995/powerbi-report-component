@@ -62,12 +62,26 @@ export interface ReportProps {
   onSave?: Function;
 }
 
+export interface ReportVisualProps {
+  tokenType: TokenType;
+  accessToken: string;
+  embedUrl: string;
+  embedId: string;
+  pageName: string;
+  visualName: string;
+  style?: any;
+  onLoad?: Function;
+  onRender?: Function;
+  onSelectData?: Function;
+}
+
 export interface Config {
   type: EmbedType;
   tokenType: TokenType;
   accessToken: string;
   embedUrl: string;
   pageName: string;
+  visualName: string;
   extraSettings: any;
   permissions: Permissions;
   id: string;
