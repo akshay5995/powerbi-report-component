@@ -138,8 +138,7 @@ const ReportDemo = () => {
               key="info"
             >
               <Text>
-                The filters are hardcoded for the purposes of this demo
-                particular demo.
+                The filters are hardcoded for the purposes of this particular demo.
                 <Button
                   type="link"
                   href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/MultiplePageDemo/index.jsx#L41"
