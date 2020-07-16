@@ -76,6 +76,7 @@ class MyComponent extends Component {
             pageName="" // set as current page of the report
             reportMode="view" // open report in a particular mode view/edit/create
             datasetId={datasetId} // required for reportMode = "create" and optional for dynamic databinding in `report` on `view` mode
+            groupId={groupId} // optional. Used when reportMode = "create" and to chose the target workspace when the dataset is shared. 
             extraSettings={extraSettings}
             permissions="All" // View
             style={reportStyle}
@@ -92,6 +93,8 @@ class MyComponent extends Component {
 }
 
 ```
+
+Visit [here](https://docs.microsoft.com/en-us/rest/api/power-bi/embedtoken/generatetoken#generatetokenrequestv2) for more details on creating reports with shared dataset
 
 ## Usage for Dashboard
 
