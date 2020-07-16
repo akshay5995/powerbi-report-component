@@ -21,6 +21,7 @@ const createReportConfig = (props: ReportProps): Config => {
     extraSettings,
     datasetId,
     reportMode,
+    groupId
   } = props;
 
   if (reportMode === 'Create') {
@@ -30,6 +31,7 @@ const createReportConfig = (props: ReportProps): Config => {
       accessToken,
       embedUrl,
       datasetId,
+      groupId,
       reportMode,
     });
   }

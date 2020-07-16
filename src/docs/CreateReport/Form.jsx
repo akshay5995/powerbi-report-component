@@ -66,6 +66,9 @@ const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
       >
         <Input placeholder="Dataset Id" />
       </Form.Item>
+      <Form.Item name={['reportProps', 'groupId']} label="Group Id">
+        <Input placeholder="Group Id (Optional)" />
+      </Form.Item>
       <FormButtonGroup isSubmit={isSubmit} onReset={onResetForm} />
     </Form>
   );
