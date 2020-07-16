@@ -6,9 +6,9 @@ import FormButtonGroup from '../common/FormButtonGroup';
 const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
   const [isSubmit, setIsSubmit] = React.useState(false);
 
-  const onSubmitForm = ({ reportProps }) => {
+  const onSubmitForm = ({ reportVisualProps }) => {
     setIsSubmit(true);
-    onSubmit({ reportProps });
+    onSubmit({ reportVisualProps });
   };
 
   const onResetForm = () => {
@@ -21,22 +21,13 @@ const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
       {...layout}
       size="large"
       colon={false}
-      name="reportProps"
+      name="reportVisualProps"
       onFinish={onSubmitForm}
-      initialValues={{ reportProps: initialReportProps }}
+      initialValues={{ reportVisualProps: initialReportProps }}
     >
       <Form.Item
-        label="Embed Type"
-        name={['reportProps', 'embedType']}
-        rules={[{ required: true }]}
-      >
-        <Select placeholder="Embed Type">
-          <Select.Option value="report">Report</Select.Option>
-        </Select>
-      </Form.Item>
-      <Form.Item
         label="Token Type"
-        name={['reportProps', 'tokenType']}
+        name={['reportVisualProps', 'tokenType']}
         rules={[{ required: true }]}
       >
         <Select placeholder="Token Type">
@@ -45,21 +36,21 @@ const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
         </Select>
       </Form.Item>
       <Form.Item
-        name={['reportProps', 'accessToken']}
+        name={['reportVisualProps', 'accessToken']}
         label="Token"
         rules={[{ required: true, message: 'Token is required' }]}
       >
         <Input placeholder="Embed or Aad Token" />
       </Form.Item>
       <Form.Item
-        name={['reportProps', 'embedUrl']}
+        name={['reportVisualProps', 'embedUrl']}
         label="Embed Url"
         rules={[{ required: true, message: 'Embed Url is required' }]}
       >
         <Input placeholder="Embed Url" />
       </Form.Item>
       <Form.Item
-        name={['reportProps', 'embedId']}
+        name={['reportVisualProps', 'embedId']}
         label="Embed Id"
         rules={[
           {
@@ -71,19 +62,28 @@ const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
         <Input placeholder="Embed Id" />
       </Form.Item>
       <Form.Item
-        label="Permissions"
-        name={['reportProps', 'permissions']}
+        name={['reportVisualProps', 'pageName']}
+        label="Page Name"
+        rules={[
+          {
+            required: true,
+            message: 'Page name is required',
+          },
+        ]}
       >
-        <Select placeholder="Permissions (default: View)">
-          <Select.Option value="View">View</Select.Option>
-          <Select.Option value="All">All</Select.Option>
-        </Select>
+        <Input placeholder="Page Name" />
       </Form.Item>
-      <Form.Item label="Mode" name={['reportProps', 'reportMode']}>
-        <Select placeholder="Mode (default: View)">
-          <Select.Option value="View">View</Select.Option>
-          <Select.Option value="Edit">Edit</Select.Option>
-        </Select>
+      <Form.Item
+        name={['reportVisualProps', 'visualName']}
+        label="Visual Name"
+        rules={[
+          {
+            required: true,
+            message: 'Visual name is required',
+          },
+        ]}
+      >
+        <Input placeholder="Visual Name" />
       </Form.Item>
       <FormButtonGroup isSubmit={isSubmit} onReset={onResetForm} />
     </Form>

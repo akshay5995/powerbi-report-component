@@ -8,6 +8,7 @@ import {
   CopyTwoTone,
   LinkOutlined,
   ExperimentTwoTone,
+  ContainerTwoTone
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -52,6 +53,12 @@ const SideNav = ({ darkMode, selected, onSelect }) => {
           icon={<BuildTwoTone style={{ fontSize: '18px' }} />}
         >
           Tile
+        </Menu.Item>
+        <Menu.Item
+          key="ReportVisual"
+          icon={<ContainerTwoTone style={{ fontSize: '18px' }} />}
+        >
+          ReportVisual
         </Menu.Item>
         <Menu.Item
           key="Create Report"

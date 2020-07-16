@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Tabs, Badge } from 'antd';
 import { FormOutlined, CheckCircleTwoTone } from '@ant-design/icons';
-import { Report } from '../../../lib';
+import { ReportVisual } from '../../../lib';
 import Form from './Form';
 
 const { Content } = Layout;
@@ -9,11 +9,10 @@ const { TabPane } = Tabs;
 
 const initialReportProps = {
   tokenType: 'Embed',
-  reportMode: 'Create',
 };
 
-const ReportDemo = () => {
-  const [reportProps, setReportProps] = React.useState(
+const ReportVisualDemo = () => {
+  const [reportVisualProps, setReportVisualProps] = React.useState(
     initialReportProps
   );
   const [isValidConfig, setIsValidConfig] = React.useState(false);
@@ -22,11 +21,11 @@ const ReportDemo = () => {
   const onTabClick = (key, event) => setActiveTab(key);
 
   const renderWithReportProps = React.useCallback(
-    ({ reportProps }) => {
-      setReportProps(reportProps);
+    ({ reportVisualProps }) => {
+      setReportVisualProps(reportVisualProps);
       setIsValidConfig(true);
     },
-    [reportProps]
+    [reportVisualProps]
   );
 
   const onReset = React.useCallback(() => {
@@ -57,30 +56,27 @@ const ReportDemo = () => {
             <Badge dot={isValidConfig}>
               <span>
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
-                Create Report
+                Report
               </span>
             </Badge>
           }
           key="report"
         >
           {isValidConfig && (
-            <Report
+            <ReportVisual
               style={{
                 height: '100%',
                 border: '0',
               }}
-              {...reportProps}
+              {...reportVisualProps}
               onLoad={(report) => {
                 console.log('Report Loaded!');
               }}
               onRender={(report) => {
-                console.log('Report Rendered!');
+                console.log('Report Rendered');
               }}
-              onSave={(data) => {
-                console.log('Report saved. Event data ', data);
-              }}
-              onError={(data) => {
-                console.log('Error', data);
+              onSelectData={(data) => {
+                console.log('Data selected', data);
               }}
             />
           )}
@@ -90,4 +86,4 @@ const ReportDemo = () => {
   );
 };
 
-export default ReportDemo;
+export default ReportVisualDemo;

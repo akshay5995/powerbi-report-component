@@ -10,7 +10,14 @@ This repository is actively maintained by [Akshay Ram (akshay5995)](https://gith
 
 Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0) for the README for versions <=2.0.0.
 
+### [New Embed Type] ReportVisual (from >=2.4.0)
+
 ### [New] Typescript support from >=2.2.2
+
+### [Change Log] >=2.3.0
+- **(Breaking change)** `reportMode` prop and config will accept `View`, `Edit` and `Create`. (previously it was `edit`/`view`/`create`)(case sensitive)
+- **(Enhancement)**  Now you can use `Edit` mode in `useReport` hook.
+
 
 ## Installation
 
@@ -74,18 +81,18 @@ class MyComponent extends Component {
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
             pageName="" // set as current page of the report
-            reportMode="view" // open report in a particular mode view/edit/create
-            datasetId={datasetId} // required for reportMode = "create" and optional for dynamic databinding in `report` on `view` mode
-            groupId={groupId} // optional. Used when reportMode = "create" and to chose the target workspace when the dataset is shared. 
+            reportMode="View" // open report in a particular mode View/Edit/Create
+            datasetId={datasetId} // required for reportMode = "Create" and optional for dynamic databinding in `report` on `View` mode
+            groupId={groupId} // optional. Used when reportMode = "Create" and to chose the target workspace when the dataset is shared. 
             extraSettings={extraSettings}
-            permissions="All" // View
+            permissions="All" // View, For "Edit" mode permissions should be "All"
             style={reportStyle}
             onLoad={this.handleReportLoad}
-            onRender={this.handleReportRender} // not allowed in `create`
+            onRender={this.handleReportRender} // not allowed in "Create" mode
             onSelectData={this.handleDataSelected}
             onPageChange={this.handlePageChange}
             onTileClicked={this.handleTileClicked}
-            onSave={this.handleReportSave} // works for edit and create
+            onSave={this.handleReportSave} // works for "Edit" and "Create"
         />
     </div>
     );
@@ -141,6 +148,32 @@ import { Tile } from 'powerbi-report-component';
 />
 ```
 
+## [New] Usage for ReportVisual
+
+```javascript
+import { ReportVisual } from 'powerbi-report-component';
+
+// inside render
+<ReportVisual
+  tokenType={tokenType}
+  accessToken={accessToken}
+  embedUrl={embedUrl}
+  embedId={embedId}
+  pageName={pageName}
+  visualName={visualName}
+  style={style} // style tile for report component
+  onSelectData={(data) => {
+    console.log('Data from ReportVisual', data);
+  }}
+  onLoad={(data) => {
+    console.log('ReportVisual loaded', data);
+  }}
+  onRender={(data) => {
+    console.log('ReportVisual rendered', data);
+  }}
+/>
+```
+
 ## Like hooks ? You'll love this :)
 
 ### useReport (available from v2.1.1)
@@ -161,6 +194,8 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
     accessToken: accessToken,
     embedUrl: embedUrl,
     embedId: embedId,
+    reportMode: "View", // "Edit"
+    permissions: "View", // "All" (when using "Edit" mode)
     extraSettings: {
       filterPaneEnabled: false,
       navContentPaneEnabled: false,
@@ -423,7 +458,7 @@ Note: you wouldn't use `this` if you're using `report` from `useReport` hook.
 1. Change Report Mode to View or Edit:
 
 ```javascript
-//mode can be "view" or "edit"
+//mode can be "View" or "Edit"
 
 changeMode = (mode) => this.report.switchMode(mode);
 ```
@@ -496,7 +531,7 @@ removeFilters = () =>
   });
 ```
 
-7. Save edited report when in "edit" mode
+7. Save edited report when in "Edit" mode
 
 (note: you need to have enough permissions to save the report)
 

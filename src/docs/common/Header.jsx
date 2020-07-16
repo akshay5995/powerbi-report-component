@@ -7,13 +7,14 @@ const { Text } = Typography;
 const titleImportMap = {
   'Create Report': 'Report',
   'Multiple Pages': 'Report',
+  'Report Visual': 'ReportVisual',
   Report: 'Report',
   Dashboard: 'Dashboard',
   Tile: 'Tile',
   useReport: 'useReport',
 };
 
-const embedTypes = new Set(['Report', 'Dashboard', 'Tile']);
+const embedTypes = new Set(['Report', 'Dashboard', 'Tile', 'ReportVisual']);
 
 const Header = ({ title, setDarkMode, isDarkMode }) => {
   const onChange = (checked) => setDarkMode(checked);
