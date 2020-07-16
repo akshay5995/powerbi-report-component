@@ -63,8 +63,8 @@ const ReportForm = ({ onSubmit, initialReportProps, onReset }) => {
       </Form.Item>
       <Form.Item label="Mode" name={['reportProps', 'reportMode']}>
         <Select placeholder="Mode (default: View)">
-          <Select.Option value="view">View</Select.Option>
-          <Select.Option value="edit">Edit</Select.Option>
+          <Select.Option value="View">View</Select.Option>
+          <Select.Option value="Edit">Edit</Select.Option>
         </Select>
       </Form.Item>
       <Form.Item

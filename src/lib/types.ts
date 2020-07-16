@@ -1,4 +1,4 @@
-export type ReportModes = 'view' | 'edit' | 'create';
+export type ReportModes = 'View' | 'Edit' | 'Create';
 
 export type EmbedType = 'report' | 'dashboard' | 'tile';
 
@@ -63,6 +63,19 @@ export interface ReportProps {
   onSave?: Function;
 }
 
+export interface ReportVisualProps {
+  tokenType: TokenType;
+  accessToken: string;
+  embedUrl: string;
+  embedId: string;
+  pageName: string;
+  visualName: string;
+  style?: any;
+  onLoad?: Function;
+  onRender?: Function;
+  onSelectData?: Function;
+}
+
 export interface Config {
   type: EmbedType;
   tokenType: TokenType;
@@ -70,6 +83,7 @@ export interface Config {
   embedUrl: string;
   pageName: string;
   groupId: string;
+  visualName: string;
   extraSettings: any;
   permissions: Permissions;
   id: string;
