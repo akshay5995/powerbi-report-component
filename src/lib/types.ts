@@ -46,7 +46,7 @@ export interface ReportProps {
   accessToken: string;
   embedUrl: string;
   embedId: string;
-  groupId: string;
+  groupId?: string;
   permissions: Permissions;
   reportMode: ReportModes;
   pageName?: string;
