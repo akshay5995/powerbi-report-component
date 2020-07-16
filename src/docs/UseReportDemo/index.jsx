@@ -96,7 +96,7 @@ const UseReportDemo = () => {
           <Info title="Why the warning?" titleType="warning" key="info">
             <Text>
               We show the report tab as default to ensure that the
-              "reportRef" set. Currently useReport is supported for only
+              "reportRef" is set. Currently useReport is supported for only
               embedType "report".
             </Text>
             <Button
