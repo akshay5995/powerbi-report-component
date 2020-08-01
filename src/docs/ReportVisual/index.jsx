@@ -56,7 +56,7 @@ const ReportVisualDemo = () => {
             <Badge dot={isValidConfig}>
               <span>
                 <CheckCircleTwoTone twoToneColor="#52c41a" />
-                Report
+                ReportVisual
               </span>
             </Badge>
           }

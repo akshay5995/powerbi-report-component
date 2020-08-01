@@ -30,31 +30,31 @@
     "react-dom": "^16.8.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.1",
-    "@babel/core": "^7.10.2",
-    "@babel/plugin-proposal-class-properties": "^7.10.1",
-    "@babel/plugin-transform-runtime": "^7.10.1",
-    "@babel/preset-env": "^7.10.2",
-    "@babel/preset-react": "^7.10.1",
-    "@types/react": "^16.9.35",
+    "@babel/cli": "^7.10.5",
+    "@babel/core": "^7.11.0",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "@types/react": "^16.9.44",
     "@types/react-dom": "^16.9.8",
     "@types/zen-observable": "^0.8.0",
-    "ajv": "^6.12.2",
-    "all-contributors-cli": "^6.15.0",
-    "antd": "^4.3.1",
+    "ajv": "^6.12.3",
+    "all-contributors-cli": "^6.17.0",
+    "antd": "^4.5.1",
     "babel-loader": "^8.1.0",
     "concurrently": "^3.6.1",
-    "css-loader": "^3.5.3",
+    "css-loader": "^3.6.0",
     "gh-pages": "^1.2.0",
     "html-webpack-plugin": "^3.2.0",
     "node-sass": "^4.14.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "style-loader": "^0.21.0",
-    "typescript": "^3.9.5",
+    "typescript": "^3.9.7",
     "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "author": {
@@ -67,6 +67,6 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.11.0"
+    "powerbi-client": "^2.13.3"
   }
 }
