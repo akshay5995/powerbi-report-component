@@ -165,11 +165,11 @@ import { ReportVisual } from 'powerbi-report-component';
   onSelectData={(data) => {
     console.log('Data from ReportVisual', data);
   }}
-  onLoad={(data) => {
+  onLoad={(reportVisual) => {
     console.log('ReportVisual loaded', data);
   }}
-  onRender={(data) => {
-    console.log('ReportVisual rendered', data);
+  onRender={(reportVisual) => {
+    console.log('ReportVisual rendered', reportVisual);
   }}
 />
 ```
