@@ -73,6 +73,7 @@ Report.propTypes = {
   embedUrl: PropTypes.string.isRequired,
   embedId: PropTypes.string,
   pageName: PropTypes.string,
+  bookmark: PropTypes.object,
   extraSettings: PropTypes.object,
   permissions: PropTypes.string,
   onLoad: PropTypes.func,
