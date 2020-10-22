@@ -14,7 +14,7 @@ This repository is actively maintained by [Akshay Ram (akshay5995)](https://gith
 
 `npm i powerbi-report-component`
 
-## Usuage
+## Usage
 
 ```javascript
 import React, {Component} from 'react';
@@ -78,6 +78,7 @@ class MyComponent extends Component {
             datasetId={datasetId} // required for reportMode = "create" and optional for dynamic databinding in `report` on `view` mode
             extraSettings={extraSettings}
             permissions="All" // View
+            bookmark={bookmark} // Bookmark e.g. { name: 'Bookmark123456' }
             style={reportStyle}
             onLoad={this.handleReportLoad}
             onRender={this.handleReportRender}
