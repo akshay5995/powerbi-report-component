@@ -13,7 +13,7 @@ const Embed = ({ config, performOnEmbed, style }: Embed) => {
     if (reportEl) {
       setEmbed(reportEl, config);
     }
-  }, [config]);
+  }, []);
 
   return (
     <div className='report' style={style} ref={reportEl} id={randId} />
