@@ -1,6 +1,6 @@
 {
   "name": "powerbi-report-component",
-  "version": "2.4.2",
+  "version": "2.5.0",
   "description": "It's a minimalistic react component to embed a Microsoft PowerBI report, dashboard or tile into your react application.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -8,7 +8,7 @@
     "dev": "concurrently \"npm run lib:watch\" \"npm run docs\"",
     "lib": "tsc",
     "lib:watch": "tsc -w",
-    "docs": "webpack-dev-server --mode development",
+    "docs": "webpack serve --mode development",
     "docs:prod": "webpack --mode production",
     "publish:demo": "npm run docs:prod && gh-pages -d docs"
   },
@@ -26,36 +26,37 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.0",
-    "@babel/plugin-proposal-class-properties": "^7.10.4",
-    "@babel/plugin-transform-runtime": "^7.11.0",
-    "@babel/preset-env": "^7.11.0",
-    "@babel/preset-react": "^7.10.4",
-    "@types/react": "^16.9.44",
-    "@types/react-dom": "^16.9.8",
-    "@types/zen-observable": "^0.8.0",
-    "ajv": "^6.12.3",
-    "all-contributors-cli": "^6.17.0",
-    "antd": "^4.5.1",
-    "babel-loader": "^8.1.0",
-    "concurrently": "^3.6.1",
-    "css-loader": "^3.6.0",
-    "gh-pages": "^1.2.0",
-    "html-webpack-plugin": "^3.2.0",
-    "node-sass": "^4.14.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "style-loader": "^0.21.0",
-    "typescript": "^3.9.7",
-    "uglifyjs-webpack-plugin": "^2.2.0",
-    "webpack": "^4.44.1",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "@babel/cli": "^7.13.16",
+    "@babel/core": "^7.14.0",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.13.15",
+    "@babel/preset-env": "^7.14.1",
+    "@babel/preset-react": "^7.13.13",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.3",
+    "@types/zen-observable": "^0.8.2",
+    "ajv": "^8.3.0",
+    "all-contributors-cli": "^6.20.0",
+    "antd": "^4.15.4",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.1.0",
+    "css-loader": "^5.2.4",
+    "gh-pages": "^3.1.0",
+    "html-webpack-plugin": "^5.3.1",
+    "node-sass": "^6.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "rxjs": "^6.6.7",
+    "style-loader": "^2.0.0",
+    "typescript": "^4.2.4",
+    "uglifyjs-webpack-plugin": "^1.1.2",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "author": {
     "name": "Akshay Ram Vignesh A",
@@ -67,6 +68,6 @@
     "url": "https://github.com/akshay5995/powerbi-report-component"
   },
   "dependencies": {
-    "powerbi-client": "^2.13.3"
+    "powerbi-client": "^2.18.0"
   }
 }
