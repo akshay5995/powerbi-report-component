@@ -6,7 +6,10 @@
 
 It's a minimalistic React component for embedding a Microsoft PowerBI report, dashboard or tile into your React application.
 
-This repository is actively maintained by [Akshay Ram (akshay5995)](https://github.com/akshay5995) and [Satya J (satya64)](https://github.com/satya64).
+This repository is maintained by:
+- [Akshay Ram (akshay5995)](https://github.com/akshay5995)
+- [Satya J (satya64)](https://github.com/satya64)
+- [Muthu](https://github.com/muthu1712)
 
 Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0) for the README for versions <=2.0.0.
 
