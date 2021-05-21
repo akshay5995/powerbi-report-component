@@ -3,6 +3,7 @@
 ![downloads](https://img.shields.io/npm/dw/powerbi-report-component?label=npm%20downloads&style=for-the-badge)
 ![license](https://img.shields.io/github/license/akshay5995/powerbi-report-component?color=blue&style=for-the-badge)
 ![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/akshay5995/powerbi-report-component?style=for-the-badge)
+![bundlephobia](https://badgen.net/bundlephobia/minzip/powerbi-report-component)
 
 It's a minimalistic React component for embedding a Microsoft PowerBI report, dashboard or tile into your React application.
 
@@ -638,3 +639,7 @@ You can get the Token, URL and Report ID from Microsoft JS playground:
 Follow the instructions below in image:
 
 ![instructions not available](https://raw.githubusercontent.com/akshay5995/powerbi-report-component/master/images/Embed-Instructions.png)
+
+### Alternatives
+
+1. https://github.com/microsoft/powerbi-client-react ![bundlephobia](https://badgen.net/bundlephobia/minzip/powerbi-client-react)
