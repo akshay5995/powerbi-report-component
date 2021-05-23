@@ -12,6 +12,7 @@ import MultiplePageDemo from './MultiplePageDemo';
 import './index.css';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import UseReportDemo from './UseReportDemo';
+import UseBootstrapDemo from './UseBootstrapDemo';
 
 const App = () => {
   const [embedType, setEmbedType] = React.useState('Report');
@@ -35,6 +36,8 @@ const App = () => {
         return <MultiplePageDemo />;
       case 'useReport':
         return <UseReportDemo />;
+        case 'useBootstrap':
+          return <UseBootstrapDemo />;
       default:
         return null;
     }

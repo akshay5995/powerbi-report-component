@@ -155,6 +155,10 @@ const validateConfig = (config: any): IError[] => {
     : validateTypeConfig(config);
 };
 
+const validateBootrapConfig = (config: any): boolean => {
+  return !!config.type && !!config.tokenType;
+};
+
 const createEmbedConfigBasedOnEmbedType = (config: any): Config => {
   const { embedType } = config;
   switch (embedType) {
@@ -190,4 +194,5 @@ export {
   createEmbedConfigBasedOnEmbedType,
   parseConfigErrors,
   createReportVisualConfig,
+  validateBootrapConfig
 };

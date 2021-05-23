@@ -12,16 +12,7 @@ This repository is maintained by:
 - [Satya J (satya64)](https://github.com/satya64)
 - [Muthu (muthu1712)](https://github.com/muthu1712)
 
-Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0) for the README for versions <=2.0.0.
-
-### [New Embed Type] ReportVisual (from >=2.4.0)
-
-### [New] Typescript support from >=2.2.2
-
-### [Change Log] >=2.3.0
-- **(Breaking change)** `reportMode` prop and config will accept `View`, `Edit` and `Create`. (previously it was `edit`/`view`/`create`)(case sensitive)
-- **(Enhancement)**  Now you can use `Edit` mode in `useReport` hook.
-
+Existing users of the package please refer to Change Log [here](https://github.com/akshay5995/powerbi-report-component/wiki/Changelog) and please refer [here](https://github.com/akshay5995/powerbi-report-component/wiki/README-file-for--=-2.0.0) for the README for versions <=2.0.0
 
 ## Installation
 
@@ -180,7 +171,7 @@ import { ReportVisual } from 'powerbi-report-component';
 
 ## Like hooks ? You'll love this :)
 
-### useReport (available from v2.1.1)
+### useReport
 
 Provides a more fine grained approach for embedding. (where you're in control)
 
@@ -190,7 +181,7 @@ import { useReport } from 'powerbi-report-component';
 
 const MyReport = ({ accessToken, embedUrl, embedId }) => {
   const reportRef = useRef(null);
-  const [report, setEmbed] = useReport();
+  const [report, embed] = useReport();
 
   const myReportConfig = {
     embedType: 'report',
@@ -209,7 +200,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
   // important
   useEffect(() => {
     // call inside useEffect so the we have the reportRef (reference available)
-    setEmbed(reportRef, myReportConfig);
+    embed(reportRef, myReportConfig);
   }, []);
 
   const handleClick = () => {
@@ -228,7 +219,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
 export default MyReport;
 ```
 
-## Passing in custom layout for useReport hook.
+#### Passing in custom layout for useReport hook.
 
 Example is taken from powerbi js wiki: [Custom-Layout](https://github.com/Microsoft/PowerBI-JavaScript/wiki/Custom-Layout).
 
@@ -291,9 +282,69 @@ const myReportConfig = {
 
 // Inside your component
 useEffect(() => {
-  setEmbed(reportRef, myReportConfig);
+  embed(reportRef, myReportConfig);
 }, []);
 
+```
+
+### useBootstrap
+
+Provided performance gains on loading in an async way
+
+```javascript
+import React, { useEffect, useRef } from 'react';
+import { useBootstrap } from 'powerbi-report-component';
+
+// Your configuration from server
+const simulateAjaxCall = new Promise(function(resolve, reject) {
+  setTimeout(() => {
+     console.log("Simulating!!!")
+  }, 3000);
+  resolve({
+    accessToken: "accessToken",
+    embedUrl: "embedUrl",
+    embedId: "embedId",
+    reportMode: "View", // "Edit"
+    permissions: "View", // "All" (when using "Edit" mode)
+  });
+});
+
+
+const MyReport = ({ accessToken, embedUrl, embedId }) => {
+  const reportRef = useRef(null);
+  const [report, bootstrap, embed] = useBootstrap();
+
+  const initialReportConfig = {
+    embedType: 'report',
+    tokenType: 'Embed',
+    extraSettings: {
+      filterPaneEnabled: false,
+      navContentPaneEnabled: false,
+    },
+  };
+
+  const getMyConfigurationFromServer = () => {
+    simulateAjaxCall.then(data => {
+      // Embed the report once your configuration is received 
+      embed(reportRef, {...initialReportConfig, ...data});
+    });
+  }
+
+  // important
+  useEffect(() => {
+    // call inside useEffect so the we have the reportRef (reference available)
+    bootstrap(reportRef, initialReportConfig);
+  }, []);
+
+  return (
+    <div className="report-container">
+      <div className="report" ref={reportRef} />
+      <button onClick={getMyConfiguraionFromServer}>Get config from AJAX call</button>
+    </div>
+  );
+};
+
+export default MyReport;
 ```
 
 ## Report features and props you can pass into the component

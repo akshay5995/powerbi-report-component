@@ -12,6 +12,7 @@ const titleImportMap = {
   Dashboard: 'Dashboard',
   Tile: 'Tile',
   useReport: 'useReport',
+  useBootstrap: 'useBootstrap'
 };
 
 const embedTypes = new Set(['Report', 'Dashboard', 'Tile', 'ReportVisual']);
