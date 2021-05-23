@@ -8,7 +8,8 @@ import {
   CopyTwoTone,
   LinkOutlined,
   ExperimentTwoTone,
-  ContainerTwoTone
+  ContainerTwoTone,
+  HourglassTwoTone
 } from '@ant-design/icons';
 
 const { Sider } = Layout;
@@ -77,6 +78,12 @@ const SideNav = ({ darkMode, selected, onSelect }) => {
           icon={<ExperimentTwoTone style={{ fontSize: '18px' }} />}
         >
           useReport
+        </Menu.Item>
+        <Menu.Item
+          key="useBootstrap"
+          icon={<HourglassTwoTone style={{ fontSize: '18px' }} />}
+        >
+          useBootstrap
         </Menu.Item>
         <Menu.Item key="_msDemoLink" icon={<LinkOutlined />}>
           <a

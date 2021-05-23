@@ -5,7 +5,7 @@ import {
   CheckCircleTwoTone,
   InfoCircleOutlined,
 } from '@ant-design/icons';
-import { useReport } from '../../../lib';
+import { useBootstrap } from '../../../lib';
 import Form from './Form';
 import Info from '../common/InfoTab';
 
@@ -13,35 +13,42 @@ const { Content } = Layout;
 const { TabPane } = Tabs;
 const { Text } = Typography;
 
+const extraSettings = {
+  filterPaneEnabled: false,
+  navContentPaneEnabled: false,
+};
+
 const initialReportProps = {
   embedType: 'report',
   tokenType: 'Embed',
   extraSettings,
 };
 
-const extraSettings = {
-  filterPaneEnabled: false,
-  navContentPaneEnabled: false,
-};
-
-const UseReportDemo = () => {
+const UseBootstrapDemo = () => {
   const [reportProps, setReportProps] =
     React.useState(initialReportProps);
   const [isValidConfig, setIsValidConfig] = React.useState(false);
   const [activeTab, setActiveTab] = React.useState('report');
 
   const reportRef = React.useRef(null);
-  const [report, setEmbed] = useReport();
+  const [report, bootstrap, embed] = useBootstrap();
 
   const onTabClick = (key, event) => setActiveTab(key);
 
   const renderWithReportProps = ({ reportProps }) => {
     setReportProps(reportProps);
-    setEmbed(reportRef, {
+    embed(reportRef, {
       ...reportProps,
-      extraSettings,
+      extraSettings: {
+        filterPaneEnabled: false,
+        navContentPaneEnabled: false,
+      },
     });
     setIsValidConfig(true);
+  };
+
+  const bootstrapReport = () => {
+    bootstrap(reportRef, initialReportProps);
   };
 
   const onReset = React.useCallback(() => {
@@ -52,6 +59,18 @@ const UseReportDemo = () => {
     // you can use "report" from useReport like
     if (report) report.print();
   };
+
+  const renderInfo = () => (
+    <ol>
+      <li>Click on <b>Bootstarp</b></li>
+      <li>Check the <b>Report</b> tab (you should see a loading screen)</li>
+      <li>Input rest of the required configuration</li>
+      <li>
+        Click on <b>Embed</b> to simulate a async call to get the configuration
+        and embed your report
+      </li>
+    </ol>
+  );
 
   return (
     <Content>
@@ -65,10 +84,17 @@ const UseReportDemo = () => {
           }
           key="form"
         >
+          <Alert
+            message="Bootstrapping helps you improve performance"
+            description={renderInfo()}
+            type="info"
+            closable
+          />
           <Form
             initialReportProps={initialReportProps}
             onSubmit={renderWithReportProps}
             onReset={onReset}
+            onBootstrap={bootstrapReport}
           />
         </TabPane>
         <TabPane
@@ -81,19 +107,33 @@ const UseReportDemo = () => {
           key="info"
         >
           <Info title="Why the warning?" titleType="warning" key="info">
-          <Text>
+            <Text>
               We show the report tab as default to ensure that the{' '}
               <b>reportRef</b> is set. Currently useReport is supported
               for only embedType <b>report</b>.
             </Text>
             <Button
               type="link"
-              href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/UseReportDemo/index.jsx"
+              href="https://github.com/akshay5995/powerbi-report-component/blob/master/src/docs/UseBootstrapDemo/index.jsx"
               target="_blank"
             >
               see the code
             </Button>
           </Info>
+          <Info title="Read more about bootstrap" key="info1">
+            <Text>
+              Bootstrap helps you improve performance by loading report
+              with incomplete configuration and the load the rest of the
+              report when you get the configuration in an <b>async</b> way.
+            </Text>
+          </Info>
+          <Button
+            type="link"
+            href="https://docs.microsoft.com/en-us/javascript/api/overview/powerbi/bootstrap-better-performance"
+            target="_blank"
+          >
+            Read more about bootstrap feature
+          </Button>
         </TabPane>
         <TabPane
           tab={
@@ -143,4 +183,4 @@ const UseReportDemo = () => {
   );
 };
 
-export default UseReportDemo;
+export default UseBootstrapDemo;
