@@ -75,7 +75,7 @@ class MyComponent extends Component {
             accessToken="" // accessToken goes here
             embedUrl="" // embedUrl goes here
             embedId="" // report or dashboard Id goes here
-            pageName="" // set as current page of the report
+            pageName="" // set as current page of the report. Name to be obtained from the original report URL
             reportMode="View" // open report in a particular mode View/Edit/Create
             datasetId={datasetId} // required for reportMode = "Create" and optional for dynamic databinding in `report` on `View` mode
             groupId={groupId} // optional. Used when reportMode = "Create" and to chose the target workspace when the dataset is shared. 
