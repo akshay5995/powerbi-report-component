@@ -75,9 +75,7 @@ const ReportDemo = () => {
               }}
               {...reportProps}
               extraSettings={extraSettings}
-              onLoad={(report) => {
-                console.log('Report Loaded!');
-              }}
+              onLoad={onLoadAndSetTokenListener}
               onRender={(report) => {
                 console.log('Report Rendered');
               }}
