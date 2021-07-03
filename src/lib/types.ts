@@ -93,6 +93,8 @@ export interface Config {
   dashboardId: string;
 }
 
+export type ConfigProps = ReportProps | DashboardProps | TileProps | ReportVisualProps;
+
 export interface Embed {
   config: Config;
   performOnEmbed: (report: any, reportRef?: any) => void;
