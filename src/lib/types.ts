@@ -1,6 +1,6 @@
 export type ReportModes = 'View' | 'Edit' | 'Create';
 
-export type EmbedType = 'report' | 'dashboard' | 'tile';
+export type EmbedType = 'report' | 'dashboard' | 'tile' | 'visual';
 
 export type TokenType = 'Aad' | 'Embed';
 
