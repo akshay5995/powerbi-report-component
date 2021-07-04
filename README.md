@@ -184,7 +184,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
   const [report, embed] = useReport();
 
   const myReportConfig = {
-    embedType: 'report',
+    type: 'report',
     tokenType: 'Embed',
     accessToken: accessToken,
     embedUrl: embedUrl,
@@ -315,7 +315,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
   const [report, bootstrap, embed] = useBootstrap();
 
   const initialReportConfig = {
-    embedType: 'report',
+    type: 'report',
     tokenType: 'Embed',
     extraSettings: {
       filterPaneEnabled: false,
