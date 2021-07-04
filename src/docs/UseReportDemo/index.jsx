@@ -14,7 +14,7 @@ const { TabPane } = Tabs;
 const { Text } = Typography;
 
 const initialReportProps = {
-  embedType: 'report',
+  type: 'report',
   tokenType: 'Embed',
   extraSettings,
 };

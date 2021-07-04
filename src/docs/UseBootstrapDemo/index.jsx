@@ -19,7 +19,7 @@ const extraSettings = {
 };
 
 const initialReportProps = {
-  embedType: 'report',
+  type: 'report',
   tokenType: 'Embed',
   extraSettings,
 };
