@@ -190,7 +190,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
     embedUrl: embedUrl,
     embedId: embedId,
     reportMode: "View", // "Edit"
-    permissions: "View", // "All" (when using "Edit" mode)
+    permissions: "Read", // "All" (when using "Edit" mode)
     extraSettings: {
       filterPaneEnabled: false,
       navContentPaneEnabled: false,
@@ -305,7 +305,7 @@ const simulateAjaxCall = new Promise(function(resolve, reject) {
     embedUrl: "embedUrl",
     embedId: "embedId",
     reportMode: "View", // "Edit"
-    permissions: "View", // "All" (when using "Edit" mode)
+    permissions: "Read", // "All" (when using "Edit" mode)
   });
 });
 
@@ -339,7 +339,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
   return (
     <div className="report-container">
       <div className="report" ref={reportRef} />
-      <button onClick={getMyConfiguraionFromServer}>Get config from AJAX call</button>
+      <button onClick={getMyConfigurationFromServer}>Get config from AJAX call</button>
     </div>
   );
 };
