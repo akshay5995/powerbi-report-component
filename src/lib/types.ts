@@ -19,7 +19,7 @@ export interface IError {
   errorCode?: string;
 }
 
-interface BasicProps {
+interface CommonProps {
   embedType: EmbedType;
   tokenType: TokenType;
   accessToken: string;
@@ -29,17 +29,17 @@ interface BasicProps {
   onLoad?: Function;
 }
 
-export interface TileProps extends BasicProps {  
+export interface TileProps extends CommonProps {  
   dashboardId: string;
   onClick?: Function;
 }
 
-export interface DashboardProps extends BasicProps {
+export interface DashboardProps extends CommonProps {
   pageView: PageView;
   onTileClicked?: Function;
 }
 
-export interface ReportProps extends BasicProps {
+export interface ReportProps extends CommonProps {
   groupId?: string;
   permissions: Permissions;
   reportMode: ReportModes;
@@ -55,7 +55,7 @@ export interface ReportProps extends BasicProps {
   onSave?: Function;
 }
 
-export interface ReportVisualProps extends BasicProps {
+export interface ReportVisualProps extends CommonProps {
   pageName: string;
   visualName: string;
   onRender?: Function;
