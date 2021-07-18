@@ -57,7 +57,7 @@ function useReport(): UseReport {
   const [report, _setEmbedInstance] = useState<Embed | null>(null);
 
   const embed = (ref: any, config: ConfigProps): void => {
-    const embedConfig = createEmbedConfigBasedOnEmbedType(config);
+    const embedConfig: Config = createEmbedConfigBasedOnEmbedType(config);
     const errors = validateConfig(embedConfig);
     if (!errors || errors.length === 0) {
       const _embed = window.powerbi.embed(ref.current, embedConfig as any);
@@ -74,12 +74,12 @@ function useReport(): UseReport {
 
 
 function useBootstrap(): UseBootstrap {
-  const [isBotstrapped, setIsBootstrapped] = useState<Boolean>(false);
+  const [isBootstrapped, setIsBootstrapped] = useState<Boolean>(false);
   const [report, _setEmbedInstance] = useState<Embed | null>(null);
 
   const embed = (ref: any, config: ConfigProps): void => {
-    if(isBotstrapped) {
-      const embedConfig = createEmbedConfigBasedOnEmbedType(config);
+    if(isBootstrapped) {
+      const embedConfig: Config = createEmbedConfigBasedOnEmbedType(config);
       const errors = validateConfig(embedConfig);
       if (!errors || errors.length === 0) {
         const _embed = window.powerbi.embed(ref.current, embedConfig as any);
@@ -95,7 +95,7 @@ function useBootstrap(): UseBootstrap {
   };
 
   const bootstrap = (ref: any, config: ConfigProps) => {
-    const bootstrapConfig = createEmbedConfigBasedOnEmbedType(config);
+    const bootstrapConfig: Config = createEmbedConfigBasedOnEmbedType(config);
     if (validateBootrapConfig(bootstrapConfig)) {
       window.powerbi.bootstrap(ref.current, bootstrapConfig);
       setIsBootstrapped(true);
