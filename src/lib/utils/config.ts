@@ -8,6 +8,7 @@ import {
   IError,
   Config,
   ReportVisualProps,
+  ConfigProps
 } from '../types';
 
 const createReportConfig = (props: ReportProps): Config => {
@@ -126,7 +127,7 @@ const createReportVisualConfig = (props: ReportVisualProps): Config => {
   });
 };
 
-const validateTypeConfig = (config: any): IError[] => {
+const validateTypeConfig = (config: Config): IError[] => {
   switch (config.type) {
     case 'report':
       return pbi.models.validateReportLoad(config);
@@ -148,28 +149,28 @@ const validateCreateReportConfig = (config: any): IError[] => {
   return pbi.models.validateCreateReport(config);
 };
 
-const validateConfig = (config: any): IError[] => {
+const validateConfig = (config: Config): IError[] => {
   const isCreateMode = config.reportMode === 'Create';
   return isCreateMode
     ? validateCreateReportConfig(config)
     : validateTypeConfig(config);
 };
 
-const validateBootrapConfig = (config: any): boolean => {
+const validateBootrapConfig = (config: Config): boolean => {
   return !!config.type && !!config.tokenType;
 };
 
-const createEmbedConfigBasedOnEmbedType = (config: any): Config => {
+const createEmbedConfigBasedOnEmbedType = (config: ConfigProps): Config => {
   const { embedType } = config;
   switch (embedType) {
     case 'report':
-      return createReportConfig(config);
+      return createReportConfig(config as ReportProps);
     case 'dashboard':
-      return createDashboardConfig(config);
+      return createDashboardConfig(config as DashboardProps);
     case 'tile':
-      return createTileConfig(config);
+      return createTileConfig(config as TileProps);
     case 'visual':
-      return createReportVisualConfig(config);
+      return createReportVisualConfig(config as ReportVisualProps);
     default:
       throw Error('Wrong embed type!');
   }

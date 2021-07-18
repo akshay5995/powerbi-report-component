@@ -1,6 +1,6 @@
 export type ReportModes = 'View' | 'Edit' | 'Create';
 
-export type EmbedType = 'report' | 'dashboard' | 'tile';
+export type EmbedType = 'report' | 'dashboard' | 'tile' | 'visual';
 
 export type TokenType = 'Aad' | 'Embed';
 
@@ -19,41 +19,33 @@ export interface IError {
   errorCode?: string;
 }
 
-export interface TileProps {
+interface CommonProps {
+  embedType: EmbedType;
   tokenType: TokenType;
   accessToken: string;
   embedUrl: string;
-  embedId: string;
-  dashboardId: string;
+  embedId?: string;
   style?: any;
   onLoad?: Function;
+}
+
+export interface TileProps extends CommonProps {  
+  dashboardId: string;
   onClick?: Function;
 }
 
-export interface DashboardProps {
-  tokenType: TokenType;
-  accessToken: string;
-  embedUrl: string;
-  embedId: string;
+export interface DashboardProps extends CommonProps {
   pageView: PageView;
-  style?: any;
-  onLoad?: Function;
   onTileClicked?: Function;
 }
 
-export interface ReportProps {
-  tokenType: TokenType;
-  accessToken: string;
-  embedUrl: string;
-  embedId: string;
+export interface ReportProps extends CommonProps {
   groupId?: string;
   permissions: Permissions;
   reportMode: ReportModes;
   pageName?: string;
   extraSettings?: any;
-  style?: any;
   datasetId?: string;
-  onLoad?: Function;
   onRender?: Function;
   onError?: Function;
   onButtonClicked?: Function;
@@ -63,15 +55,9 @@ export interface ReportProps {
   onSave?: Function;
 }
 
-export interface ReportVisualProps {
-  tokenType: TokenType;
-  accessToken: string;
-  embedUrl: string;
-  embedId: string;
+export interface ReportVisualProps extends CommonProps {
   pageName: string;
   visualName: string;
-  style?: any;
-  onLoad?: Function;
   onRender?: Function;
   onSelectData?: Function;
 }
@@ -92,6 +78,8 @@ export interface Config {
   pageView: PageView;
   dashboardId: string;
 }
+
+export type ConfigProps = ReportProps | DashboardProps | TileProps | ReportVisualProps;
 
 export interface Embed {
   config: Config;

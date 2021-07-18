@@ -5,18 +5,20 @@ import {
   createEmbedConfigBasedOnEmbedType,
   validateBootrapConfig
 } from '../utils/config';
-import { Config } from '../types';
+import { Config, ConfigProps } from '../types';
 import { Embed } from 'embed';
 
-declare type UseReport = [any, (ref: any, config: Config) => void];
+declare type _UseReport = [any, (ref: any, config: Config) => void];
 
-declare type UseBootstrap = [any, (ref: any, config: Config) => void, (ref: any, config: Config) => void];
+declare type UseReport = [any, (ref: any, config: ConfigProps) => void];
+
+declare type UseBootstrap = [any, (ref: any, config: ConfigProps) => void, (ref: any, config: ConfigProps) => void];
 
 // powerbi object is global
 // used inside Embed.jsx has more logic tied to props of Embed.
 function _useReport(
   performOnEmbed: (report: any, reportRef?: any) => void
-): UseReport {
+): _UseReport {
   const [report, _setEmbedInstance] = useState<Embed | null>(null);
 
   const setEmbed = (embedDivRef: any, embedConfig: Config): void => {
@@ -54,8 +56,8 @@ function _useReport(
 function useReport(): UseReport {
   const [report, _setEmbedInstance] = useState<Embed | null>(null);
 
-  const embed = (ref: any, config: Config): void => {
-    const embedConfig = createEmbedConfigBasedOnEmbedType(config);
+  const embed = (ref: any, config: ConfigProps): void => {
+    const embedConfig: Config = createEmbedConfigBasedOnEmbedType(config);
     const errors = validateConfig(embedConfig);
     if (!errors || errors.length === 0) {
       const _embed = window.powerbi.embed(ref.current, embedConfig as any);
@@ -72,12 +74,12 @@ function useReport(): UseReport {
 
 
 function useBootstrap(): UseBootstrap {
-  const [isBotstrapped, setIsBootstrapped] = useState<Boolean>(false);
+  const [isBootstrapped, setIsBootstrapped] = useState<Boolean>(false);
   const [report, _setEmbedInstance] = useState<Embed | null>(null);
 
-  const embed = (ref: any, config: Config): void => {
-    if(isBotstrapped) {
-      const embedConfig = createEmbedConfigBasedOnEmbedType(config);
+  const embed = (ref: any, config: ConfigProps): void => {
+    if(isBootstrapped) {
+      const embedConfig: Config = createEmbedConfigBasedOnEmbedType(config);
       const errors = validateConfig(embedConfig);
       if (!errors || errors.length === 0) {
         const _embed = window.powerbi.embed(ref.current, embedConfig as any);
@@ -92,8 +94,8 @@ function useBootstrap(): UseBootstrap {
     }
   };
 
-  const bootstrap = (ref: any, config: Config) => {
-    const bootstrapConfig = createEmbedConfigBasedOnEmbedType(config);
+  const bootstrap = (ref: any, config: ConfigProps) => {
+    const bootstrapConfig: Config = createEmbedConfigBasedOnEmbedType(config);
     if (validateBootrapConfig(bootstrapConfig)) {
       window.powerbi.bootstrap(ref.current, bootstrapConfig);
       setIsBootstrapped(true);
