@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'src/docs'),
@@ -9,22 +9,11 @@ module.exports = {
     filename: 'bundle.js',
   },
   optimization: {
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
-          warnings: false,
-          parse: {},
-          compress: {},
-          mangle: true, // Note `mangle.properties` is `false` by default.
-          output: null,
-          toplevel: false,
-          nameCache: null,
-          ie8: false,
-          keep_fnames: false,
-          compress: {
-            drop_console: true,
-          },
-        },
+      new TerserPlugin({
+        test: /\.js(\?.*)?$/i,
+        exclude: /\/node_modules/,
       }),
     ],
   },
@@ -50,8 +39,10 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
-    contentBase: path.join(__dirname, 'docs'),
+    static: {
+      directory: path.join(__dirname, 'docs'),
+    },
     port: 8000,
-    stats: 'minimal',
+    liveReload: true,
   },
 };
