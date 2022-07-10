@@ -1,0 +1,266 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+  Copyright (c) 2018 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
+ * @license  MIT
+ */
+
+/*! ./../process/browser.js */
+
+/*! ./../webpack/buildin/global.js */
+
+/*! ./FilterBuilders */
+
+/*! ./advancedFilterBuilder */
+
+/*! ./basicFilterBuilder */
+
+/*! ./bookmarksManager */
+
+/*! ./config */
+
+/*! ./create */
+
+/*! ./dashboard */
+
+/*! ./embed */
+
+/*! ./errors */
+
+/*! ./factories */
+
+/*! ./filterBuilder */
+
+/*! ./page */
+
+/*! ./qna */
+
+/*! ./relativeDateFilterBuilder */
+
+/*! ./relativeTimeFilterBuilder */
+
+/*! ./report */
+
+/*! ./service */
+
+/*! ./support/isBuffer */
+
+/*! ./tile */
+
+/*! ./topNFilterBuilder */
+
+/*! ./util */
+
+/*! ./visual */
+
+/*! ./visualDescriptor */
+
+/*! assert */
+
+/*! http-post-message */
+
+/*! http-post-message v0.2.3 | (c) 2016 Microsoft Corporation MIT */
+
+/*! inherits */
+
+/*! no static exports found */
+
+/*! object-assign */
+
+/*! powerbi-models */
+
+/*! powerbi-router */
+
+/*! powerbi-router v0.1.5 | (c) 2016 Microsoft Corporation MIT */
+
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+/*! util/ */
+
+/*! window-post-message-proxy */
+
+/*! window-post-message-proxy v0.2.6 | (c) 2016 Microsoft Corporation MIT */
+
+/*!********************!*\
+  !*** ./src/qna.ts ***!
+  \********************/
+
+/*!*********************!*\
+  !*** ./src/page.ts ***!
+  \*********************/
+
+/*!*********************!*\
+  !*** ./src/tile.ts ***!
+  \*********************/
+
+/*!*********************!*\
+  !*** ./src/util.ts ***!
+  \*********************/
+
+/*!**********************!*\
+  !*** ./src/embed.ts ***!
+  \**********************/
+
+/*!***********************!*\
+  !*** ./src/config.ts ***!
+  \***********************/
+
+/*!***********************!*\
+  !*** ./src/create.ts ***!
+  \***********************/
+
+/*!***********************!*\
+  !*** ./src/errors.ts ***!
+  \***********************/
+
+/*!***********************!*\
+  !*** ./src/report.ts ***!
+  \***********************/
+
+/*!***********************!*\
+  !*** ./src/visual.ts ***!
+  \***********************/
+
+/*!************************!*\
+  !*** ./src/service.ts ***!
+  \************************/
+
+/*!**************************!*\
+  !*** ./src/dashboard.ts ***!
+  \**************************/
+
+/*!**************************!*\
+  !*** ./src/factories.ts ***!
+  \**************************/
+
+/*!*******************************!*\
+  !*** ./src/powerbi-client.ts ***!
+  \*******************************/
+
+/*!*********************************!*\
+  !*** ./src/bookmarksManager.ts ***!
+  \*********************************/
+
+/*!*********************************!*\
+  !*** ./src/visualDescriptor.ts ***!
+  \*********************************/
+
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+
+/*!***********************************!*\
+  !*** ./node_modules/util/util.js ***!
+  \***********************************/
+
+/*!*************************************!*\
+  !*** ./src/FilterBuilders/index.ts ***!
+  \*************************************/
+
+/*!***************************************!*\
+  !*** ./node_modules/assert/assert.js ***!
+  \***************************************/
+
+/*!*****************************************!*\
+  !*** ./node_modules/process/browser.js ***!
+  \*****************************************/
+
+/*!*********************************************!*\
+  !*** ./node_modules/object-assign/index.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./src/FilterBuilders/filterBuilder.ts ***!
+  \*********************************************/
+
+/*!*************************************************!*\
+  !*** ./src/FilterBuilders/topNFilterBuilder.ts ***!
+  \*************************************************/
+
+/*!**************************************************!*\
+  !*** ./src/FilterBuilders/basicFilterBuilder.ts ***!
+  \**************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/powerbi-models/dist/models.js ***!
+  \****************************************************/
+
+/*!****************************************************!*\
+  !*** ./node_modules/powerbi-router/dist/router.js ***!
+  \****************************************************/
+
+/*!*****************************************************!*\
+  !*** ./src/FilterBuilders/advancedFilterBuilder.ts ***!
+  \*****************************************************/
+
+/*!******************************************************!*\
+  !*** ./node_modules/util/support/isBufferBrowser.js ***!
+  \******************************************************/
+
+/*!*********************************************************!*\
+  !*** ./src/FilterBuilders/relativeDateFilterBuilder.ts ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./src/FilterBuilders/relativeTimeFilterBuilder.ts ***!
+  \*********************************************************/
+
+/*!****************************************************************!*\
+  !*** ./node_modules/http-post-message/dist/httpPostMessage.js ***!
+  \****************************************************************/
+
+/*!*********************************************************************!*\
+  !*** ./node_modules/util/node_modules/inherits/inherits_browser.js ***!
+  \*********************************************************************/
+
+/*!*******************************************************************************!*\
+  !*** ./node_modules/window-post-message-proxy/dist/windowPostMessageProxy.js ***!
+  \*******************************************************************************/
+
+/** @license React v0.20.2
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
