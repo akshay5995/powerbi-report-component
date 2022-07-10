@@ -46,7 +46,7 @@
     "@types/zen-observable": "^0.8.2",
     "antd": "^4.15.4",
     "babel-loader": "^8.2.2",
-    "concurrently": "^6.1.0",
+    "concurrently": "^7.2.2",
     "css-loader": "^5.2.4",
     "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.3.1",
