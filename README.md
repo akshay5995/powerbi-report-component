@@ -136,7 +136,7 @@ import { Tile } from 'powerbi-report-component';
 />
 ```
 
-## [New] Usage for ReportVisual
+## Usage for ReportVisual
 
 ```javascript
 import { ReportVisual } from 'powerbi-report-component';
