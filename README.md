@@ -288,18 +288,21 @@ Provided performance gains on loading in an async way
 import React, { useEffect, useRef } from 'react';
 import { useBootstrap } from 'powerbi-report-component';
 
+delay(t, v) {
+   return new Promise(function(resolve) { 
+       setTimeout(resolve.bind(null, v), t)
+   });
+}
+
 // Your configuration from server
-const simulateAjaxCall = new Promise(function(resolve, reject) {
-  setTimeout(() => {
-     console.log("Simulating!!!")
-  }, 3000);
-  resolve({
+const simulateAjaxCall = () => new Promise(function(resolve) {
+  setTimeout(resolve.bind(null, {
     accessToken: "accessToken",
     embedUrl: "embedUrl",
     embedId: "embedId",
     reportMode: "View", // "Edit"
     permissions: "View", // "All" (when using "Edit" mode)
-  });
+  }), 3000)
 });
 
 
@@ -317,7 +320,7 @@ const MyReport = ({ accessToken, embedUrl, embedId }) => {
   };
 
   const getMyConfigurationFromServer = () => {
-    simulateAjaxCall.then(data => {
+    simulateAjaxCall().then(data => {
       // Embed the report once your configuration is received 
       embed(reportRef, {...initialReportConfig, ...data});
     });
