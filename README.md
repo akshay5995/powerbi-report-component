@@ -126,7 +126,7 @@ import { Tile } from 'powerbi-report-component';
   embedUrl={embedUrl}
   embedId={embedId}
   dashboardId={dashboardId}
-  style={style} // style tile for report component
+  style={style} // style for tile component
   onClick={(data) => {
     console.log('Data from tile', data);
   }}
@@ -149,7 +149,7 @@ import { ReportVisual } from 'powerbi-report-component';
   embedId={embedId}
   pageName={pageName}
   visualName={visualName}
-  style={style} // style tile for report component
+  style={style} // style for report visual component
   onSelectData={(data) => {
     console.log('Data from ReportVisual', data);
   }}
@@ -287,12 +287,6 @@ Provided performance gains on loading in an async way
 ```javascript
 import React, { useEffect, useRef } from 'react';
 import { useBootstrap } from 'powerbi-report-component';
-
-delay(t, v) {
-   return new Promise(function(resolve) { 
-       setTimeout(resolve.bind(null, v), t)
-   });
-}
 
 // Your configuration from server
 const simulateAjaxCall = () => new Promise(function(resolve) {
