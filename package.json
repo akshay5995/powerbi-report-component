@@ -44,7 +44,7 @@
     "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.3",
     "@types/zen-observable": "^0.8.2",
-    "antd": "^4.15.4",
+    "antd": "^5.0.1",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.1.0",
     "css-loader": "^5.2.4",
