@@ -47,7 +47,7 @@
     "antd": "^4.15.4",
     "babel-loader": "^8.2.2",
     "concurrently": "^6.1.0",
-    "css-loader": "^5.2.4",
+    "css-loader": "^6.7.3",
     "gh-pages": "^4.0.0",
     "html-webpack-plugin": "^5.3.1",
     "node-sass": "^7.0.1",
